@@ -28,7 +28,7 @@ def string_map(map, text):
 def strip(text):
     return string_map(strip_table, text)
 
-def to_monotonic(text):
+def monotonize(text):
     return string_map(monotonic_table, text)
 
 def replaces(table, text):
@@ -60,7 +60,7 @@ if __name__ == "__main__":
     try:
         with open(file, "r", encoding="utf-8") as f:
             text = f.read()
-        print((to_monotonic if monotonic else romanize)(text).rstrip())
+        print((monotonize if monotonic else romanize)(text).rstrip())
     except Exception as e:
         print(e)
         sys.exit(1)

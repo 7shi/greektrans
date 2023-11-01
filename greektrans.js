@@ -36,7 +36,7 @@ export function strip(text) {
     return stringMap(stripTable, text);
 }
 
-export function toMonotonic(text) {
+export function monotonize(text) {
     return stringMap(monotonicTable, text);
 }
 
@@ -75,7 +75,7 @@ if (import.meta.main) {
     } else {
         try {
             const text = Deno.readTextFileSync(file);
-            console.log((monotonic ? toMonotonic : romanize)(text).trimEnd());
+            console.log((monotonic ? monotonize : romanize)(text).trimEnd());
         } catch (e) {
             console.error(e);
             Deno.exit(1);

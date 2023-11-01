@@ -148,7 +148,7 @@ with open(f"{table_name}.py", "w", encoding="utf-8") as file:
 
 ### Additional Impementation
 
-def to_monotonic(text):
+def monotonize(text):
     return "".join(map(to_monotonic1, text))
 
 def replaces(table, text):
@@ -174,7 +174,7 @@ with open("lords_prayer.txt", "r", encoding="utf-8") as file:
     sample = file.read()
 
 # Note: The results do not match because of removing without grammar.
-print(to_monotonic(sample))
+print(monotonize(sample))
 
 print(romanize(sample))
 # print(romanize(to_monotonic(sample)))
