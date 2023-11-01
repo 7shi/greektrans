@@ -36,13 +36,13 @@ def replaces(table, text):
         text = text.replace(key, value)
     return text
 
-def romanize(text, caron=True, ogonek_macron=True):
+def romanize(text, caron=True, dot_macron=True):
     text = replaces(table["romanizationTableEx"]["combination"], text)
     text = string_map(romanization_table, text)
     if caron:
         text = replaces(table["romanizationTableEx"]["caron"], text)
-    if ogonek_macron:
-        text = replaces(table["romanizationTableEx"]["ogonekMacron"], text)
+    if dot_macron:
+        text = replaces(table["romanizationTableEx"]["dotMacron"], text)
     return text
 
 if __name__ == "__main__":

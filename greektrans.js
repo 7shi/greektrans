@@ -47,14 +47,14 @@ function replaces(table, text) {
     return text;
 }
 
-export function romanize(text, caron = true, ogonekMacron = true) {
+export function romanize(text, caron = true, dotMacron = true) {
     text = replaces(table.romanizationTableEx.combination, text);
     text = stringMap(romanizationTable, text);
     if (caron) {
         text = replaces(table.romanizationTableEx.caron, text);
     }
-    if (ogonekMacron) {
-        text = replaces(table.romanizationTableEx.ogonekMacron, text);
+    if (dotMacron) {
+        text = replaces(table.romanizationTableEx.dotMacron, text);
     }
     return text;
 }

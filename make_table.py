@@ -156,13 +156,13 @@ def replaces(table, text):
         text = text.replace(key, value)
     return text
 
-def romanize(text, caron=True, ogonekMacron=True):
+def romanize(text, caron=True, dotMacron=True):
     text = replaces(romanization_table_ex["combination"], text)
     text = "".join(map(lambda letter: romanization_table.get(letter, letter), text))
     if caron:
         text = replaces(romanization_table_ex["caron"], text)
-    if ogonekMacron:
-        text = replaces(romanization_table_ex["ogonekMacron"], text)
+    if dotMacron:
+        text = replaces(romanization_table_ex["dotMacron"], text)
     return text
 
 ### Sample
