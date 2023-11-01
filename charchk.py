@@ -9,12 +9,8 @@ for f in sys.argv[1:]:
     with open(f, "r") as f:
         text += f.read()
 
-# textに使われるすべての文字を拾ってソートする
 chars = sorted(set(text))
-
-# JavaScriptの連想配列として出力する
-print("const greekChars = {")
 for ch in chars:
-    if ord(ch) >= 128:
-        print(f'    "{ch}": "", // {hex(ord(ch))}')
-print("};")
+    code = ord(ch)
+    if code >= 128:
+        print(f"{ch}\t{hex(code)}")
