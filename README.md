@@ -24,6 +24,8 @@ Diacritical mark conversions are in the original system.
   ex. "φωνή" -> "phōně" ("ḗ" -> "èé" -> "ě")
 * The dot below is used for the iota subscript.  
   ex. "λόγῳ" -> "lógọ̄"
+* The apostrophe is used for the coronis.  
+  ex. "κἀγώ" -> "ca'gǒ"
 
 The dot below was chosen because the font composition is relatively supported compared to the other diacritical marks.
 
@@ -60,7 +62,7 @@ deno run --allow-read greektrans.js [-m] file
 Supports the browser and Deno.
 
 ```js
-import * as greektrans from "https://cdn.jsdelivr.net/gh/7shi/greektrans@0.3/greektrans.min.js";
+import * as greektrans from "https://cdn.jsdelivr.net/gh/7shi/greektrans@0.4/greektrans.min.js";
 
 const text = "Πάτερ ἡμῶν ὁ ἐν τοῖς οὐρανοῖς·";
 

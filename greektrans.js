@@ -17,15 +17,15 @@ const monotonicTable = fromReverseTable(table.monotonicTableRev);
 const romanizationTable = fromReverseTable(table.romanizationTableRev);
 
 export function isLetter(letter) {
-    return letter in table.greekLetters;
+    return table.greekLetters.includes(letter);
 }
 
 export function isVowel(letter) {
-    return letter in table.greekVowels;
+    return table.greekVowels.includes(letter);
 }
 
 export function isConsonant(letter) {
-    return letter in table.greekConsonants;
+    return table.greekConsonants.includes(letter);
 }
 
 function stringMap(map, text) {
@@ -40,6 +40,43 @@ export function monotonize(text) {
     return stringMap(monotonicTable, text);
 }
 
+function prepareRomanize(word) {
+    let ret = "";
+    if (word.length >= 1 && isVowel(word[0])) {
+        if (word.length >= 2 && table.romanizationTableEx.combination[word.slice(0, 2)]) {
+            ret = word.slice(0, 2);
+            word = word.slice(2);
+        } else {
+            ret = word.slice(0, 1);
+            word = word.slice(1);
+        }
+    }
+    // check coronis: ex. κἀγώ = καὶ ἐγώ
+    const psili = table.attributes.PSILI;
+    for (const ch of word) {
+        ret += ch;
+        if (psili.includes(ch)) ret += "'";
+    }
+    return ret;
+}
+
+function* tokenize(text) {
+    let token = "";
+    let type = 0;
+    for (const ch of text) {
+        const t = isLetter(ch) ? 1 : 2;
+        if (type !== t) {
+            if (token) {
+                yield [type, token];
+                token = "";
+            }
+            type = t;
+        }
+        token += ch;
+    }
+    if (token) yield [type, token];
+}
+
 function replaces(table, text) {
     for (const [key, value] of Object.entries(table)) {
         text = text.replaceAll(key, value);
@@ -48,15 +85,23 @@ function replaces(table, text) {
 }
 
 export function romanize(text, caron = true, dotMacron = true) {
-    text = replaces(table.romanizationTableEx.combination, text);
-    text = stringMap(romanizationTable, text);
+    let ret = "";
+    for (const [type, token] of tokenize(text)) {
+        if (type === 1) {
+            ret += prepareRomanize(token);
+        } else {
+            ret += token;
+        }
+    }
+    ret = replaces(table.romanizationTableEx.combination, ret);
+    ret = stringMap(romanizationTable, ret);
     if (caron) {
-        text = replaces(table.romanizationTableEx.caron, text);
+        ret = replaces(table.romanizationTableEx.caron, ret);
     }
     if (dotMacron) {
-        text = replaces(table.romanizationTableEx.dotMacron, text);
+        ret = replaces(table.romanizationTableEx.dotMacron, ret);
     }
-    return text;
+    return ret;
 }
 
 if (import.meta.main) {
