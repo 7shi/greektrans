@@ -58,6 +58,14 @@ for s, e in [(0x384, 0x3d0), (0x1f00, 0x2000)]:
         if gch.greek_name:
             greek_letters_info[gch.char] = gch
 
+def search_greek(name, capital, *attrs):
+    base_name = "GREEK " + ("CAPITAL" if capital else "SMALL") + " LETTER " + name
+    attrs_set = set(attrs)
+    for gch in greek_letters_info.values():
+        if gch.base_name == base_name and gch.attrs == attrs_set:
+            return gch
+    return None
+
 # extract: GREEK CAPITAL/SMALL LETTER
 greek_capital_letters = "".join([gch.char for gch in greek_letters_info.values() if gch.capital])
 greek_small_letters = "".join([gch.char for gch in greek_letters_info.values() if not gch.capital])
@@ -232,11 +240,12 @@ class TestGreekTrans(unittest.TestCase):
     # The Lord's Prayer
     # https://en.wikipedia.org/wiki/Greek_diacritics#Examples
     def test_lords_prayer(self):
-        with open("lords_prayer.txt", "r", encoding="utf-8") as file:
+        file_prefix = "samples/lords_prayer"
+        with open(f"{file_prefix}.txt", "r", encoding="utf-8") as file:
             src = file.read()
-        with open("lords_prayer-romanized.txt", "r", encoding="utf-8") as file:
+        with open(f"{file_prefix}-romanized.txt", "r", encoding="utf-8") as file:
             dst_r = file.read()
-        with open("lords_prayer-monotonized.txt", "r", encoding="utf-8") as file:
+        with open(f"{file_prefix}-monotonized.txt", "r", encoding="utf-8") as file:
             dst_m = file.read()
         self.assertEqual(romanize(src), dst_r)
         self.assertEqual(monotonize(src), dst_m)
