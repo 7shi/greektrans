@@ -1,85 +1,53 @@
 # Create a table of Greek letters
 
-import sys, os, re, json, unicodedata
+import re, json, unicodedata
 
-class UnicodeChar:
-    def __init__(self, code):
-        self.code = code
-        self.char = chr(code)
-        self.nfd  = unicodedata.normalize("NFD", self.char)
-
-        try:
-            self.name = unicodedata.name(self.char)
-        except ValueError:
-            self.name = ""
-
-        if m := re.match(r"([A-Z]+) (CAPITAL|SMALL) LETTER (.*)", self.name):
-            self.type = m.group(1)
-            self.capital = m.group(2) == "CAPITAL"
-            letter_name = m.group(3)
-            if m := re.match(r"(.*) WITH", letter_name):
-                self.letter_name = m.group(1)
-            else:
-                self.letter_name = letter_name
-        else:
-            self.type = ""
-            self.capital = False
-            self.letter_name = ""
-
-    def __str__(self):
-        return f"{self.char} [U+{self.code:04x}] {self.name}"
-    
-    def json(self):
-        return {
-            "code": f"{self.code:04x}",
-            "nfd": " ".join([f"{ord(ch):04x}" for ch in self.nfd]),
-            "name": self.name,
-        }
-
-# Read Unicode names
-letters_info = {}
+# read Unicode names
+letter_names = {}
 for s, e in [(0x20, 0x250), (0x1e00, 0x1f00), (0x384, 0x3d0), (0x1f00, 0x2000)]:
     for code in range(s, e):
-        uch = UnicodeChar(code)
-        if uch.type:
-            letters_info[uch.char] = uch
-latin_letters_info = {key: uch for key, uch in letters_info.items() if uch.type == "LATIN"}
-greek_letters_info = {key: uch for key, uch in letters_info.items() if uch.type == "GREEK"}
+        ch = chr(code)
+        name = unicodedata.name(ch, "")
+        if re.match(r"(LATIN|GREEK) .* LETTER", name):
+            letter_names[ch] = name
+latin_letter_names = {key: value for key, value in letter_names.items() if value.startswith("LATIN")}
+greek_letter_names = {key: value for key, value in letter_names.items() if value.startswith("GREEK")}
 
 # extract: GREEK CAPITAL/SMALL LETTER
-greek_capital_letters = "".join([uch.char for uch in greek_letters_info.values() if uch.capital])
-greek_small_letters = "".join([uch.char for uch in greek_letters_info.values() if not uch.capital])
+greek_capital_letters = "".join([ch for ch, name in greek_letter_names.items() if "CAPITAL" in name])
+greek_small_letters   = "".join([ch for ch, name in greek_letter_names.items() if "SMALL"   in name])
 greek_letters = greek_capital_letters + greek_small_letters
 
 attr_chars = {}
 
-def collect_attrs(letters_info):
+def collect_attrs(letter_names):
     ret = {"": ""}
-    for key in sorted(letters_info.keys()):
-        uch = letters_info[key]
-        if len(uch.nfd) == 1:
-            ret[""] += uch.char
-        for ch in uch.nfd[1:]:
-            if ch not in attr_chars:
-                attr_chars[ch] = (unicodedata.name(ch)
-                                  .replace("COMBINING ", "")
-                                  .replace(" ", "_"))
-            name = attr_chars[ch]
+    for ch in sorted(letter_names.keys()):
+        name = letter_names[ch]
+        nfd = unicodedata.normalize("NFD", ch)
+        if len(nfd) == 1:
+            ret[""] += ch
+        for attr in nfd[1:]:
+            if attr not in attr_chars:
+                attr_chars[attr] = (unicodedata.name(attr)
+                                    .replace("COMBINING ", "")
+                                    .replace(" ", "_"))
+            name = attr_chars[attr]
             if name not in ret:
                 ret[name] = ""
-            ret[name] += uch.char
+            ret[name] += ch
     return ret
 
-latin_attrs = collect_attrs(latin_letters_info)
-greek_attrs = collect_attrs(greek_letters_info)
+latin_attrs = collect_attrs(latin_letter_names)
+greek_attrs = collect_attrs(greek_letter_names)
 attr_chars_rev = {name: ch for ch, name in attr_chars.items()}
 
 def is_letter(letter):
     return letter in greek_letters
 
 def is_vowel(letter):
-    uch = greek_letters_info.get(letter)
-    return uch.nfd[0] in "ΑΕΗΙΟΥΩαεηιουω" if uch else False
+    nfd = unicodedata.normalize("NFD", letter)
+    return nfd[0] in "ΑΕΗΙΟΥΩαεηιουω"
 
 def is_consonant(letter):
     return is_letter(letter) and not is_vowel(letter)
@@ -93,10 +61,6 @@ romanize_basic_table = {gch: unicodedata.normalize("NFD", lch)
                         for gch, lch in zip(greek_basic_letters, romanize_basic)}
 
 def romanize1(letter):
-    if letter in "\u00b7\u0387":
-        return ";"
-    if letter == ";":
-        return "?"
     nfd = unicodedata.normalize("NFD", letter.lower())
     if not (ret := romanize_basic_table.get(nfd[0])):
         return letter
@@ -152,12 +116,6 @@ def reverse_table(table):
             rev[value] = ""
         rev[value] += key
     return rev
-
-# Generate Unicode Data
-with open("json/unicode-latin.json", "w", encoding="utf-8") as file:
-    json.dump({key: uch.json() for key, uch in latin_letters_info.items()}, file, ensure_ascii=False, indent=2)
-with open("json/unicode-greek.json", "w", encoding="utf-8") as file:
-    json.dump({key: uch.json() for key, uch in greek_letters_info.items()}, file, ensure_ascii=False, indent=2)
 
 # convert to JSON
 table = json.dumps({
