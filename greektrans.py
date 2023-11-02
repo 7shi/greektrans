@@ -16,10 +16,10 @@ attribute_codes = {key: chr(int(value, 16)) for key, value in table["attributeCo
 
 greek_attrs_char = {}
 for key, value in attribute_codes.items():
-    if key in ["TONOS", "OXIA", "PERISPOMENI"]:
-        greek_attrs_char[value] = attribute_codes["TONOS"]
-    elif key == "DIALYTIKA":
-        greek_attrs_char[value] = attribute_codes["DIALYTIKA"]
+    if key in ["ACUTE_ACCENT", "GREEK_PERISPOMENI"]:
+        greek_attrs_char[value] = attribute_codes["ACUTE_ACCENT"]
+    elif key == "DIAERESIS":
+        greek_attrs_char[value] = attribute_codes["DIAERESIS"]
     else:
         greek_attrs_char[value] = ""
 
@@ -59,7 +59,7 @@ def prepare_romanize(word):
             ret = word[:1]
             word = word[1:]
     # check coronis: ex. κἀγώ = καὶ ἐγώ
-    psili = table["attributes"]["PSILI"]
+    psili = table["attributes"]["COMMA_ABOVE"]
     for ch in word:
         ret += ch
         if ch in psili:

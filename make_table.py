@@ -77,14 +77,6 @@ for s, e in [(0x20, 0x250), (0x1e00, 0x1f00), (0x384, 0x3d0), (0x1f00, 0x2000)]:
 latin_letters_info = {key: uch for key, uch in letters_info.items() if uch.type == "LATIN"}
 greek_letters_info = {key: uch for key, uch in letters_info.items() if uch.type == "GREEK"}
 
-def search(type, name, capital, *attrs):
-    base_name = type + " " + ("CAPITAL" if capital else "SMALL") + " LETTER " + name
-    attrs_set = set(attrs)
-    for uch in letters_info.values():
-        if uch.base_name == base_name and uch.attrs == attrs_set:
-            return uch
-    return None
-
 # extract: GREEK CAPITAL/SMALL LETTER
 greek_capital_letters = "".join([uch.char for uch in greek_letters_info.values() if uch.capital])
 greek_small_letters = "".join([uch.char for uch in greek_letters_info.values() if not uch.capital])
@@ -92,41 +84,25 @@ greek_letters = greek_capital_letters + greek_small_letters
 
 attr_chars = {}
 
-def collect_attrs(letters):
+def collect_attrs(letters_info):
     ret = {"": ""}
-    for uch in letters:
-        if len(uch.attrs) == 0:
+    for key in sorted(letters_info.keys()):
+        uch = letters_info[key]
+        if len(uch.nfd) == 1:
             ret[""] += uch.char
-        else:
-            for attr in uch.attrs:
-                if attr not in ret:
-                    ret[attr] = ""
-                ret[attr] += uch.char
-            if len(uch.attrs) == 1:
-                attr = list(uch.attrs)[0]
-                hexstr = " ".join([f"{ord(ch):04x}" for ch in uch.nfd])
-                if len(uch.nfd) == 2:
-                    if attr not in attr_chars:
-                        attr_chars[attr] = uch.nfd[1]
-                    elif attr_chars[attr] != uch.nfd[1]:
-                        raise Exception(f"Unexpected NFD: {uch} ({hexstr})")
-                else:
-                    # print(f"Length not 2 ({hexstr}): {uch}")
-                    pass
+        for ch in uch.nfd[1:]:
+            if ch not in attr_chars:
+                attr_chars[ch] = (unicodedata.name(ch)
+                                  .replace("COMBINING ", "")
+                                  .replace(" ", "_"))
+            name = attr_chars[ch]
+            if name not in ret:
+                ret[name] = ""
+            ret[name] += uch.char
     return ret
 
-latin_attrs = collect_attrs(latin_letters_info.values())
-greek_attrs = collect_attrs(greek_letters_info.values())
-# print("attr_chars:", {key: [f"{ord(ch):04x}" for ch in value] for key, value in attr_chars.items()})
-greek_attrs_char = [attr_chars[attr] for attr in greek_attrs.keys() if attr]
-
-def add_attr(ch, attr):
-    if not (uch := letters_info.get(ch)):
-        raise Exception(f"Unknown character: {ch}")
-    if not (ach := attr_chars.get(attr)):
-        raise Exception(f"Unknown attribute: {attr}")
-    ret = search(uch.type, uch.letter_name, uch.capital, *uch.attrs.union({attr}))
-    return ret.char if ret else ch + ach
+latin_attrs = collect_attrs(latin_letters_info)
+greek_attrs = collect_attrs(greek_letters_info)
 
 def is_letter(letter):
     return letter in greek_letters
@@ -143,7 +119,8 @@ greek_consonants = "".join(filter(is_consonant, greek_letters))
 
 greek_basic_letters = "αβγδεζηθικλμνξοπρςστυφχψω"
 romanize_basic = "a,b,g,d,e,z,ē,th,i,c,l,m,n,x,o,p,r,s,s,t,y,ph,ch,ps,ō".split(",")
-romanize_basic_table = {greek_letters_info[lch].letter_name: gch for lch, gch in zip(greek_basic_letters, romanize_basic)}
+romanize_basic_table = {greek_letters_info[lch].letter_name: gch
+                        for lch, gch in zip(greek_basic_letters, romanize_basic)}
 
 # Create romanization table template
 table_name = "romanize"
@@ -179,7 +156,7 @@ table = json.dumps({
     "greekCapitalLetters": greek_capital_letters,
     "greekSmallLetters": greek_small_letters,
     "attributes": greek_attrs,
-    "attributeCodes": {attr: f"{ord(attr_chars[attr]):04x}" for attr in greek_attrs.keys() if attr},
+    "attributeCodes": {name: f"{ord(ch):04x}" for ch, name in attr_chars.items() if name in greek_attrs},
     "greekVowels": greek_vowels,
     "greekConsonants": greek_consonants,
     "romanizationTableRev": reverse_table(romanization_table),

@@ -21,10 +21,10 @@ for (const [key, value] of Object.entries(table["attributeCodes"])) {
 
 const greekAttrsChar = {};
 for (const [key, value] of Object.entries(attributeCodes)) {
-    if (key == "TONOS" || key == "OXIA" || key == "PERISPOMENI") {
-        greekAttrsChar[value] = attributeCodes.TONOS;
-    } else if (key == "DIALYTIKA") {
-        greekAttrsChar[value] = attributeCodes.DIALYTIKA;
+    if (key == "ACUTE_ACCENT" || key == "GREEK_PERISPOMENI") {
+        greekAttrsChar[value] = attributeCodes.ACUTE_ACCENT;
+    } else if (key == "DIAERESIS") {
+        greekAttrsChar[value] = attributeCodes.DIAERESIS;
     } else {
         greekAttrsChar[value] = "";
     }
@@ -75,7 +75,7 @@ function prepareRomanize(word) {
         }
     }
     // check coronis: ex. κἀγώ = καὶ ἐγώ
-    const psili = table.attributes.PSILI;
+    const psili = table.attributes.COMMA_ABOVE;
     for (const ch of word) {
         ret += ch;
         if (psili.includes(ch)) ret += "'";
