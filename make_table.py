@@ -71,6 +71,8 @@ def romanize1(letter):
             ret += "h"
         else:
             ret = "h" + ret
+    if letter.isupper():
+        ret = ret.capitalize()
     if (ch := attr_chars_rev["DIAERESIS"]) in nfd:
         ret += ch
     circ = attr_chars_rev["GREEK_PERISPOMENI"] in nfd
@@ -83,10 +85,10 @@ def romanize1(letter):
             ret += ch
     if circ:
         ret += attr_chars_rev["CIRCUMFLEX_ACCENT"]
+    ret = unicodedata.normalize("NFC", ret)
     if iota:
         ret += attr_chars_rev["DOT_BELOW"]
-    ret = unicodedata.normalize("NFC", ret)
-    return ret if letter.islower() else ret.capitalize()
+    return ret
 
 romanization_table = {
     "\u00b7": ";", # MIDDLE DOT
@@ -99,15 +101,6 @@ for ch in greek_small_letters:
 table_name = "romanize"
 with open(f"json/{table_name}-extra.json", "r", encoding="utf-8") as file:
     romanization_table_ex = json.load(file)
-
-romanization_table_ex["caron"] = {
-    unicodedata.normalize("NFC", key): unicodedata.normalize("NFC", value)
-    for key, value in romanization_table_ex["caron"].items()
-}
-romanization_table_ex["dotMacron"] = {
-    unicodedata.normalize("NFC", key): unicodedata.normalize("NFC", value)
-    for key, value in romanization_table_ex["dotMacron"].items()
-}
 
 def reverse_table(table):
     rev = {}
