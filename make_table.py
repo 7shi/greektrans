@@ -235,21 +235,24 @@ def romanize(text, caron=True, dot_macron=True):
 ### unit test
 
 import unittest
-test = unittest.TestCase()
-test.assertEqual(prepare_romanize("κἀγώ"), "κἀ'γώ")
-test.assertEqual(romanize("Ἐγὼ δ' εἰς τὴν ἀγρίαν ὁδὸν εἰσῆλθον."),
-                 "Egṑ d' eis tḕn agrían hodòn eisêlthon.")
 
-### Sample
+class TestGreekTrans(unittest.TestCase):
+    def test(self):
+        self.assertEqual(prepare_romanize("κἀγώ"), "κἀ'γώ")
+        self.assertEqual(romanize("Ἐγὼ δ' εἰς τὴν ἀγρίαν ὁδὸν εἰσῆλθον."),
+                         "Egṑ d' eis tḕn agrían hodòn eisêlthon.")
 
-# The Lord's Prayer
-# https://en.wikipedia.org/wiki/Greek_diacritics#Examples
+    def tearDown(self):
+        # The Lord's Prayer
+        # https://en.wikipedia.org/wiki/Greek_diacritics#Examples
 
-with open("lords_prayer.txt", "r", encoding="utf-8") as file:
-    sample = file.read()
+        with open("lords_prayer.txt", "r", encoding="utf-8") as file:
+            sample = file.read()
 
-# Note: The results do not match because of removing without grammar.
-print(monotonize(sample))
+        # Note: The results do not match because of removing without grammar.
+        print(monotonize(sample))
 
-print(romanize(sample))
-# print(romanize(to_monotonic(sample)))
+        print(romanize(sample))
+        # print(romanize(to_monotonic(sample)))
+
+unittest.main()
