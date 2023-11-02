@@ -72,6 +72,7 @@ def collect_attrs(letters_info):
 
 latin_attrs = collect_attrs(latin_letters_info)
 greek_attrs = collect_attrs(greek_letters_info)
+attr_chars_rev = {name: ch for ch, name in attr_chars.items()}
 
 def is_letter(letter):
     return letter in greek_letters
@@ -88,22 +89,61 @@ greek_consonants = "".join(filter(is_consonant, greek_letters))
 
 greek_basic_letters = "αβγδεζηθικλμνξοπρςστυφχψω"
 romanize_basic = "a,b,g,d,e,z,ē,th,i,c,l,m,n,x,o,p,r,s,s,t,y,ph,ch,ps,ō".split(",")
-romanize_basic_table = {greek_letters_info[lch].letter_name: gch
-                        for lch, gch in zip(greek_basic_letters, romanize_basic)}
+romanize_basic_table = {gch: unicodedata.normalize("NFD", lch)
+                        for gch, lch in zip(greek_basic_letters, romanize_basic)}
 
-# Create romanization table template
+def romanize1(letter):
+    if letter in "\u00b7\u0387":
+        return ";"
+    if letter == ";":
+        return "?"
+    nfd = unicodedata.normalize("NFD", letter.lower())
+    if not (ret := romanize_basic_table.get(nfd[0])):
+        return letter
+    if macron := (ret[-1] == attr_chars_rev["MACRON"]):
+        ret = ret[:-1]
+    if attr_chars_rev["REVERSED_COMMA_ABOVE"] in nfd:
+        if ret == "r":
+            ret += "h"
+        else:
+            ret = "h" + ret
+    if (ch := attr_chars_rev["DIAERESIS"]) in nfd:
+        ret += ch
+    circ = attr_chars_rev["GREEK_PERISPOMENI"] in nfd
+    iota = attr_chars_rev["GREEK_YPOGEGRAMMENI"] in nfd
+    ch = attr_chars_rev["MACRON"]
+    if not circ and not iota and (macron or ch in nfd):
+        ret += ch
+    for name in ["BREVE", "ACUTE_ACCENT", "GRAVE_ACCENT"]:
+        if (ch := attr_chars_rev[name]) in nfd:
+            ret += ch
+    if circ:
+        ret += attr_chars_rev["CIRCUMFLEX_ACCENT"]
+    if iota:
+        ret += attr_chars_rev["DOT_BELOW"]
+    ret = unicodedata.normalize("NFC", ret)
+    return ret if letter.islower() else ret.capitalize()
+
+romanization_table = {
+    "\u00b7": ";", # MIDDLE DOT
+    "\u0387": ";", # GREEK ANO TELEIA
+    ";": "?",
+}
+for ch in greek_small_letters:
+    romanization_table[ch] = romanize1(ch)
+
 table_name = "romanize"
-if not os.path.exists(f"json/{table_name}-letter.json"):
-    with open(f"json/{table_name}-letter.json", "w", encoding="utf-8") as file:
-        json.dump({letter: "" for letter in greek_letters}, file, ensure_ascii=False, indent=2)
-    print(f"Please edit `json/{table_name}-letter.json`.", file=sys.stderr)
-    sys.exit(1)
-
-with open(f"json/{table_name}-letter.json", "r", encoding="utf-8") as file:
-    romanization_table = json.load(file)
-
 with open(f"json/{table_name}-extra.json", "r", encoding="utf-8") as file:
     romanization_table_ex = json.load(file)
+
+romanization_table_ex["caron"] = {
+    unicodedata.normalize("NFC", key): value #unicodedata.normalize("NFC", value)
+    for key, value in romanization_table_ex["caron"].items()
+}
+romanization_table_ex["dotMacron"] = {
+    unicodedata.normalize("NFC", key): value #unicodedata.normalize("NFC", value)
+    for key, value in romanization_table_ex["dotMacron"].items()
+}
 
 def reverse_table(table):
     rev = {}

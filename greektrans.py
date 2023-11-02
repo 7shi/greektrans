@@ -11,9 +11,12 @@ def from_reversed_table(table_rev):
     return table
 
 romanization_table = from_reversed_table(table["romanizationTableRev"])
-romanization_table_ex = table["romanizationTableEx"]
-attribute_codes = {key: chr(int(value, 16)) for key, value in table["attributeCodes"].items()}
+for ch in table["greekCapitalLetters"]:
+    romanization_table[ch] = romanization_table[ch.lower()].capitalize()
 
+romanization_table_ex = table["romanizationTableEx"]
+
+attribute_codes = {key: chr(int(value, 16)) for key, value in table["attributeCodes"].items()}
 greek_attrs_char = {}
 for key, value in attribute_codes.items():
     if key in ["ACUTE_ACCENT", "GREEK_PERISPOMENI"]:

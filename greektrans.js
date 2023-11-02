@@ -13,6 +13,10 @@ function fromReversedTable(tableRev) {
 }
 
 const romanizationTable = fromReversedTable(table.romanizationTableRev);
+for (const ch of table.greekCapitalLetters) {
+    const value = romanizationTable[ch.toLowerCase()]
+    romanizationTable[ch] = value[0].toUpperCase() + value.slice(1);
+}
 
 const attributeCodes = {};
 for (const [key, value] of Object.entries(table["attributeCodes"])) {
