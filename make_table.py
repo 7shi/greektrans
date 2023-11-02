@@ -77,13 +77,6 @@ for s, e in [(0x20, 0x250), (0x1e00, 0x1f00), (0x384, 0x3d0), (0x1f00, 0x2000)]:
 latin_letters_info = {key: uch for key, uch in letters_info.items() if uch.type == "LATIN"}
 greek_letters_info = {key: uch for key, uch in letters_info.items() if uch.type == "GREEK"}
 
-greek_nfd_rev = {}
-for key in sorted(greek_letters_info.keys()):
-    uch = greek_letters_info[key]
-    nfd = "".join(sorted(uch.nfd))
-    if nfd not in greek_nfd_rev:
-        greek_nfd_rev[nfd] = uch.char
-
 def search(type, name, capital, *attrs):
     base_name = type + " " + ("CAPITAL" if capital else "SMALL") + " LETTER " + name
     attrs_set = set(attrs)
@@ -205,7 +198,6 @@ table = json.dumps({
     "greekSmallLetters": greek_small_letters,
     "attributes": greek_attrs,
     "attributeCodes": {attr: f"{ord(attr_chars[attr]):04x}" for attr in greek_attrs.keys() if attr},
-    "greekNFD": {key: " ".join([f"{ord(ch):04x}" for ch in value.nfd]) for key, value in greek_letters_info.items()},
     "greekVowels": greek_vowels,
     "greekConsonants": greek_consonants,
     "stripTableRev": reverse_table(strip_table),
@@ -228,36 +220,10 @@ with open(f"{table_name}.py", "w", encoding="utf-8") as file:
 
 ### Additional Impementation
 
-def normalize_nfd(text):
-    ret = ""
-    for ch in text:
-        if uch := greek_letters_info.get(ch):
-            ret += uch.nfd
-        else:
-            ret += ch
-    return ret
-
-def normalize_nfc1(chs):
-    for length in range(len(chs), 0, -1):
-        if ch := greek_nfd_rev.get("".join(sorted(chs[:length]))):
-            return ch + chs[length:]
-    return chs
-
-def normalize_nfc(text):
-    ret = ""
-    chs = ""
-    for ch in text:
-        if ch not in greek_attrs_char:
-            if chs:
-                ret += normalize_nfc1(chs)
-                chs = ""
-        chs += ch
-    if chs:
-        ret += normalize_nfc1(chs)
-    return ret
-
 def strip(text):
-    return "".join(map(strip1, text))
+    text = unicodedata.normalize("NFD", text)
+    text = "".join(filter(lambda ch: ch not in greek_attrs_char, text))
+    return unicodedata.normalize("NFC", text)
 
 def monotonize(text):
     return "".join(map(monotonize1, text))
@@ -280,7 +246,7 @@ def prepare_romanize(word):
     return ret
 
 def tokenize(text):
-    text = normalize_nfc(text)
+    text = unicodedata.normalize("NFC", text)
     token = ""
     type = 0
     for ch in text:
@@ -329,25 +295,13 @@ def load_texts(file_prefix):
 
 class TestGreekTrans(unittest.TestCase):
     def test(self):
+        self.assertEqual(strip("ᾅ"), "α")
+        self.assertEqual(strip("ί"), "ι")
         self.assertEqual(prepare_romanize("κἀγώ"), "κἀ'γώ")
 
-        src = "ᾅ"
-        nfd = unicodedata.normalize("NFD", src)
-        self.assertEqual(normalize_nfd (src), nfd)
-        self.assertEqual(normalize_nfc1(nfd), src)
-        self.assertEqual(normalize_nfc (nfd), src)
-
-        src = "ί"
-        nfd = unicodedata.normalize("NFD", src)
-        self.assertEqual(normalize_nfd (src), nfd)
-        self.assertEqual(normalize_nfc1(nfd), src)
-        self.assertEqual(normalize_nfc (nfd), src)
-
         src = "Ἐγὼ δ' εἰς τὴν ἀγρίαν ὁδὸν εἰσῆλθον."
+        self.assertEqual(strip(src), "Εγω δ' εις την αγριαν οδον εισηλθον.")
         self.assertEqual(romanize(src), "Egṑ d' eis tḕn agrían hodòn eisêlthon.")
-        nfd = unicodedata.normalize("NFD", src)
-        self.assertEqual(normalize_nfd(src), nfd)
-        self.assertEqual(normalize_nfc(nfd), unicodedata.normalize("NFC", nfd))
 
     # The Lord's Prayer
     # https://en.wikipedia.org/wiki/Greek_diacritics#Examples
@@ -355,9 +309,6 @@ class TestGreekTrans(unittest.TestCase):
         src, dst_r, dst_m = load_texts("samples/lords_prayer")
         self.assertEqual(romanize(src), dst_r)
         self.assertEqual(monotonize(src), dst_m)
-        nfd = unicodedata.normalize("NFD", src)
-        self.assertEqual(normalize_nfd(src), nfd)
-        self.assertEqual(normalize_nfc(nfd), unicodedata.normalize("NFC", nfd))
 
     # Divine Comedy Inferno Canto 1
     # https://github.com/7shi/dante-la-el
