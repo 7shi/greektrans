@@ -85,10 +85,17 @@ def romanize1(letter):
             ret += ch
     if circ:
         ret += attr_chars_rev["CIRCUMFLEX_ACCENT"]
-    ret = unicodedata.normalize("NFC", ret)
-    if iota:
-        ret += attr_chars_rev["DOT_BELOW"]
-    return ret
+    ret2 = unicodedata.normalize("NFC", ret)
+    if not iota:
+        return ret2
+
+    dot = attr_chars_rev["DOT_BELOW"]
+    if len(ret2) != 1:
+        return ret2 + dot
+    ret3 = unicodedata.normalize("NFC", ret + dot)
+    if len(ret3) == 1 or ret3[-1] == dot:
+        return ret3
+    return ret2 + dot
 
 romanization_table = {
     "\u00b7": ";", # MIDDLE DOT
