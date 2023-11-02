@@ -2,7 +2,7 @@
 
 import sys, os, re, json, unicodedata
 
-class GreekChar:
+class UnicodeChar:
     def __init__(self, code):
         self.code = code
         self.char = chr(code)
@@ -13,12 +13,14 @@ class GreekChar:
         except ValueError:
             self.name = ""
 
-        if m := re.match(r"GREEK (CAPITAL|SMALL) (LETTER [A-Z]+)", self.name):
-            self.capital = m.group(1) == "CAPITAL"
-            self.greek_name = m.group(2)
+        if m := re.match(r"([A-Z]+) (CAPITAL|SMALL) (LETTER [A-Z]+)", self.name):
+            self.type = m.group(1)
+            self.capital = m.group(2) == "CAPITAL"
+            self.letter_name = m.group(3)
         else:
+            self.type = ""
             self.capital = False
-            self.greek_name = ""
+            self.letter_name = ""
 
         self.attrs = set()
         if m := re.match(r"(.*) WITH (.*)", self.name):
@@ -28,6 +30,16 @@ class GreekChar:
         else:
             self.base_name = self.name
 
+        # Latin attributes
+        self.acute      = "ACUTE"      in self.attrs
+        self.grave      = "GRAVE"      in self.attrs
+        self.circumflex = "CIRCUMFLEX" in self.attrs
+        self.diaeresis  = "DIAERESIS"  in self.attrs # tréma, umlaut
+        self.macron     = "MACRON"     in self.attrs
+        self.breve      = "BREVE"      in self.attrs
+        self.dot_below  = "DOT BELOW"  in self.attrs
+
+        # Greek attributes
         self.tonos          = "TONOS"          in self.attrs # acute (modern)
         self.dialytika      = "DIALYTIKA"      in self.attrs # diaeresis (tréma)
         self.oxia           = "OXIA"           in self.attrs # acute (ancient)
@@ -50,18 +62,20 @@ class GreekChar:
             "name": self.name,
         }
 
-# Read Unicode names for Greek
-greek_letters_info = {}
-for s, e in [(0x384, 0x3d0), (0x1f00, 0x2000)]:
+# Read Unicode names
+letters_info = {}
+for s, e in [(0x20, 0x250), (0x384, 0x3d0), (0x1f00, 0x2000)]:
     for code in range(s, e):
-        gch = GreekChar(code)
-        if gch.greek_name:
-            greek_letters_info[gch.char] = gch
+        gch = UnicodeChar(code)
+        if gch.type:
+            letters_info[gch.char] = gch
+latin_letters_info = {key: gch for key, gch in letters_info.items() if gch.type == "LATIN"}
+greek_letters_info = {key: gch for key, gch in letters_info.items() if gch.type == "GREEK"}
 
-def search_greek(name, capital, *attrs):
-    base_name = "GREEK " + ("CAPITAL" if capital else "SMALL") + " LETTER " + name
+def search(type, name, capital, *attrs):
+    base_name = type + " " + ("CAPITAL" if capital else "SMALL") + " LETTER " + name
     attrs_set = set(attrs)
-    for gch in greek_letters_info.values():
+    for gch in letters_info.values():
         if gch.base_name == base_name and gch.attrs == attrs_set:
             return gch
     return None
@@ -139,6 +153,8 @@ def reverse_table(table):
     return rev
 
 # Generate Unicode Data
+with open("json/unicode-latin.json", "w", encoding="utf-8") as file:
+    json.dump({key: gch.json() for key, gch in latin_letters_info.items()}, file, ensure_ascii=False, indent=2)
 with open("json/unicode-greek.json", "w", encoding="utf-8") as file:
     json.dump({key: gch.json() for key, gch in greek_letters_info.items()}, file, ensure_ascii=False, indent=2)
 

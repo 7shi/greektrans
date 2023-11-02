@@ -1,0 +1,2187 @@
+{
+  "A": {
+    "code": "0041",
+    "nfd": "0041",
+    "name": "LATIN CAPITAL LETTER A"
+  },
+  "B": {
+    "code": "0042",
+    "nfd": "0042",
+    "name": "LATIN CAPITAL LETTER B"
+  },
+  "C": {
+    "code": "0043",
+    "nfd": "0043",
+    "name": "LATIN CAPITAL LETTER C"
+  },
+  "D": {
+    "code": "0044",
+    "nfd": "0044",
+    "name": "LATIN CAPITAL LETTER D"
+  },
+  "E": {
+    "code": "0045",
+    "nfd": "0045",
+    "name": "LATIN CAPITAL LETTER E"
+  },
+  "F": {
+    "code": "0046",
+    "nfd": "0046",
+    "name": "LATIN CAPITAL LETTER F"
+  },
+  "G": {
+    "code": "0047",
+    "nfd": "0047",
+    "name": "LATIN CAPITAL LETTER G"
+  },
+  "H": {
+    "code": "0048",
+    "nfd": "0048",
+    "name": "LATIN CAPITAL LETTER H"
+  },
+  "I": {
+    "code": "0049",
+    "nfd": "0049",
+    "name": "LATIN CAPITAL LETTER I"
+  },
+  "J": {
+    "code": "004a",
+    "nfd": "004a",
+    "name": "LATIN CAPITAL LETTER J"
+  },
+  "K": {
+    "code": "004b",
+    "nfd": "004b",
+    "name": "LATIN CAPITAL LETTER K"
+  },
+  "L": {
+    "code": "004c",
+    "nfd": "004c",
+    "name": "LATIN CAPITAL LETTER L"
+  },
+  "M": {
+    "code": "004d",
+    "nfd": "004d",
+    "name": "LATIN CAPITAL LETTER M"
+  },
+  "N": {
+    "code": "004e",
+    "nfd": "004e",
+    "name": "LATIN CAPITAL LETTER N"
+  },
+  "O": {
+    "code": "004f",
+    "nfd": "004f",
+    "name": "LATIN CAPITAL LETTER O"
+  },
+  "P": {
+    "code": "0050",
+    "nfd": "0050",
+    "name": "LATIN CAPITAL LETTER P"
+  },
+  "Q": {
+    "code": "0051",
+    "nfd": "0051",
+    "name": "LATIN CAPITAL LETTER Q"
+  },
+  "R": {
+    "code": "0052",
+    "nfd": "0052",
+    "name": "LATIN CAPITAL LETTER R"
+  },
+  "S": {
+    "code": "0053",
+    "nfd": "0053",
+    "name": "LATIN CAPITAL LETTER S"
+  },
+  "T": {
+    "code": "0054",
+    "nfd": "0054",
+    "name": "LATIN CAPITAL LETTER T"
+  },
+  "U": {
+    "code": "0055",
+    "nfd": "0055",
+    "name": "LATIN CAPITAL LETTER U"
+  },
+  "V": {
+    "code": "0056",
+    "nfd": "0056",
+    "name": "LATIN CAPITAL LETTER V"
+  },
+  "W": {
+    "code": "0057",
+    "nfd": "0057",
+    "name": "LATIN CAPITAL LETTER W"
+  },
+  "X": {
+    "code": "0058",
+    "nfd": "0058",
+    "name": "LATIN CAPITAL LETTER X"
+  },
+  "Y": {
+    "code": "0059",
+    "nfd": "0059",
+    "name": "LATIN CAPITAL LETTER Y"
+  },
+  "Z": {
+    "code": "005a",
+    "nfd": "005a",
+    "name": "LATIN CAPITAL LETTER Z"
+  },
+  "a": {
+    "code": "0061",
+    "nfd": "0061",
+    "name": "LATIN SMALL LETTER A"
+  },
+  "b": {
+    "code": "0062",
+    "nfd": "0062",
+    "name": "LATIN SMALL LETTER B"
+  },
+  "c": {
+    "code": "0063",
+    "nfd": "0063",
+    "name": "LATIN SMALL LETTER C"
+  },
+  "d": {
+    "code": "0064",
+    "nfd": "0064",
+    "name": "LATIN SMALL LETTER D"
+  },
+  "e": {
+    "code": "0065",
+    "nfd": "0065",
+    "name": "LATIN SMALL LETTER E"
+  },
+  "f": {
+    "code": "0066",
+    "nfd": "0066",
+    "name": "LATIN SMALL LETTER F"
+  },
+  "g": {
+    "code": "0067",
+    "nfd": "0067",
+    "name": "LATIN SMALL LETTER G"
+  },
+  "h": {
+    "code": "0068",
+    "nfd": "0068",
+    "name": "LATIN SMALL LETTER H"
+  },
+  "i": {
+    "code": "0069",
+    "nfd": "0069",
+    "name": "LATIN SMALL LETTER I"
+  },
+  "j": {
+    "code": "006a",
+    "nfd": "006a",
+    "name": "LATIN SMALL LETTER J"
+  },
+  "k": {
+    "code": "006b",
+    "nfd": "006b",
+    "name": "LATIN SMALL LETTER K"
+  },
+  "l": {
+    "code": "006c",
+    "nfd": "006c",
+    "name": "LATIN SMALL LETTER L"
+  },
+  "m": {
+    "code": "006d",
+    "nfd": "006d",
+    "name": "LATIN SMALL LETTER M"
+  },
+  "n": {
+    "code": "006e",
+    "nfd": "006e",
+    "name": "LATIN SMALL LETTER N"
+  },
+  "o": {
+    "code": "006f",
+    "nfd": "006f",
+    "name": "LATIN SMALL LETTER O"
+  },
+  "p": {
+    "code": "0070",
+    "nfd": "0070",
+    "name": "LATIN SMALL LETTER P"
+  },
+  "q": {
+    "code": "0071",
+    "nfd": "0071",
+    "name": "LATIN SMALL LETTER Q"
+  },
+  "r": {
+    "code": "0072",
+    "nfd": "0072",
+    "name": "LATIN SMALL LETTER R"
+  },
+  "s": {
+    "code": "0073",
+    "nfd": "0073",
+    "name": "LATIN SMALL LETTER S"
+  },
+  "t": {
+    "code": "0074",
+    "nfd": "0074",
+    "name": "LATIN SMALL LETTER T"
+  },
+  "u": {
+    "code": "0075",
+    "nfd": "0075",
+    "name": "LATIN SMALL LETTER U"
+  },
+  "v": {
+    "code": "0076",
+    "nfd": "0076",
+    "name": "LATIN SMALL LETTER V"
+  },
+  "w": {
+    "code": "0077",
+    "nfd": "0077",
+    "name": "LATIN SMALL LETTER W"
+  },
+  "x": {
+    "code": "0078",
+    "nfd": "0078",
+    "name": "LATIN SMALL LETTER X"
+  },
+  "y": {
+    "code": "0079",
+    "nfd": "0079",
+    "name": "LATIN SMALL LETTER Y"
+  },
+  "z": {
+    "code": "007a",
+    "nfd": "007a",
+    "name": "LATIN SMALL LETTER Z"
+  },
+  "À": {
+    "code": "00c0",
+    "nfd": "0041 0300",
+    "name": "LATIN CAPITAL LETTER A WITH GRAVE"
+  },
+  "Á": {
+    "code": "00c1",
+    "nfd": "0041 0301",
+    "name": "LATIN CAPITAL LETTER A WITH ACUTE"
+  },
+  "Â": {
+    "code": "00c2",
+    "nfd": "0041 0302",
+    "name": "LATIN CAPITAL LETTER A WITH CIRCUMFLEX"
+  },
+  "Ã": {
+    "code": "00c3",
+    "nfd": "0041 0303",
+    "name": "LATIN CAPITAL LETTER A WITH TILDE"
+  },
+  "Ä": {
+    "code": "00c4",
+    "nfd": "0041 0308",
+    "name": "LATIN CAPITAL LETTER A WITH DIAERESIS"
+  },
+  "Å": {
+    "code": "00c5",
+    "nfd": "0041 030a",
+    "name": "LATIN CAPITAL LETTER A WITH RING ABOVE"
+  },
+  "Æ": {
+    "code": "00c6",
+    "nfd": "00c6",
+    "name": "LATIN CAPITAL LETTER AE"
+  },
+  "Ç": {
+    "code": "00c7",
+    "nfd": "0043 0327",
+    "name": "LATIN CAPITAL LETTER C WITH CEDILLA"
+  },
+  "È": {
+    "code": "00c8",
+    "nfd": "0045 0300",
+    "name": "LATIN CAPITAL LETTER E WITH GRAVE"
+  },
+  "É": {
+    "code": "00c9",
+    "nfd": "0045 0301",
+    "name": "LATIN CAPITAL LETTER E WITH ACUTE"
+  },
+  "Ê": {
+    "code": "00ca",
+    "nfd": "0045 0302",
+    "name": "LATIN CAPITAL LETTER E WITH CIRCUMFLEX"
+  },
+  "Ë": {
+    "code": "00cb",
+    "nfd": "0045 0308",
+    "name": "LATIN CAPITAL LETTER E WITH DIAERESIS"
+  },
+  "Ì": {
+    "code": "00cc",
+    "nfd": "0049 0300",
+    "name": "LATIN CAPITAL LETTER I WITH GRAVE"
+  },
+  "Í": {
+    "code": "00cd",
+    "nfd": "0049 0301",
+    "name": "LATIN CAPITAL LETTER I WITH ACUTE"
+  },
+  "Î": {
+    "code": "00ce",
+    "nfd": "0049 0302",
+    "name": "LATIN CAPITAL LETTER I WITH CIRCUMFLEX"
+  },
+  "Ï": {
+    "code": "00cf",
+    "nfd": "0049 0308",
+    "name": "LATIN CAPITAL LETTER I WITH DIAERESIS"
+  },
+  "Ð": {
+    "code": "00d0",
+    "nfd": "00d0",
+    "name": "LATIN CAPITAL LETTER ETH"
+  },
+  "Ñ": {
+    "code": "00d1",
+    "nfd": "004e 0303",
+    "name": "LATIN CAPITAL LETTER N WITH TILDE"
+  },
+  "Ò": {
+    "code": "00d2",
+    "nfd": "004f 0300",
+    "name": "LATIN CAPITAL LETTER O WITH GRAVE"
+  },
+  "Ó": {
+    "code": "00d3",
+    "nfd": "004f 0301",
+    "name": "LATIN CAPITAL LETTER O WITH ACUTE"
+  },
+  "Ô": {
+    "code": "00d4",
+    "nfd": "004f 0302",
+    "name": "LATIN CAPITAL LETTER O WITH CIRCUMFLEX"
+  },
+  "Õ": {
+    "code": "00d5",
+    "nfd": "004f 0303",
+    "name": "LATIN CAPITAL LETTER O WITH TILDE"
+  },
+  "Ö": {
+    "code": "00d6",
+    "nfd": "004f 0308",
+    "name": "LATIN CAPITAL LETTER O WITH DIAERESIS"
+  },
+  "Ø": {
+    "code": "00d8",
+    "nfd": "00d8",
+    "name": "LATIN CAPITAL LETTER O WITH STROKE"
+  },
+  "Ù": {
+    "code": "00d9",
+    "nfd": "0055 0300",
+    "name": "LATIN CAPITAL LETTER U WITH GRAVE"
+  },
+  "Ú": {
+    "code": "00da",
+    "nfd": "0055 0301",
+    "name": "LATIN CAPITAL LETTER U WITH ACUTE"
+  },
+  "Û": {
+    "code": "00db",
+    "nfd": "0055 0302",
+    "name": "LATIN CAPITAL LETTER U WITH CIRCUMFLEX"
+  },
+  "Ü": {
+    "code": "00dc",
+    "nfd": "0055 0308",
+    "name": "LATIN CAPITAL LETTER U WITH DIAERESIS"
+  },
+  "Ý": {
+    "code": "00dd",
+    "nfd": "0059 0301",
+    "name": "LATIN CAPITAL LETTER Y WITH ACUTE"
+  },
+  "Þ": {
+    "code": "00de",
+    "nfd": "00de",
+    "name": "LATIN CAPITAL LETTER THORN"
+  },
+  "ß": {
+    "code": "00df",
+    "nfd": "00df",
+    "name": "LATIN SMALL LETTER SHARP S"
+  },
+  "à": {
+    "code": "00e0",
+    "nfd": "0061 0300",
+    "name": "LATIN SMALL LETTER A WITH GRAVE"
+  },
+  "á": {
+    "code": "00e1",
+    "nfd": "0061 0301",
+    "name": "LATIN SMALL LETTER A WITH ACUTE"
+  },
+  "â": {
+    "code": "00e2",
+    "nfd": "0061 0302",
+    "name": "LATIN SMALL LETTER A WITH CIRCUMFLEX"
+  },
+  "ã": {
+    "code": "00e3",
+    "nfd": "0061 0303",
+    "name": "LATIN SMALL LETTER A WITH TILDE"
+  },
+  "ä": {
+    "code": "00e4",
+    "nfd": "0061 0308",
+    "name": "LATIN SMALL LETTER A WITH DIAERESIS"
+  },
+  "å": {
+    "code": "00e5",
+    "nfd": "0061 030a",
+    "name": "LATIN SMALL LETTER A WITH RING ABOVE"
+  },
+  "æ": {
+    "code": "00e6",
+    "nfd": "00e6",
+    "name": "LATIN SMALL LETTER AE"
+  },
+  "ç": {
+    "code": "00e7",
+    "nfd": "0063 0327",
+    "name": "LATIN SMALL LETTER C WITH CEDILLA"
+  },
+  "è": {
+    "code": "00e8",
+    "nfd": "0065 0300",
+    "name": "LATIN SMALL LETTER E WITH GRAVE"
+  },
+  "é": {
+    "code": "00e9",
+    "nfd": "0065 0301",
+    "name": "LATIN SMALL LETTER E WITH ACUTE"
+  },
+  "ê": {
+    "code": "00ea",
+    "nfd": "0065 0302",
+    "name": "LATIN SMALL LETTER E WITH CIRCUMFLEX"
+  },
+  "ë": {
+    "code": "00eb",
+    "nfd": "0065 0308",
+    "name": "LATIN SMALL LETTER E WITH DIAERESIS"
+  },
+  "ì": {
+    "code": "00ec",
+    "nfd": "0069 0300",
+    "name": "LATIN SMALL LETTER I WITH GRAVE"
+  },
+  "í": {
+    "code": "00ed",
+    "nfd": "0069 0301",
+    "name": "LATIN SMALL LETTER I WITH ACUTE"
+  },
+  "î": {
+    "code": "00ee",
+    "nfd": "0069 0302",
+    "name": "LATIN SMALL LETTER I WITH CIRCUMFLEX"
+  },
+  "ï": {
+    "code": "00ef",
+    "nfd": "0069 0308",
+    "name": "LATIN SMALL LETTER I WITH DIAERESIS"
+  },
+  "ð": {
+    "code": "00f0",
+    "nfd": "00f0",
+    "name": "LATIN SMALL LETTER ETH"
+  },
+  "ñ": {
+    "code": "00f1",
+    "nfd": "006e 0303",
+    "name": "LATIN SMALL LETTER N WITH TILDE"
+  },
+  "ò": {
+    "code": "00f2",
+    "nfd": "006f 0300",
+    "name": "LATIN SMALL LETTER O WITH GRAVE"
+  },
+  "ó": {
+    "code": "00f3",
+    "nfd": "006f 0301",
+    "name": "LATIN SMALL LETTER O WITH ACUTE"
+  },
+  "ô": {
+    "code": "00f4",
+    "nfd": "006f 0302",
+    "name": "LATIN SMALL LETTER O WITH CIRCUMFLEX"
+  },
+  "õ": {
+    "code": "00f5",
+    "nfd": "006f 0303",
+    "name": "LATIN SMALL LETTER O WITH TILDE"
+  },
+  "ö": {
+    "code": "00f6",
+    "nfd": "006f 0308",
+    "name": "LATIN SMALL LETTER O WITH DIAERESIS"
+  },
+  "ø": {
+    "code": "00f8",
+    "nfd": "00f8",
+    "name": "LATIN SMALL LETTER O WITH STROKE"
+  },
+  "ù": {
+    "code": "00f9",
+    "nfd": "0075 0300",
+    "name": "LATIN SMALL LETTER U WITH GRAVE"
+  },
+  "ú": {
+    "code": "00fa",
+    "nfd": "0075 0301",
+    "name": "LATIN SMALL LETTER U WITH ACUTE"
+  },
+  "û": {
+    "code": "00fb",
+    "nfd": "0075 0302",
+    "name": "LATIN SMALL LETTER U WITH CIRCUMFLEX"
+  },
+  "ü": {
+    "code": "00fc",
+    "nfd": "0075 0308",
+    "name": "LATIN SMALL LETTER U WITH DIAERESIS"
+  },
+  "ý": {
+    "code": "00fd",
+    "nfd": "0079 0301",
+    "name": "LATIN SMALL LETTER Y WITH ACUTE"
+  },
+  "þ": {
+    "code": "00fe",
+    "nfd": "00fe",
+    "name": "LATIN SMALL LETTER THORN"
+  },
+  "ÿ": {
+    "code": "00ff",
+    "nfd": "0079 0308",
+    "name": "LATIN SMALL LETTER Y WITH DIAERESIS"
+  },
+  "Ā": {
+    "code": "0100",
+    "nfd": "0041 0304",
+    "name": "LATIN CAPITAL LETTER A WITH MACRON"
+  },
+  "ā": {
+    "code": "0101",
+    "nfd": "0061 0304",
+    "name": "LATIN SMALL LETTER A WITH MACRON"
+  },
+  "Ă": {
+    "code": "0102",
+    "nfd": "0041 0306",
+    "name": "LATIN CAPITAL LETTER A WITH BREVE"
+  },
+  "ă": {
+    "code": "0103",
+    "nfd": "0061 0306",
+    "name": "LATIN SMALL LETTER A WITH BREVE"
+  },
+  "Ą": {
+    "code": "0104",
+    "nfd": "0041 0328",
+    "name": "LATIN CAPITAL LETTER A WITH OGONEK"
+  },
+  "ą": {
+    "code": "0105",
+    "nfd": "0061 0328",
+    "name": "LATIN SMALL LETTER A WITH OGONEK"
+  },
+  "Ć": {
+    "code": "0106",
+    "nfd": "0043 0301",
+    "name": "LATIN CAPITAL LETTER C WITH ACUTE"
+  },
+  "ć": {
+    "code": "0107",
+    "nfd": "0063 0301",
+    "name": "LATIN SMALL LETTER C WITH ACUTE"
+  },
+  "Ĉ": {
+    "code": "0108",
+    "nfd": "0043 0302",
+    "name": "LATIN CAPITAL LETTER C WITH CIRCUMFLEX"
+  },
+  "ĉ": {
+    "code": "0109",
+    "nfd": "0063 0302",
+    "name": "LATIN SMALL LETTER C WITH CIRCUMFLEX"
+  },
+  "Ċ": {
+    "code": "010a",
+    "nfd": "0043 0307",
+    "name": "LATIN CAPITAL LETTER C WITH DOT ABOVE"
+  },
+  "ċ": {
+    "code": "010b",
+    "nfd": "0063 0307",
+    "name": "LATIN SMALL LETTER C WITH DOT ABOVE"
+  },
+  "Č": {
+    "code": "010c",
+    "nfd": "0043 030c",
+    "name": "LATIN CAPITAL LETTER C WITH CARON"
+  },
+  "č": {
+    "code": "010d",
+    "nfd": "0063 030c",
+    "name": "LATIN SMALL LETTER C WITH CARON"
+  },
+  "Ď": {
+    "code": "010e",
+    "nfd": "0044 030c",
+    "name": "LATIN CAPITAL LETTER D WITH CARON"
+  },
+  "ď": {
+    "code": "010f",
+    "nfd": "0064 030c",
+    "name": "LATIN SMALL LETTER D WITH CARON"
+  },
+  "Đ": {
+    "code": "0110",
+    "nfd": "0110",
+    "name": "LATIN CAPITAL LETTER D WITH STROKE"
+  },
+  "đ": {
+    "code": "0111",
+    "nfd": "0111",
+    "name": "LATIN SMALL LETTER D WITH STROKE"
+  },
+  "Ē": {
+    "code": "0112",
+    "nfd": "0045 0304",
+    "name": "LATIN CAPITAL LETTER E WITH MACRON"
+  },
+  "ē": {
+    "code": "0113",
+    "nfd": "0065 0304",
+    "name": "LATIN SMALL LETTER E WITH MACRON"
+  },
+  "Ĕ": {
+    "code": "0114",
+    "nfd": "0045 0306",
+    "name": "LATIN CAPITAL LETTER E WITH BREVE"
+  },
+  "ĕ": {
+    "code": "0115",
+    "nfd": "0065 0306",
+    "name": "LATIN SMALL LETTER E WITH BREVE"
+  },
+  "Ė": {
+    "code": "0116",
+    "nfd": "0045 0307",
+    "name": "LATIN CAPITAL LETTER E WITH DOT ABOVE"
+  },
+  "ė": {
+    "code": "0117",
+    "nfd": "0065 0307",
+    "name": "LATIN SMALL LETTER E WITH DOT ABOVE"
+  },
+  "Ę": {
+    "code": "0118",
+    "nfd": "0045 0328",
+    "name": "LATIN CAPITAL LETTER E WITH OGONEK"
+  },
+  "ę": {
+    "code": "0119",
+    "nfd": "0065 0328",
+    "name": "LATIN SMALL LETTER E WITH OGONEK"
+  },
+  "Ě": {
+    "code": "011a",
+    "nfd": "0045 030c",
+    "name": "LATIN CAPITAL LETTER E WITH CARON"
+  },
+  "ě": {
+    "code": "011b",
+    "nfd": "0065 030c",
+    "name": "LATIN SMALL LETTER E WITH CARON"
+  },
+  "Ĝ": {
+    "code": "011c",
+    "nfd": "0047 0302",
+    "name": "LATIN CAPITAL LETTER G WITH CIRCUMFLEX"
+  },
+  "ĝ": {
+    "code": "011d",
+    "nfd": "0067 0302",
+    "name": "LATIN SMALL LETTER G WITH CIRCUMFLEX"
+  },
+  "Ğ": {
+    "code": "011e",
+    "nfd": "0047 0306",
+    "name": "LATIN CAPITAL LETTER G WITH BREVE"
+  },
+  "ğ": {
+    "code": "011f",
+    "nfd": "0067 0306",
+    "name": "LATIN SMALL LETTER G WITH BREVE"
+  },
+  "Ġ": {
+    "code": "0120",
+    "nfd": "0047 0307",
+    "name": "LATIN CAPITAL LETTER G WITH DOT ABOVE"
+  },
+  "ġ": {
+    "code": "0121",
+    "nfd": "0067 0307",
+    "name": "LATIN SMALL LETTER G WITH DOT ABOVE"
+  },
+  "Ģ": {
+    "code": "0122",
+    "nfd": "0047 0327",
+    "name": "LATIN CAPITAL LETTER G WITH CEDILLA"
+  },
+  "ģ": {
+    "code": "0123",
+    "nfd": "0067 0327",
+    "name": "LATIN SMALL LETTER G WITH CEDILLA"
+  },
+  "Ĥ": {
+    "code": "0124",
+    "nfd": "0048 0302",
+    "name": "LATIN CAPITAL LETTER H WITH CIRCUMFLEX"
+  },
+  "ĥ": {
+    "code": "0125",
+    "nfd": "0068 0302",
+    "name": "LATIN SMALL LETTER H WITH CIRCUMFLEX"
+  },
+  "Ħ": {
+    "code": "0126",
+    "nfd": "0126",
+    "name": "LATIN CAPITAL LETTER H WITH STROKE"
+  },
+  "ħ": {
+    "code": "0127",
+    "nfd": "0127",
+    "name": "LATIN SMALL LETTER H WITH STROKE"
+  },
+  "Ĩ": {
+    "code": "0128",
+    "nfd": "0049 0303",
+    "name": "LATIN CAPITAL LETTER I WITH TILDE"
+  },
+  "ĩ": {
+    "code": "0129",
+    "nfd": "0069 0303",
+    "name": "LATIN SMALL LETTER I WITH TILDE"
+  },
+  "Ī": {
+    "code": "012a",
+    "nfd": "0049 0304",
+    "name": "LATIN CAPITAL LETTER I WITH MACRON"
+  },
+  "ī": {
+    "code": "012b",
+    "nfd": "0069 0304",
+    "name": "LATIN SMALL LETTER I WITH MACRON"
+  },
+  "Ĭ": {
+    "code": "012c",
+    "nfd": "0049 0306",
+    "name": "LATIN CAPITAL LETTER I WITH BREVE"
+  },
+  "ĭ": {
+    "code": "012d",
+    "nfd": "0069 0306",
+    "name": "LATIN SMALL LETTER I WITH BREVE"
+  },
+  "Į": {
+    "code": "012e",
+    "nfd": "0049 0328",
+    "name": "LATIN CAPITAL LETTER I WITH OGONEK"
+  },
+  "į": {
+    "code": "012f",
+    "nfd": "0069 0328",
+    "name": "LATIN SMALL LETTER I WITH OGONEK"
+  },
+  "İ": {
+    "code": "0130",
+    "nfd": "0049 0307",
+    "name": "LATIN CAPITAL LETTER I WITH DOT ABOVE"
+  },
+  "ı": {
+    "code": "0131",
+    "nfd": "0131",
+    "name": "LATIN SMALL LETTER DOTLESS I"
+  },
+  "Ĵ": {
+    "code": "0134",
+    "nfd": "004a 0302",
+    "name": "LATIN CAPITAL LETTER J WITH CIRCUMFLEX"
+  },
+  "ĵ": {
+    "code": "0135",
+    "nfd": "006a 0302",
+    "name": "LATIN SMALL LETTER J WITH CIRCUMFLEX"
+  },
+  "Ķ": {
+    "code": "0136",
+    "nfd": "004b 0327",
+    "name": "LATIN CAPITAL LETTER K WITH CEDILLA"
+  },
+  "ķ": {
+    "code": "0137",
+    "nfd": "006b 0327",
+    "name": "LATIN SMALL LETTER K WITH CEDILLA"
+  },
+  "ĸ": {
+    "code": "0138",
+    "nfd": "0138",
+    "name": "LATIN SMALL LETTER KRA"
+  },
+  "Ĺ": {
+    "code": "0139",
+    "nfd": "004c 0301",
+    "name": "LATIN CAPITAL LETTER L WITH ACUTE"
+  },
+  "ĺ": {
+    "code": "013a",
+    "nfd": "006c 0301",
+    "name": "LATIN SMALL LETTER L WITH ACUTE"
+  },
+  "Ļ": {
+    "code": "013b",
+    "nfd": "004c 0327",
+    "name": "LATIN CAPITAL LETTER L WITH CEDILLA"
+  },
+  "ļ": {
+    "code": "013c",
+    "nfd": "006c 0327",
+    "name": "LATIN SMALL LETTER L WITH CEDILLA"
+  },
+  "Ľ": {
+    "code": "013d",
+    "nfd": "004c 030c",
+    "name": "LATIN CAPITAL LETTER L WITH CARON"
+  },
+  "ľ": {
+    "code": "013e",
+    "nfd": "006c 030c",
+    "name": "LATIN SMALL LETTER L WITH CARON"
+  },
+  "Ŀ": {
+    "code": "013f",
+    "nfd": "013f",
+    "name": "LATIN CAPITAL LETTER L WITH MIDDLE DOT"
+  },
+  "ŀ": {
+    "code": "0140",
+    "nfd": "0140",
+    "name": "LATIN SMALL LETTER L WITH MIDDLE DOT"
+  },
+  "Ł": {
+    "code": "0141",
+    "nfd": "0141",
+    "name": "LATIN CAPITAL LETTER L WITH STROKE"
+  },
+  "ł": {
+    "code": "0142",
+    "nfd": "0142",
+    "name": "LATIN SMALL LETTER L WITH STROKE"
+  },
+  "Ń": {
+    "code": "0143",
+    "nfd": "004e 0301",
+    "name": "LATIN CAPITAL LETTER N WITH ACUTE"
+  },
+  "ń": {
+    "code": "0144",
+    "nfd": "006e 0301",
+    "name": "LATIN SMALL LETTER N WITH ACUTE"
+  },
+  "Ņ": {
+    "code": "0145",
+    "nfd": "004e 0327",
+    "name": "LATIN CAPITAL LETTER N WITH CEDILLA"
+  },
+  "ņ": {
+    "code": "0146",
+    "nfd": "006e 0327",
+    "name": "LATIN SMALL LETTER N WITH CEDILLA"
+  },
+  "Ň": {
+    "code": "0147",
+    "nfd": "004e 030c",
+    "name": "LATIN CAPITAL LETTER N WITH CARON"
+  },
+  "ň": {
+    "code": "0148",
+    "nfd": "006e 030c",
+    "name": "LATIN SMALL LETTER N WITH CARON"
+  },
+  "ŉ": {
+    "code": "0149",
+    "nfd": "0149",
+    "name": "LATIN SMALL LETTER N PRECEDED BY APOSTROPHE"
+  },
+  "Ŋ": {
+    "code": "014a",
+    "nfd": "014a",
+    "name": "LATIN CAPITAL LETTER ENG"
+  },
+  "ŋ": {
+    "code": "014b",
+    "nfd": "014b",
+    "name": "LATIN SMALL LETTER ENG"
+  },
+  "Ō": {
+    "code": "014c",
+    "nfd": "004f 0304",
+    "name": "LATIN CAPITAL LETTER O WITH MACRON"
+  },
+  "ō": {
+    "code": "014d",
+    "nfd": "006f 0304",
+    "name": "LATIN SMALL LETTER O WITH MACRON"
+  },
+  "Ŏ": {
+    "code": "014e",
+    "nfd": "004f 0306",
+    "name": "LATIN CAPITAL LETTER O WITH BREVE"
+  },
+  "ŏ": {
+    "code": "014f",
+    "nfd": "006f 0306",
+    "name": "LATIN SMALL LETTER O WITH BREVE"
+  },
+  "Ő": {
+    "code": "0150",
+    "nfd": "004f 030b",
+    "name": "LATIN CAPITAL LETTER O WITH DOUBLE ACUTE"
+  },
+  "ő": {
+    "code": "0151",
+    "nfd": "006f 030b",
+    "name": "LATIN SMALL LETTER O WITH DOUBLE ACUTE"
+  },
+  "Ŕ": {
+    "code": "0154",
+    "nfd": "0052 0301",
+    "name": "LATIN CAPITAL LETTER R WITH ACUTE"
+  },
+  "ŕ": {
+    "code": "0155",
+    "nfd": "0072 0301",
+    "name": "LATIN SMALL LETTER R WITH ACUTE"
+  },
+  "Ŗ": {
+    "code": "0156",
+    "nfd": "0052 0327",
+    "name": "LATIN CAPITAL LETTER R WITH CEDILLA"
+  },
+  "ŗ": {
+    "code": "0157",
+    "nfd": "0072 0327",
+    "name": "LATIN SMALL LETTER R WITH CEDILLA"
+  },
+  "Ř": {
+    "code": "0158",
+    "nfd": "0052 030c",
+    "name": "LATIN CAPITAL LETTER R WITH CARON"
+  },
+  "ř": {
+    "code": "0159",
+    "nfd": "0072 030c",
+    "name": "LATIN SMALL LETTER R WITH CARON"
+  },
+  "Ś": {
+    "code": "015a",
+    "nfd": "0053 0301",
+    "name": "LATIN CAPITAL LETTER S WITH ACUTE"
+  },
+  "ś": {
+    "code": "015b",
+    "nfd": "0073 0301",
+    "name": "LATIN SMALL LETTER S WITH ACUTE"
+  },
+  "Ŝ": {
+    "code": "015c",
+    "nfd": "0053 0302",
+    "name": "LATIN CAPITAL LETTER S WITH CIRCUMFLEX"
+  },
+  "ŝ": {
+    "code": "015d",
+    "nfd": "0073 0302",
+    "name": "LATIN SMALL LETTER S WITH CIRCUMFLEX"
+  },
+  "Ş": {
+    "code": "015e",
+    "nfd": "0053 0327",
+    "name": "LATIN CAPITAL LETTER S WITH CEDILLA"
+  },
+  "ş": {
+    "code": "015f",
+    "nfd": "0073 0327",
+    "name": "LATIN SMALL LETTER S WITH CEDILLA"
+  },
+  "Š": {
+    "code": "0160",
+    "nfd": "0053 030c",
+    "name": "LATIN CAPITAL LETTER S WITH CARON"
+  },
+  "š": {
+    "code": "0161",
+    "nfd": "0073 030c",
+    "name": "LATIN SMALL LETTER S WITH CARON"
+  },
+  "Ţ": {
+    "code": "0162",
+    "nfd": "0054 0327",
+    "name": "LATIN CAPITAL LETTER T WITH CEDILLA"
+  },
+  "ţ": {
+    "code": "0163",
+    "nfd": "0074 0327",
+    "name": "LATIN SMALL LETTER T WITH CEDILLA"
+  },
+  "Ť": {
+    "code": "0164",
+    "nfd": "0054 030c",
+    "name": "LATIN CAPITAL LETTER T WITH CARON"
+  },
+  "ť": {
+    "code": "0165",
+    "nfd": "0074 030c",
+    "name": "LATIN SMALL LETTER T WITH CARON"
+  },
+  "Ŧ": {
+    "code": "0166",
+    "nfd": "0166",
+    "name": "LATIN CAPITAL LETTER T WITH STROKE"
+  },
+  "ŧ": {
+    "code": "0167",
+    "nfd": "0167",
+    "name": "LATIN SMALL LETTER T WITH STROKE"
+  },
+  "Ũ": {
+    "code": "0168",
+    "nfd": "0055 0303",
+    "name": "LATIN CAPITAL LETTER U WITH TILDE"
+  },
+  "ũ": {
+    "code": "0169",
+    "nfd": "0075 0303",
+    "name": "LATIN SMALL LETTER U WITH TILDE"
+  },
+  "Ū": {
+    "code": "016a",
+    "nfd": "0055 0304",
+    "name": "LATIN CAPITAL LETTER U WITH MACRON"
+  },
+  "ū": {
+    "code": "016b",
+    "nfd": "0075 0304",
+    "name": "LATIN SMALL LETTER U WITH MACRON"
+  },
+  "Ŭ": {
+    "code": "016c",
+    "nfd": "0055 0306",
+    "name": "LATIN CAPITAL LETTER U WITH BREVE"
+  },
+  "ŭ": {
+    "code": "016d",
+    "nfd": "0075 0306",
+    "name": "LATIN SMALL LETTER U WITH BREVE"
+  },
+  "Ů": {
+    "code": "016e",
+    "nfd": "0055 030a",
+    "name": "LATIN CAPITAL LETTER U WITH RING ABOVE"
+  },
+  "ů": {
+    "code": "016f",
+    "nfd": "0075 030a",
+    "name": "LATIN SMALL LETTER U WITH RING ABOVE"
+  },
+  "Ű": {
+    "code": "0170",
+    "nfd": "0055 030b",
+    "name": "LATIN CAPITAL LETTER U WITH DOUBLE ACUTE"
+  },
+  "ű": {
+    "code": "0171",
+    "nfd": "0075 030b",
+    "name": "LATIN SMALL LETTER U WITH DOUBLE ACUTE"
+  },
+  "Ų": {
+    "code": "0172",
+    "nfd": "0055 0328",
+    "name": "LATIN CAPITAL LETTER U WITH OGONEK"
+  },
+  "ų": {
+    "code": "0173",
+    "nfd": "0075 0328",
+    "name": "LATIN SMALL LETTER U WITH OGONEK"
+  },
+  "Ŵ": {
+    "code": "0174",
+    "nfd": "0057 0302",
+    "name": "LATIN CAPITAL LETTER W WITH CIRCUMFLEX"
+  },
+  "ŵ": {
+    "code": "0175",
+    "nfd": "0077 0302",
+    "name": "LATIN SMALL LETTER W WITH CIRCUMFLEX"
+  },
+  "Ŷ": {
+    "code": "0176",
+    "nfd": "0059 0302",
+    "name": "LATIN CAPITAL LETTER Y WITH CIRCUMFLEX"
+  },
+  "ŷ": {
+    "code": "0177",
+    "nfd": "0079 0302",
+    "name": "LATIN SMALL LETTER Y WITH CIRCUMFLEX"
+  },
+  "Ÿ": {
+    "code": "0178",
+    "nfd": "0059 0308",
+    "name": "LATIN CAPITAL LETTER Y WITH DIAERESIS"
+  },
+  "Ź": {
+    "code": "0179",
+    "nfd": "005a 0301",
+    "name": "LATIN CAPITAL LETTER Z WITH ACUTE"
+  },
+  "ź": {
+    "code": "017a",
+    "nfd": "007a 0301",
+    "name": "LATIN SMALL LETTER Z WITH ACUTE"
+  },
+  "Ż": {
+    "code": "017b",
+    "nfd": "005a 0307",
+    "name": "LATIN CAPITAL LETTER Z WITH DOT ABOVE"
+  },
+  "ż": {
+    "code": "017c",
+    "nfd": "007a 0307",
+    "name": "LATIN SMALL LETTER Z WITH DOT ABOVE"
+  },
+  "Ž": {
+    "code": "017d",
+    "nfd": "005a 030c",
+    "name": "LATIN CAPITAL LETTER Z WITH CARON"
+  },
+  "ž": {
+    "code": "017e",
+    "nfd": "007a 030c",
+    "name": "LATIN SMALL LETTER Z WITH CARON"
+  },
+  "ſ": {
+    "code": "017f",
+    "nfd": "017f",
+    "name": "LATIN SMALL LETTER LONG S"
+  },
+  "ƀ": {
+    "code": "0180",
+    "nfd": "0180",
+    "name": "LATIN SMALL LETTER B WITH STROKE"
+  },
+  "Ɓ": {
+    "code": "0181",
+    "nfd": "0181",
+    "name": "LATIN CAPITAL LETTER B WITH HOOK"
+  },
+  "Ƃ": {
+    "code": "0182",
+    "nfd": "0182",
+    "name": "LATIN CAPITAL LETTER B WITH TOPBAR"
+  },
+  "ƃ": {
+    "code": "0183",
+    "nfd": "0183",
+    "name": "LATIN SMALL LETTER B WITH TOPBAR"
+  },
+  "Ƅ": {
+    "code": "0184",
+    "nfd": "0184",
+    "name": "LATIN CAPITAL LETTER TONE SIX"
+  },
+  "ƅ": {
+    "code": "0185",
+    "nfd": "0185",
+    "name": "LATIN SMALL LETTER TONE SIX"
+  },
+  "Ɔ": {
+    "code": "0186",
+    "nfd": "0186",
+    "name": "LATIN CAPITAL LETTER OPEN O"
+  },
+  "Ƈ": {
+    "code": "0187",
+    "nfd": "0187",
+    "name": "LATIN CAPITAL LETTER C WITH HOOK"
+  },
+  "ƈ": {
+    "code": "0188",
+    "nfd": "0188",
+    "name": "LATIN SMALL LETTER C WITH HOOK"
+  },
+  "Ɖ": {
+    "code": "0189",
+    "nfd": "0189",
+    "name": "LATIN CAPITAL LETTER AFRICAN D"
+  },
+  "Ɗ": {
+    "code": "018a",
+    "nfd": "018a",
+    "name": "LATIN CAPITAL LETTER D WITH HOOK"
+  },
+  "Ƌ": {
+    "code": "018b",
+    "nfd": "018b",
+    "name": "LATIN CAPITAL LETTER D WITH TOPBAR"
+  },
+  "ƌ": {
+    "code": "018c",
+    "nfd": "018c",
+    "name": "LATIN SMALL LETTER D WITH TOPBAR"
+  },
+  "ƍ": {
+    "code": "018d",
+    "nfd": "018d",
+    "name": "LATIN SMALL LETTER TURNED DELTA"
+  },
+  "Ǝ": {
+    "code": "018e",
+    "nfd": "018e",
+    "name": "LATIN CAPITAL LETTER REVERSED E"
+  },
+  "Ə": {
+    "code": "018f",
+    "nfd": "018f",
+    "name": "LATIN CAPITAL LETTER SCHWA"
+  },
+  "Ɛ": {
+    "code": "0190",
+    "nfd": "0190",
+    "name": "LATIN CAPITAL LETTER OPEN E"
+  },
+  "Ƒ": {
+    "code": "0191",
+    "nfd": "0191",
+    "name": "LATIN CAPITAL LETTER F WITH HOOK"
+  },
+  "ƒ": {
+    "code": "0192",
+    "nfd": "0192",
+    "name": "LATIN SMALL LETTER F WITH HOOK"
+  },
+  "Ɠ": {
+    "code": "0193",
+    "nfd": "0193",
+    "name": "LATIN CAPITAL LETTER G WITH HOOK"
+  },
+  "Ɣ": {
+    "code": "0194",
+    "nfd": "0194",
+    "name": "LATIN CAPITAL LETTER GAMMA"
+  },
+  "ƕ": {
+    "code": "0195",
+    "nfd": "0195",
+    "name": "LATIN SMALL LETTER HV"
+  },
+  "Ɩ": {
+    "code": "0196",
+    "nfd": "0196",
+    "name": "LATIN CAPITAL LETTER IOTA"
+  },
+  "Ɨ": {
+    "code": "0197",
+    "nfd": "0197",
+    "name": "LATIN CAPITAL LETTER I WITH STROKE"
+  },
+  "Ƙ": {
+    "code": "0198",
+    "nfd": "0198",
+    "name": "LATIN CAPITAL LETTER K WITH HOOK"
+  },
+  "ƙ": {
+    "code": "0199",
+    "nfd": "0199",
+    "name": "LATIN SMALL LETTER K WITH HOOK"
+  },
+  "ƚ": {
+    "code": "019a",
+    "nfd": "019a",
+    "name": "LATIN SMALL LETTER L WITH BAR"
+  },
+  "ƛ": {
+    "code": "019b",
+    "nfd": "019b",
+    "name": "LATIN SMALL LETTER LAMBDA WITH STROKE"
+  },
+  "Ɯ": {
+    "code": "019c",
+    "nfd": "019c",
+    "name": "LATIN CAPITAL LETTER TURNED M"
+  },
+  "Ɲ": {
+    "code": "019d",
+    "nfd": "019d",
+    "name": "LATIN CAPITAL LETTER N WITH LEFT HOOK"
+  },
+  "ƞ": {
+    "code": "019e",
+    "nfd": "019e",
+    "name": "LATIN SMALL LETTER N WITH LONG RIGHT LEG"
+  },
+  "Ɵ": {
+    "code": "019f",
+    "nfd": "019f",
+    "name": "LATIN CAPITAL LETTER O WITH MIDDLE TILDE"
+  },
+  "Ơ": {
+    "code": "01a0",
+    "nfd": "004f 031b",
+    "name": "LATIN CAPITAL LETTER O WITH HORN"
+  },
+  "ơ": {
+    "code": "01a1",
+    "nfd": "006f 031b",
+    "name": "LATIN SMALL LETTER O WITH HORN"
+  },
+  "Ƣ": {
+    "code": "01a2",
+    "nfd": "01a2",
+    "name": "LATIN CAPITAL LETTER OI"
+  },
+  "ƣ": {
+    "code": "01a3",
+    "nfd": "01a3",
+    "name": "LATIN SMALL LETTER OI"
+  },
+  "Ƥ": {
+    "code": "01a4",
+    "nfd": "01a4",
+    "name": "LATIN CAPITAL LETTER P WITH HOOK"
+  },
+  "ƥ": {
+    "code": "01a5",
+    "nfd": "01a5",
+    "name": "LATIN SMALL LETTER P WITH HOOK"
+  },
+  "Ƨ": {
+    "code": "01a7",
+    "nfd": "01a7",
+    "name": "LATIN CAPITAL LETTER TONE TWO"
+  },
+  "ƨ": {
+    "code": "01a8",
+    "nfd": "01a8",
+    "name": "LATIN SMALL LETTER TONE TWO"
+  },
+  "Ʃ": {
+    "code": "01a9",
+    "nfd": "01a9",
+    "name": "LATIN CAPITAL LETTER ESH"
+  },
+  "ƫ": {
+    "code": "01ab",
+    "nfd": "01ab",
+    "name": "LATIN SMALL LETTER T WITH PALATAL HOOK"
+  },
+  "Ƭ": {
+    "code": "01ac",
+    "nfd": "01ac",
+    "name": "LATIN CAPITAL LETTER T WITH HOOK"
+  },
+  "ƭ": {
+    "code": "01ad",
+    "nfd": "01ad",
+    "name": "LATIN SMALL LETTER T WITH HOOK"
+  },
+  "Ʈ": {
+    "code": "01ae",
+    "nfd": "01ae",
+    "name": "LATIN CAPITAL LETTER T WITH RETROFLEX HOOK"
+  },
+  "Ư": {
+    "code": "01af",
+    "nfd": "0055 031b",
+    "name": "LATIN CAPITAL LETTER U WITH HORN"
+  },
+  "ư": {
+    "code": "01b0",
+    "nfd": "0075 031b",
+    "name": "LATIN SMALL LETTER U WITH HORN"
+  },
+  "Ʊ": {
+    "code": "01b1",
+    "nfd": "01b1",
+    "name": "LATIN CAPITAL LETTER UPSILON"
+  },
+  "Ʋ": {
+    "code": "01b2",
+    "nfd": "01b2",
+    "name": "LATIN CAPITAL LETTER V WITH HOOK"
+  },
+  "Ƴ": {
+    "code": "01b3",
+    "nfd": "01b3",
+    "name": "LATIN CAPITAL LETTER Y WITH HOOK"
+  },
+  "ƴ": {
+    "code": "01b4",
+    "nfd": "01b4",
+    "name": "LATIN SMALL LETTER Y WITH HOOK"
+  },
+  "Ƶ": {
+    "code": "01b5",
+    "nfd": "01b5",
+    "name": "LATIN CAPITAL LETTER Z WITH STROKE"
+  },
+  "ƶ": {
+    "code": "01b6",
+    "nfd": "01b6",
+    "name": "LATIN SMALL LETTER Z WITH STROKE"
+  },
+  "Ʒ": {
+    "code": "01b7",
+    "nfd": "01b7",
+    "name": "LATIN CAPITAL LETTER EZH"
+  },
+  "Ƹ": {
+    "code": "01b8",
+    "nfd": "01b8",
+    "name": "LATIN CAPITAL LETTER EZH REVERSED"
+  },
+  "ƹ": {
+    "code": "01b9",
+    "nfd": "01b9",
+    "name": "LATIN SMALL LETTER EZH REVERSED"
+  },
+  "ƺ": {
+    "code": "01ba",
+    "nfd": "01ba",
+    "name": "LATIN SMALL LETTER EZH WITH TAIL"
+  },
+  "Ƽ": {
+    "code": "01bc",
+    "nfd": "01bc",
+    "name": "LATIN CAPITAL LETTER TONE FIVE"
+  },
+  "ƽ": {
+    "code": "01bd",
+    "nfd": "01bd",
+    "name": "LATIN SMALL LETTER TONE FIVE"
+  },
+  "Ǆ": {
+    "code": "01c4",
+    "nfd": "01c4",
+    "name": "LATIN CAPITAL LETTER DZ WITH CARON"
+  },
+  "ǅ": {
+    "code": "01c5",
+    "nfd": "01c5",
+    "name": "LATIN CAPITAL LETTER D WITH SMALL LETTER Z WITH CARON"
+  },
+  "ǆ": {
+    "code": "01c6",
+    "nfd": "01c6",
+    "name": "LATIN SMALL LETTER DZ WITH CARON"
+  },
+  "Ǉ": {
+    "code": "01c7",
+    "nfd": "01c7",
+    "name": "LATIN CAPITAL LETTER LJ"
+  },
+  "ǈ": {
+    "code": "01c8",
+    "nfd": "01c8",
+    "name": "LATIN CAPITAL LETTER L WITH SMALL LETTER J"
+  },
+  "ǉ": {
+    "code": "01c9",
+    "nfd": "01c9",
+    "name": "LATIN SMALL LETTER LJ"
+  },
+  "Ǌ": {
+    "code": "01ca",
+    "nfd": "01ca",
+    "name": "LATIN CAPITAL LETTER NJ"
+  },
+  "ǋ": {
+    "code": "01cb",
+    "nfd": "01cb",
+    "name": "LATIN CAPITAL LETTER N WITH SMALL LETTER J"
+  },
+  "ǌ": {
+    "code": "01cc",
+    "nfd": "01cc",
+    "name": "LATIN SMALL LETTER NJ"
+  },
+  "Ǎ": {
+    "code": "01cd",
+    "nfd": "0041 030c",
+    "name": "LATIN CAPITAL LETTER A WITH CARON"
+  },
+  "ǎ": {
+    "code": "01ce",
+    "nfd": "0061 030c",
+    "name": "LATIN SMALL LETTER A WITH CARON"
+  },
+  "Ǐ": {
+    "code": "01cf",
+    "nfd": "0049 030c",
+    "name": "LATIN CAPITAL LETTER I WITH CARON"
+  },
+  "ǐ": {
+    "code": "01d0",
+    "nfd": "0069 030c",
+    "name": "LATIN SMALL LETTER I WITH CARON"
+  },
+  "Ǒ": {
+    "code": "01d1",
+    "nfd": "004f 030c",
+    "name": "LATIN CAPITAL LETTER O WITH CARON"
+  },
+  "ǒ": {
+    "code": "01d2",
+    "nfd": "006f 030c",
+    "name": "LATIN SMALL LETTER O WITH CARON"
+  },
+  "Ǔ": {
+    "code": "01d3",
+    "nfd": "0055 030c",
+    "name": "LATIN CAPITAL LETTER U WITH CARON"
+  },
+  "ǔ": {
+    "code": "01d4",
+    "nfd": "0075 030c",
+    "name": "LATIN SMALL LETTER U WITH CARON"
+  },
+  "Ǖ": {
+    "code": "01d5",
+    "nfd": "0055 0308 0304",
+    "name": "LATIN CAPITAL LETTER U WITH DIAERESIS AND MACRON"
+  },
+  "ǖ": {
+    "code": "01d6",
+    "nfd": "0075 0308 0304",
+    "name": "LATIN SMALL LETTER U WITH DIAERESIS AND MACRON"
+  },
+  "Ǘ": {
+    "code": "01d7",
+    "nfd": "0055 0308 0301",
+    "name": "LATIN CAPITAL LETTER U WITH DIAERESIS AND ACUTE"
+  },
+  "ǘ": {
+    "code": "01d8",
+    "nfd": "0075 0308 0301",
+    "name": "LATIN SMALL LETTER U WITH DIAERESIS AND ACUTE"
+  },
+  "Ǚ": {
+    "code": "01d9",
+    "nfd": "0055 0308 030c",
+    "name": "LATIN CAPITAL LETTER U WITH DIAERESIS AND CARON"
+  },
+  "ǚ": {
+    "code": "01da",
+    "nfd": "0075 0308 030c",
+    "name": "LATIN SMALL LETTER U WITH DIAERESIS AND CARON"
+  },
+  "Ǜ": {
+    "code": "01db",
+    "nfd": "0055 0308 0300",
+    "name": "LATIN CAPITAL LETTER U WITH DIAERESIS AND GRAVE"
+  },
+  "ǜ": {
+    "code": "01dc",
+    "nfd": "0075 0308 0300",
+    "name": "LATIN SMALL LETTER U WITH DIAERESIS AND GRAVE"
+  },
+  "ǝ": {
+    "code": "01dd",
+    "nfd": "01dd",
+    "name": "LATIN SMALL LETTER TURNED E"
+  },
+  "Ǟ": {
+    "code": "01de",
+    "nfd": "0041 0308 0304",
+    "name": "LATIN CAPITAL LETTER A WITH DIAERESIS AND MACRON"
+  },
+  "ǟ": {
+    "code": "01df",
+    "nfd": "0061 0308 0304",
+    "name": "LATIN SMALL LETTER A WITH DIAERESIS AND MACRON"
+  },
+  "Ǡ": {
+    "code": "01e0",
+    "nfd": "0041 0307 0304",
+    "name": "LATIN CAPITAL LETTER A WITH DOT ABOVE AND MACRON"
+  },
+  "ǡ": {
+    "code": "01e1",
+    "nfd": "0061 0307 0304",
+    "name": "LATIN SMALL LETTER A WITH DOT ABOVE AND MACRON"
+  },
+  "Ǣ": {
+    "code": "01e2",
+    "nfd": "00c6 0304",
+    "name": "LATIN CAPITAL LETTER AE WITH MACRON"
+  },
+  "ǣ": {
+    "code": "01e3",
+    "nfd": "00e6 0304",
+    "name": "LATIN SMALL LETTER AE WITH MACRON"
+  },
+  "Ǥ": {
+    "code": "01e4",
+    "nfd": "01e4",
+    "name": "LATIN CAPITAL LETTER G WITH STROKE"
+  },
+  "ǥ": {
+    "code": "01e5",
+    "nfd": "01e5",
+    "name": "LATIN SMALL LETTER G WITH STROKE"
+  },
+  "Ǧ": {
+    "code": "01e6",
+    "nfd": "0047 030c",
+    "name": "LATIN CAPITAL LETTER G WITH CARON"
+  },
+  "ǧ": {
+    "code": "01e7",
+    "nfd": "0067 030c",
+    "name": "LATIN SMALL LETTER G WITH CARON"
+  },
+  "Ǩ": {
+    "code": "01e8",
+    "nfd": "004b 030c",
+    "name": "LATIN CAPITAL LETTER K WITH CARON"
+  },
+  "ǩ": {
+    "code": "01e9",
+    "nfd": "006b 030c",
+    "name": "LATIN SMALL LETTER K WITH CARON"
+  },
+  "Ǫ": {
+    "code": "01ea",
+    "nfd": "004f 0328",
+    "name": "LATIN CAPITAL LETTER O WITH OGONEK"
+  },
+  "ǫ": {
+    "code": "01eb",
+    "nfd": "006f 0328",
+    "name": "LATIN SMALL LETTER O WITH OGONEK"
+  },
+  "Ǭ": {
+    "code": "01ec",
+    "nfd": "004f 0328 0304",
+    "name": "LATIN CAPITAL LETTER O WITH OGONEK AND MACRON"
+  },
+  "ǭ": {
+    "code": "01ed",
+    "nfd": "006f 0328 0304",
+    "name": "LATIN SMALL LETTER O WITH OGONEK AND MACRON"
+  },
+  "Ǯ": {
+    "code": "01ee",
+    "nfd": "01b7 030c",
+    "name": "LATIN CAPITAL LETTER EZH WITH CARON"
+  },
+  "ǯ": {
+    "code": "01ef",
+    "nfd": "0292 030c",
+    "name": "LATIN SMALL LETTER EZH WITH CARON"
+  },
+  "ǰ": {
+    "code": "01f0",
+    "nfd": "006a 030c",
+    "name": "LATIN SMALL LETTER J WITH CARON"
+  },
+  "Ǳ": {
+    "code": "01f1",
+    "nfd": "01f1",
+    "name": "LATIN CAPITAL LETTER DZ"
+  },
+  "ǲ": {
+    "code": "01f2",
+    "nfd": "01f2",
+    "name": "LATIN CAPITAL LETTER D WITH SMALL LETTER Z"
+  },
+  "ǳ": {
+    "code": "01f3",
+    "nfd": "01f3",
+    "name": "LATIN SMALL LETTER DZ"
+  },
+  "Ǵ": {
+    "code": "01f4",
+    "nfd": "0047 0301",
+    "name": "LATIN CAPITAL LETTER G WITH ACUTE"
+  },
+  "ǵ": {
+    "code": "01f5",
+    "nfd": "0067 0301",
+    "name": "LATIN SMALL LETTER G WITH ACUTE"
+  },
+  "Ƕ": {
+    "code": "01f6",
+    "nfd": "01f6",
+    "name": "LATIN CAPITAL LETTER HWAIR"
+  },
+  "Ƿ": {
+    "code": "01f7",
+    "nfd": "01f7",
+    "name": "LATIN CAPITAL LETTER WYNN"
+  },
+  "Ǹ": {
+    "code": "01f8",
+    "nfd": "004e 0300",
+    "name": "LATIN CAPITAL LETTER N WITH GRAVE"
+  },
+  "ǹ": {
+    "code": "01f9",
+    "nfd": "006e 0300",
+    "name": "LATIN SMALL LETTER N WITH GRAVE"
+  },
+  "Ǻ": {
+    "code": "01fa",
+    "nfd": "0041 030a 0301",
+    "name": "LATIN CAPITAL LETTER A WITH RING ABOVE AND ACUTE"
+  },
+  "ǻ": {
+    "code": "01fb",
+    "nfd": "0061 030a 0301",
+    "name": "LATIN SMALL LETTER A WITH RING ABOVE AND ACUTE"
+  },
+  "Ǽ": {
+    "code": "01fc",
+    "nfd": "00c6 0301",
+    "name": "LATIN CAPITAL LETTER AE WITH ACUTE"
+  },
+  "ǽ": {
+    "code": "01fd",
+    "nfd": "00e6 0301",
+    "name": "LATIN SMALL LETTER AE WITH ACUTE"
+  },
+  "Ǿ": {
+    "code": "01fe",
+    "nfd": "00d8 0301",
+    "name": "LATIN CAPITAL LETTER O WITH STROKE AND ACUTE"
+  },
+  "ǿ": {
+    "code": "01ff",
+    "nfd": "00f8 0301",
+    "name": "LATIN SMALL LETTER O WITH STROKE AND ACUTE"
+  },
+  "Ȁ": {
+    "code": "0200",
+    "nfd": "0041 030f",
+    "name": "LATIN CAPITAL LETTER A WITH DOUBLE GRAVE"
+  },
+  "ȁ": {
+    "code": "0201",
+    "nfd": "0061 030f",
+    "name": "LATIN SMALL LETTER A WITH DOUBLE GRAVE"
+  },
+  "Ȃ": {
+    "code": "0202",
+    "nfd": "0041 0311",
+    "name": "LATIN CAPITAL LETTER A WITH INVERTED BREVE"
+  },
+  "ȃ": {
+    "code": "0203",
+    "nfd": "0061 0311",
+    "name": "LATIN SMALL LETTER A WITH INVERTED BREVE"
+  },
+  "Ȅ": {
+    "code": "0204",
+    "nfd": "0045 030f",
+    "name": "LATIN CAPITAL LETTER E WITH DOUBLE GRAVE"
+  },
+  "ȅ": {
+    "code": "0205",
+    "nfd": "0065 030f",
+    "name": "LATIN SMALL LETTER E WITH DOUBLE GRAVE"
+  },
+  "Ȇ": {
+    "code": "0206",
+    "nfd": "0045 0311",
+    "name": "LATIN CAPITAL LETTER E WITH INVERTED BREVE"
+  },
+  "ȇ": {
+    "code": "0207",
+    "nfd": "0065 0311",
+    "name": "LATIN SMALL LETTER E WITH INVERTED BREVE"
+  },
+  "Ȉ": {
+    "code": "0208",
+    "nfd": "0049 030f",
+    "name": "LATIN CAPITAL LETTER I WITH DOUBLE GRAVE"
+  },
+  "ȉ": {
+    "code": "0209",
+    "nfd": "0069 030f",
+    "name": "LATIN SMALL LETTER I WITH DOUBLE GRAVE"
+  },
+  "Ȋ": {
+    "code": "020a",
+    "nfd": "0049 0311",
+    "name": "LATIN CAPITAL LETTER I WITH INVERTED BREVE"
+  },
+  "ȋ": {
+    "code": "020b",
+    "nfd": "0069 0311",
+    "name": "LATIN SMALL LETTER I WITH INVERTED BREVE"
+  },
+  "Ȍ": {
+    "code": "020c",
+    "nfd": "004f 030f",
+    "name": "LATIN CAPITAL LETTER O WITH DOUBLE GRAVE"
+  },
+  "ȍ": {
+    "code": "020d",
+    "nfd": "006f 030f",
+    "name": "LATIN SMALL LETTER O WITH DOUBLE GRAVE"
+  },
+  "Ȏ": {
+    "code": "020e",
+    "nfd": "004f 0311",
+    "name": "LATIN CAPITAL LETTER O WITH INVERTED BREVE"
+  },
+  "ȏ": {
+    "code": "020f",
+    "nfd": "006f 0311",
+    "name": "LATIN SMALL LETTER O WITH INVERTED BREVE"
+  },
+  "Ȑ": {
+    "code": "0210",
+    "nfd": "0052 030f",
+    "name": "LATIN CAPITAL LETTER R WITH DOUBLE GRAVE"
+  },
+  "ȑ": {
+    "code": "0211",
+    "nfd": "0072 030f",
+    "name": "LATIN SMALL LETTER R WITH DOUBLE GRAVE"
+  },
+  "Ȓ": {
+    "code": "0212",
+    "nfd": "0052 0311",
+    "name": "LATIN CAPITAL LETTER R WITH INVERTED BREVE"
+  },
+  "ȓ": {
+    "code": "0213",
+    "nfd": "0072 0311",
+    "name": "LATIN SMALL LETTER R WITH INVERTED BREVE"
+  },
+  "Ȕ": {
+    "code": "0214",
+    "nfd": "0055 030f",
+    "name": "LATIN CAPITAL LETTER U WITH DOUBLE GRAVE"
+  },
+  "ȕ": {
+    "code": "0215",
+    "nfd": "0075 030f",
+    "name": "LATIN SMALL LETTER U WITH DOUBLE GRAVE"
+  },
+  "Ȗ": {
+    "code": "0216",
+    "nfd": "0055 0311",
+    "name": "LATIN CAPITAL LETTER U WITH INVERTED BREVE"
+  },
+  "ȗ": {
+    "code": "0217",
+    "nfd": "0075 0311",
+    "name": "LATIN SMALL LETTER U WITH INVERTED BREVE"
+  },
+  "Ș": {
+    "code": "0218",
+    "nfd": "0053 0326",
+    "name": "LATIN CAPITAL LETTER S WITH COMMA BELOW"
+  },
+  "ș": {
+    "code": "0219",
+    "nfd": "0073 0326",
+    "name": "LATIN SMALL LETTER S WITH COMMA BELOW"
+  },
+  "Ț": {
+    "code": "021a",
+    "nfd": "0054 0326",
+    "name": "LATIN CAPITAL LETTER T WITH COMMA BELOW"
+  },
+  "ț": {
+    "code": "021b",
+    "nfd": "0074 0326",
+    "name": "LATIN SMALL LETTER T WITH COMMA BELOW"
+  },
+  "Ȝ": {
+    "code": "021c",
+    "nfd": "021c",
+    "name": "LATIN CAPITAL LETTER YOGH"
+  },
+  "ȝ": {
+    "code": "021d",
+    "nfd": "021d",
+    "name": "LATIN SMALL LETTER YOGH"
+  },
+  "Ȟ": {
+    "code": "021e",
+    "nfd": "0048 030c",
+    "name": "LATIN CAPITAL LETTER H WITH CARON"
+  },
+  "ȟ": {
+    "code": "021f",
+    "nfd": "0068 030c",
+    "name": "LATIN SMALL LETTER H WITH CARON"
+  },
+  "Ƞ": {
+    "code": "0220",
+    "nfd": "0220",
+    "name": "LATIN CAPITAL LETTER N WITH LONG RIGHT LEG"
+  },
+  "ȡ": {
+    "code": "0221",
+    "nfd": "0221",
+    "name": "LATIN SMALL LETTER D WITH CURL"
+  },
+  "Ȣ": {
+    "code": "0222",
+    "nfd": "0222",
+    "name": "LATIN CAPITAL LETTER OU"
+  },
+  "ȣ": {
+    "code": "0223",
+    "nfd": "0223",
+    "name": "LATIN SMALL LETTER OU"
+  },
+  "Ȥ": {
+    "code": "0224",
+    "nfd": "0224",
+    "name": "LATIN CAPITAL LETTER Z WITH HOOK"
+  },
+  "ȥ": {
+    "code": "0225",
+    "nfd": "0225",
+    "name": "LATIN SMALL LETTER Z WITH HOOK"
+  },
+  "Ȧ": {
+    "code": "0226",
+    "nfd": "0041 0307",
+    "name": "LATIN CAPITAL LETTER A WITH DOT ABOVE"
+  },
+  "ȧ": {
+    "code": "0227",
+    "nfd": "0061 0307",
+    "name": "LATIN SMALL LETTER A WITH DOT ABOVE"
+  },
+  "Ȩ": {
+    "code": "0228",
+    "nfd": "0045 0327",
+    "name": "LATIN CAPITAL LETTER E WITH CEDILLA"
+  },
+  "ȩ": {
+    "code": "0229",
+    "nfd": "0065 0327",
+    "name": "LATIN SMALL LETTER E WITH CEDILLA"
+  },
+  "Ȫ": {
+    "code": "022a",
+    "nfd": "004f 0308 0304",
+    "name": "LATIN CAPITAL LETTER O WITH DIAERESIS AND MACRON"
+  },
+  "ȫ": {
+    "code": "022b",
+    "nfd": "006f 0308 0304",
+    "name": "LATIN SMALL LETTER O WITH DIAERESIS AND MACRON"
+  },
+  "Ȭ": {
+    "code": "022c",
+    "nfd": "004f 0303 0304",
+    "name": "LATIN CAPITAL LETTER O WITH TILDE AND MACRON"
+  },
+  "ȭ": {
+    "code": "022d",
+    "nfd": "006f 0303 0304",
+    "name": "LATIN SMALL LETTER O WITH TILDE AND MACRON"
+  },
+  "Ȯ": {
+    "code": "022e",
+    "nfd": "004f 0307",
+    "name": "LATIN CAPITAL LETTER O WITH DOT ABOVE"
+  },
+  "ȯ": {
+    "code": "022f",
+    "nfd": "006f 0307",
+    "name": "LATIN SMALL LETTER O WITH DOT ABOVE"
+  },
+  "Ȱ": {
+    "code": "0230",
+    "nfd": "004f 0307 0304",
+    "name": "LATIN CAPITAL LETTER O WITH DOT ABOVE AND MACRON"
+  },
+  "ȱ": {
+    "code": "0231",
+    "nfd": "006f 0307 0304",
+    "name": "LATIN SMALL LETTER O WITH DOT ABOVE AND MACRON"
+  },
+  "Ȳ": {
+    "code": "0232",
+    "nfd": "0059 0304",
+    "name": "LATIN CAPITAL LETTER Y WITH MACRON"
+  },
+  "ȳ": {
+    "code": "0233",
+    "nfd": "0079 0304",
+    "name": "LATIN SMALL LETTER Y WITH MACRON"
+  },
+  "ȴ": {
+    "code": "0234",
+    "nfd": "0234",
+    "name": "LATIN SMALL LETTER L WITH CURL"
+  },
+  "ȵ": {
+    "code": "0235",
+    "nfd": "0235",
+    "name": "LATIN SMALL LETTER N WITH CURL"
+  },
+  "ȶ": {
+    "code": "0236",
+    "nfd": "0236",
+    "name": "LATIN SMALL LETTER T WITH CURL"
+  },
+  "ȷ": {
+    "code": "0237",
+    "nfd": "0237",
+    "name": "LATIN SMALL LETTER DOTLESS J"
+  },
+  "ȸ": {
+    "code": "0238",
+    "nfd": "0238",
+    "name": "LATIN SMALL LETTER DB DIGRAPH"
+  },
+  "ȹ": {
+    "code": "0239",
+    "nfd": "0239",
+    "name": "LATIN SMALL LETTER QP DIGRAPH"
+  },
+  "Ⱥ": {
+    "code": "023a",
+    "nfd": "023a",
+    "name": "LATIN CAPITAL LETTER A WITH STROKE"
+  },
+  "Ȼ": {
+    "code": "023b",
+    "nfd": "023b",
+    "name": "LATIN CAPITAL LETTER C WITH STROKE"
+  },
+  "ȼ": {
+    "code": "023c",
+    "nfd": "023c",
+    "name": "LATIN SMALL LETTER C WITH STROKE"
+  },
+  "Ƚ": {
+    "code": "023d",
+    "nfd": "023d",
+    "name": "LATIN CAPITAL LETTER L WITH BAR"
+  },
+  "Ⱦ": {
+    "code": "023e",
+    "nfd": "023e",
+    "name": "LATIN CAPITAL LETTER T WITH DIAGONAL STROKE"
+  },
+  "ȿ": {
+    "code": "023f",
+    "nfd": "023f",
+    "name": "LATIN SMALL LETTER S WITH SWASH TAIL"
+  },
+  "ɀ": {
+    "code": "0240",
+    "nfd": "0240",
+    "name": "LATIN SMALL LETTER Z WITH SWASH TAIL"
+  },
+  "Ɂ": {
+    "code": "0241",
+    "nfd": "0241",
+    "name": "LATIN CAPITAL LETTER GLOTTAL STOP"
+  },
+  "ɂ": {
+    "code": "0242",
+    "nfd": "0242",
+    "name": "LATIN SMALL LETTER GLOTTAL STOP"
+  },
+  "Ƀ": {
+    "code": "0243",
+    "nfd": "0243",
+    "name": "LATIN CAPITAL LETTER B WITH STROKE"
+  },
+  "Ʉ": {
+    "code": "0244",
+    "nfd": "0244",
+    "name": "LATIN CAPITAL LETTER U BAR"
+  },
+  "Ʌ": {
+    "code": "0245",
+    "nfd": "0245",
+    "name": "LATIN CAPITAL LETTER TURNED V"
+  },
+  "Ɇ": {
+    "code": "0246",
+    "nfd": "0246",
+    "name": "LATIN CAPITAL LETTER E WITH STROKE"
+  },
+  "ɇ": {
+    "code": "0247",
+    "nfd": "0247",
+    "name": "LATIN SMALL LETTER E WITH STROKE"
+  },
+  "Ɉ": {
+    "code": "0248",
+    "nfd": "0248",
+    "name": "LATIN CAPITAL LETTER J WITH STROKE"
+  },
+  "ɉ": {
+    "code": "0249",
+    "nfd": "0249",
+    "name": "LATIN SMALL LETTER J WITH STROKE"
+  },
+  "Ɋ": {
+    "code": "024a",
+    "nfd": "024a",
+    "name": "LATIN CAPITAL LETTER SMALL Q WITH HOOK TAIL"
+  },
+  "ɋ": {
+    "code": "024b",
+    "nfd": "024b",
+    "name": "LATIN SMALL LETTER Q WITH HOOK TAIL"
+  },
+  "Ɍ": {
+    "code": "024c",
+    "nfd": "024c",
+    "name": "LATIN CAPITAL LETTER R WITH STROKE"
+  },
+  "ɍ": {
+    "code": "024d",
+    "nfd": "024d",
+    "name": "LATIN SMALL LETTER R WITH STROKE"
+  },
+  "Ɏ": {
+    "code": "024e",
+    "nfd": "024e",
+    "name": "LATIN CAPITAL LETTER Y WITH STROKE"
+  },
+  "ɏ": {
+    "code": "024f",
+    "nfd": "024f",
+    "name": "LATIN SMALL LETTER Y WITH STROKE"
+  }
+}
