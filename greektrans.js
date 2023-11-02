@@ -12,11 +12,22 @@ function fromReversedTable(tableRev) {
     return table;
 }
 
-const monotonicTable = fromReversedTable(table.monotonicTableRev);
 const romanizationTable = fromReversedTable(table.romanizationTableRev);
-const greekAttrsChar = {};
+
+const attributeCodes = {};
 for (const [key, value] of Object.entries(table["attributeCodes"])) {
-    greekAttrsChar[String.fromCharCode(parseInt(value, 16))] = key;
+    attributeCodes[key] = String.fromCharCode(parseInt(value, 16));
+}
+
+const greekAttrsChar = {};
+for (const [key, value] of Object.entries(attributeCodes)) {
+    if (key == "TONOS" || key == "OXIA" || key == "PERISPOMENI") {
+        greekAttrsChar[value] = attributeCodes.TONOS;
+    } else if (key == "DIALYTIKA") {
+        greekAttrsChar[value] = attributeCodes.DIALYTIKA;
+    } else {
+        greekAttrsChar[value] = "";
+    }
 }
 
 export function isLetter(letter) {
@@ -39,13 +50,17 @@ export function strip(text) {
     return text.normalize("NFC");
 }
 
-function stringMap(map, text) {
-    return text.split("").map((letter) => map[letter] || letter).join("");
+function replaces(table, text) {
+    for (const [key, value] of Object.entries(table)) {
+        if (key != value) text = text.replaceAll(key, value);
+    }
+    return text;
 }
 
 export function monotonize(text) {
-    text = text.normalize("NFC");
-    return stringMap(monotonicTable, text);
+    text = text.normalize("NFD");
+    text = replaces(greekAttrsChar, text);
+    return text.normalize("NFC");
 }
 
 function prepareRomanize(word) {
@@ -86,13 +101,6 @@ function* tokenize(text) {
     if (token) yield [type, token];
 }
 
-function replaces(table, text) {
-    for (const [key, value] of Object.entries(table)) {
-        text = text.replaceAll(key, value);
-    }
-    return text;
-}
-
 export function romanize(text, caron = true, dotMacron = true) {
     let ret = "";
     for (const [type, token] of tokenize(text)) {
@@ -103,7 +111,7 @@ export function romanize(text, caron = true, dotMacron = true) {
         }
     }
     ret = replaces(table.romanizationTableEx.combination, ret);
-    ret = stringMap(romanizationTable, ret);
+    ret = replaces(romanizationTable, ret);
     if (caron) {
         ret = replaces(table.romanizationTableEx.caron, ret);
     }

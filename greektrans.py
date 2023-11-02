@@ -10,11 +10,18 @@ def from_reversed_table(table_rev):
             table[letter] = key
     return table
 
-greek_letters = table["greekLetters"]
-monotonic_table = from_reversed_table(table["monotonicTableRev"])
 romanization_table = from_reversed_table(table["romanizationTableRev"])
 romanization_table_ex = table["romanizationTableEx"]
-greek_attrs_char = {chr(int(value, 16)): key for key, value in table["attributeCodes"].items()}
+attribute_codes = {key: chr(int(value, 16)) for key, value in table["attributeCodes"].items()}
+
+greek_attrs_char = {}
+for key, value in attribute_codes.items():
+    if key in ["TONOS", "OXIA", "PERISPOMENI"]:
+        greek_attrs_char[value] = attribute_codes["TONOS"]
+    elif key == "DIALYTIKA":
+        greek_attrs_char[value] = attribute_codes["DIALYTIKA"]
+    else:
+        greek_attrs_char[value] = ""
 
 def is_letter(letter):
     return letter in table["greekLetters"]
@@ -31,12 +38,16 @@ def strip(text):
         text = text.replace(ch, "")
     return unicodedata.normalize("NFC", text)
 
-def string_map(map, text):
-    return "".join([map[letter] if letter in map else letter for letter in text])
+def replaces(table, text):
+    for key, value in table.items():
+        if key != value:
+            text = text.replace(key, value)
+    return text
 
 def monotonize(text):
-    text = unicodedata.normalize("NFC", text)
-    return string_map(monotonic_table, text)
+    text = unicodedata.normalize("NFD", text)
+    text = replaces(greek_attrs_char, text)
+    return unicodedata.normalize("NFC", text)
 
 def prepare_romanize(word):
     ret = ""
@@ -60,7 +71,7 @@ def tokenize(text):
     token = ""
     type = 0
     for ch in text:
-        t = 1 if ch in greek_letters else 2
+        t = 1 if is_letter(ch) else 2
         if type != t:
             if token:
                 yield type, token
@@ -69,11 +80,6 @@ def tokenize(text):
         token += ch
     if token:
         yield type, token
-
-def replaces(table, text):
-    for key, value in table.items():
-        text = text.replace(key, value)
-    return text
 
 def romanize(text, caron=True, dot_macron=True):
     ret = ""

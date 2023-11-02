@@ -128,20 +128,6 @@ def add_attr(ch, attr):
     ret = search(uch.type, uch.letter_name, uch.capital, *uch.attrs.union({attr}))
     return ret.char if ret else ch + ach
 
-def monotonize1(letter):
-    if not (uch := greek_letters_info.get(letter)):
-        return letter
-    ret = uch.nfd[0]
-    if uch.dialytika:
-        if ch := add_attr(ret, "DIALYTIKA"):
-            ret = ch
-    if uch.tonos or uch.perispomeni or uch.oxia:
-        if ch := add_attr(ret, "TONOS"):
-            ret = ch
-    return ret
-
-monotonic_table = {key: key2 for key in greek_letters if key != (key2 := monotonize1(key))}
-
 def is_letter(letter):
     return letter in greek_letters
 
@@ -196,7 +182,6 @@ table = json.dumps({
     "attributeCodes": {attr: f"{ord(attr_chars[attr]):04x}" for attr in greek_attrs.keys() if attr},
     "greekVowels": greek_vowels,
     "greekConsonants": greek_consonants,
-    "monotonicTableRev": reverse_table(monotonic_table),
     "romanizationTableRev": reverse_table(romanization_table),
     "romanizationTableEx": romanization_table_ex,
 }, ensure_ascii=False, indent=2)
