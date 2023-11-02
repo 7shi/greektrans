@@ -13,10 +13,14 @@ class UnicodeChar:
         except ValueError:
             self.name = ""
 
-        if m := re.match(r"([A-Z]+) (CAPITAL|SMALL) LETTER ([A-Z]+)", self.name):
+        if m := re.match(r"([A-Z]+) (CAPITAL|SMALL) LETTER (.*)", self.name):
             self.type = m.group(1)
             self.capital = m.group(2) == "CAPITAL"
-            self.letter_name = m.group(3)
+            letter_name = m.group(3)
+            if m := re.match(r"(.*) WITH", letter_name):
+                self.letter_name = m.group(1)
+            else:
+                self.letter_name = letter_name
         else:
             self.type = ""
             self.capital = False
@@ -54,7 +58,7 @@ class UnicodeChar:
         self.vrachy         = "VRACHY"         in self.attrs # breve
 
     def __str__(self):
-        return f"{self.char}[U+{self.code:04x}]: {self.name}"
+        return f"{self.char} [U+{self.code:04x}] {self.name}"
     
     def json(self):
         return {
@@ -73,6 +77,13 @@ for s, e in [(0x20, 0x250), (0x1e00, 0x1f00), (0x384, 0x3d0), (0x1f00, 0x2000)]:
 latin_letters_info = {key: uch for key, uch in letters_info.items() if uch.type == "LATIN"}
 greek_letters_info = {key: uch for key, uch in letters_info.items() if uch.type == "GREEK"}
 
+greek_nfd_rev = {}
+for key in sorted(greek_letters_info.keys()):
+    uch = greek_letters_info[key]
+    nfd = "".join(sorted(uch.nfd))
+    if nfd not in greek_nfd_rev:
+        greek_nfd_rev[nfd] = uch.char
+
 def search(type, name, capital, *attrs):
     base_name = type + " " + ("CAPITAL" if capital else "SMALL") + " LETTER " + name
     attrs_set = set(attrs)
@@ -85,7 +96,8 @@ def search(type, name, capital, *attrs):
 greek_capital_letters = "".join([uch.char for uch in greek_letters_info.values() if uch.capital])
 greek_small_letters = "".join([uch.char for uch in greek_letters_info.values() if not uch.capital])
 greek_letters = greek_capital_letters + greek_small_letters
-greek_letters_rev = {uch.name: uch.char for uch in greek_letters_info.values()}
+
+attr_chars = {}
 
 def collect_attrs(letters):
     ret = {"": ""}
@@ -97,29 +109,47 @@ def collect_attrs(letters):
                 if attr not in ret:
                     ret[attr] = ""
                 ret[attr] += uch.char
+            if len(uch.attrs) == 1:
+                attr = list(uch.attrs)[0]
+                hexstr = " ".join([f"{ord(ch):04x}" for ch in uch.nfd])
+                if len(uch.nfd) == 2:
+                    if attr not in attr_chars:
+                        attr_chars[attr] = uch.nfd[1]
+                    elif attr_chars[attr] != uch.nfd[1]:
+                        raise Exception(f"Unexpected NFD: {uch} ({hexstr})")
+                else:
+                    # print(f"Length not 2 ({hexstr}): {uch}")
+                    pass
     return ret
 
 latin_attrs = collect_attrs(latin_letters_info.values())
 greek_attrs = collect_attrs(greek_letters_info.values())
+# print("attr_chars:", {key: [f"{ord(ch):04x}" for ch in value] for key, value in attr_chars.items()})
+greek_attrs_char = [attr_chars[attr] for attr in greek_attrs.keys() if attr]
+
+def add_attr(ch, attr):
+    if not (uch := letters_info.get(ch)):
+        raise Exception(f"Unknown character: {ch}")
+    if not (ach := attr_chars.get(attr)):
+        raise Exception(f"Unknown attribute: {attr}")
+    ret = search(uch.type, uch.letter_name, uch.capital, *uch.attrs.union({attr}))
+    return ret.char if ret else ch + ach
 
 def strip1(letter):
     uch = greek_letters_info.get(letter)
     return uch.nfd[0] if uch else letter
 
 def monotonize1(letter):
-    uch = greek_letters_info.get(letter)
-    if not uch:
+    if not (uch := greek_letters_info.get(letter)):
         return letter
-    tonos = uch.tonos or uch.perispomeni or uch.oxia
-    if tonos and uch.dialytika:
-        ret = greek_letters_rev.get(uch.base_name + " WITH DIALYTIKA AND TONOS")
-        if ret: return ret
+    ret = uch.nfd[0]
     if uch.dialytika:
-        return greek_letters_rev[uch.base_name + " WITH DIALYTIKA"]
-    elif tonos:
-        return greek_letters_rev[uch.base_name + " WITH TONOS"]
-    else:
-        return uch.nfd[0]
+        if ch := add_attr(ret, "DIALYTIKA"):
+            ret = ch
+    if uch.tonos or uch.perispomeni or uch.oxia:
+        if ch := add_attr(ret, "TONOS"):
+            ret = ch
+    return ret
 
 strip_table = {key: key2 for key in greek_letters if key != (key2 := strip1(key))}
 monotonic_table = {key: key2 for key in greek_letters if key != (key2 := monotonize1(key))}
@@ -135,6 +165,10 @@ def is_consonant(letter):
 
 greek_vowels = "".join(filter(is_vowel, greek_letters))
 greek_consonants = "".join(filter(is_consonant, greek_letters))
+
+greek_basic_letters = "αβγδεζηθικλμνξοπρςστυφχψω"
+romanize_basic = "a,b,g,d,e,z,ē,th,i,c,l,m,n,x,o,p,r,s,s,t,y,ph,ch,ps,ō".split(",")
+romanize_basic_table = {greek_letters_info[lch].letter_name: gch for lch, gch in zip(greek_basic_letters, romanize_basic)}
 
 # Create romanization table template
 table_name = "romanize"
@@ -170,6 +204,8 @@ table = json.dumps({
     "greekCapitalLetters": greek_capital_letters,
     "greekSmallLetters": greek_small_letters,
     "attributes": greek_attrs,
+    "attributeCodes": {attr: f"{ord(attr_chars[attr]):04x}" for attr in greek_attrs.keys() if attr},
+    "greekNFD": {key: " ".join([f"{ord(ch):04x}" for ch in value.nfd]) for key, value in greek_letters_info.items()},
     "greekVowels": greek_vowels,
     "greekConsonants": greek_consonants,
     "stripTableRev": reverse_table(strip_table),
@@ -191,6 +227,34 @@ with open(f"{table_name}.py", "w", encoding="utf-8") as file:
     file.write(f"table = {table}");
 
 ### Additional Impementation
+
+def normalize_nfd(text):
+    ret = ""
+    for ch in text:
+        if uch := greek_letters_info.get(ch):
+            ret += uch.nfd
+        else:
+            ret += ch
+    return ret
+
+def normalize_nfc1(chs):
+    for length in range(len(chs), 0, -1):
+        if ch := greek_nfd_rev.get("".join(sorted(chs[:length]))):
+            return ch + chs[length:]
+    return chs
+
+def normalize_nfc(text):
+    ret = ""
+    chs = ""
+    for ch in text:
+        if ch not in greek_attrs_char:
+            if chs:
+                ret += normalize_nfc1(chs)
+                chs = ""
+        chs += ch
+    if chs:
+        ret += normalize_nfc1(chs)
+    return ret
 
 def strip(text):
     return "".join(map(strip1, text))
@@ -216,6 +280,7 @@ def prepare_romanize(word):
     return ret
 
 def tokenize(text):
+    text = normalize_nfc(text)
     token = ""
     type = 0
     for ch in text:
@@ -265,8 +330,24 @@ def load_texts(file_prefix):
 class TestGreekTrans(unittest.TestCase):
     def test(self):
         self.assertEqual(prepare_romanize("κἀγώ"), "κἀ'γώ")
-        self.assertEqual(romanize("Ἐγὼ δ' εἰς τὴν ἀγρίαν ὁδὸν εἰσῆλθον."),
-                         "Egṑ d' eis tḕn agrían hodòn eisêlthon.")
+
+        src = "ᾅ"
+        nfd = unicodedata.normalize("NFD", src)
+        self.assertEqual(normalize_nfd (src), nfd)
+        self.assertEqual(normalize_nfc1(nfd), src)
+        self.assertEqual(normalize_nfc (nfd), src)
+
+        src = "ί"
+        nfd = unicodedata.normalize("NFD", src)
+        self.assertEqual(normalize_nfd (src), nfd)
+        self.assertEqual(normalize_nfc1(nfd), src)
+        self.assertEqual(normalize_nfc (nfd), src)
+
+        src = "Ἐγὼ δ' εἰς τὴν ἀγρίαν ὁδὸν εἰσῆλθον."
+        self.assertEqual(romanize(src), "Egṑ d' eis tḕn agrían hodòn eisêlthon.")
+        nfd = unicodedata.normalize("NFD", src)
+        self.assertEqual(normalize_nfd(src), nfd)
+        self.assertEqual(normalize_nfc(nfd), unicodedata.normalize("NFC", nfd))
 
     # The Lord's Prayer
     # https://en.wikipedia.org/wiki/Greek_diacritics#Examples
@@ -274,6 +355,9 @@ class TestGreekTrans(unittest.TestCase):
         src, dst_r, dst_m = load_texts("samples/lords_prayer")
         self.assertEqual(romanize(src), dst_r)
         self.assertEqual(monotonize(src), dst_m)
+        nfd = unicodedata.normalize("NFD", src)
+        self.assertEqual(normalize_nfd(src), nfd)
+        self.assertEqual(normalize_nfc(nfd), unicodedata.normalize("NFC", nfd))
 
     # Divine Comedy Inferno Canto 1
     # https://github.com/7shi/dante-la-el
