@@ -33,7 +33,9 @@ export function isConsonant(letter) {
 
 export function strip(text) {
     text = text.normalize("NFD");
-    text = [...text].filter((ch) => !(ch in greekAttrsChar)).join("");
+    for (const ch in greekAttrsChar) {
+        text = text.replaceAll(ch, "")
+    }
     return text.normalize("NFC");
 }
 

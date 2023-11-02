@@ -27,7 +27,8 @@ def is_consonant(letter):
 
 def strip(text):
     text = unicodedata.normalize("NFD", text)
-    text = "".join(filter(lambda ch: ch not in greek_attrs_char, text))
+    for ch in greek_attrs_char:
+        text = text.replace(ch, "")
     return unicodedata.normalize("NFC", text)
 
 def string_map(map, text):
