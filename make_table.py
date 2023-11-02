@@ -1,24 +1,17 @@
 # Create a table of Greek letters
 
-import sys, os, re, json
+import sys, os, re, json, unicodedata
 
-# Download if it does not exist
-if not os.path.exists("greek.txt"):
-    import urllib.request
-    urllib.request.urlretrieve("https://www.w3.org/International/Spread/greek.txt", "greek.txt")
-
-with open("greek.txt", "r", encoding="utf-8") as file:
-    greek_data_entity = file.read()
-
-# Read greek_data_entity line by line and convert it into a JavaScript associative array
+# Read Unicode names for Greek
 letters = {}
-for line in greek_data_entity.splitlines():
-    m = re.search(r'U([0-9A-F]{4}) SDATA "\[(.*)\]"', line)
-    if m:
-        code = m.group(1)
-        char = chr(int(code, 16))
-        sdata = m.group(2)
-        letters[char] = sdata
+for s, e in [(0x384, 0x3d0), (0x1f00, 0x2000)]:
+    for code in range(s, e):
+        char = chr(code)
+        try:
+            name = unicodedata.name(char)
+            letters[char] = name
+        except ValueError:
+            pass
 
 class Assoc:
     @staticmethod
