@@ -37,6 +37,7 @@ class UnicodeChar:
         self.diaeresis  = "DIAERESIS"  in self.attrs # tréma, umlaut
         self.macron     = "MACRON"     in self.attrs
         self.breve      = "BREVE"      in self.attrs
+        self.caron      = "CARON"      in self.attrs # háček
         self.dot_below  = "DOT BELOW"  in self.attrs
 
         # Greek attributes
