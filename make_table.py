@@ -131,7 +131,6 @@ def reverse_table(table):
 
 # convert to JSON
 table = json.dumps({
-    "letters": letters,
     "greekLetters": greek_letters,
     "greekCapitalLetters": greek_capital_letters,
     "greekSmallLetters": greek_small_letters,
