@@ -26,37 +26,6 @@ class UnicodeChar:
             self.capital = False
             self.letter_name = ""
 
-        self.attrs = set()
-        if m := re.match(r"(.*) WITH (.*)", self.name):
-            self.base_name = m.group(1)
-            for attr in m.group(2).split(" AND "):
-                self.attrs.add(attr)
-        else:
-            self.base_name = self.name
-
-        # Latin attributes
-        self.acute      = "ACUTE"      in self.attrs
-        self.grave      = "GRAVE"      in self.attrs
-        self.circumflex = "CIRCUMFLEX" in self.attrs
-        self.diaeresis  = "DIAERESIS"  in self.attrs # tréma, umlaut
-        self.macron     = "MACRON"     in self.attrs
-        self.breve      = "BREVE"      in self.attrs
-        self.caron      = "CARON"      in self.attrs # háček
-        self.dot_below  = "DOT BELOW"  in self.attrs
-
-        # Greek attributes
-        self.tonos          = "TONOS"          in self.attrs # acute (modern)
-        self.dialytika      = "DIALYTIKA"      in self.attrs # diaeresis (tréma)
-        self.oxia           = "OXIA"           in self.attrs # acute (ancient)
-        self.perispomeni    = "PERISPOMENI"    in self.attrs # circumflex
-        self.varia          = "VARIA"          in self.attrs # grave
-        self.psili          = "PSILI"          in self.attrs # smooth breathing
-        self.dasia          = "DASIA"          in self.attrs # rough breathing (aspirated)
-        self.prosgegrammeni = "PROSGEGRAMMENI" in self.attrs # iota subscript (capital)
-        self.ypogegrammeni  = "YPOGEGRAMMENI"  in self.attrs # iota subscript (small)
-        self.macron         = "MACRON"         in self.attrs # macron
-        self.vrachy         = "VRACHY"         in self.attrs # breve
-
     def __str__(self):
         return f"{self.char} [U+{self.code:04x}] {self.name}"
     
