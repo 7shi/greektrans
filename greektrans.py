@@ -34,6 +34,7 @@ def string_map(map, text):
     return "".join([map[letter] if letter in map else letter for letter in text])
 
 def monotonize(text):
+    text = unicodedata.normalize("NFC", text)
     return string_map(monotonic_table, text)
 
 def prepare_romanize(word):
@@ -54,6 +55,7 @@ def prepare_romanize(word):
     return ret
 
 def tokenize(text):
+    text = unicodedata.normalize("NFC", text)
     token = ""
     type = 0
     for ch in text:

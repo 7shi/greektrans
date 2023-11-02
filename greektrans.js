@@ -42,6 +42,7 @@ export function strip(text) {
 }
 
 export function monotonize(text) {
+    text = text.normalize("NFC");
     return stringMap(monotonicTable, text);
 }
 
@@ -66,6 +67,7 @@ function prepareRomanize(word) {
 }
 
 function* tokenize(text) {
+    text = text.normalize("NFC");
     let token = "";
     let type = 0;
     for (const ch of text) {
