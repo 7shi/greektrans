@@ -130,9 +130,12 @@ def reverse_table(table):
         rev[value] += key
     return rev
 
+# Generate Unicode Data
+with open("unicode-greek.json", "w", encoding="utf-8") as file:
+    json.dump({key: gch.json() for key, gch in greek_letters_info.items()}, file, ensure_ascii=False, indent=2)
+
 # convert to JSON
 table = json.dumps({
-    "unicodeData": {key: gch.json() for key, gch in greek_letters_info.items()},
     "greekLetters": greek_letters,
     "greekCapitalLetters": greek_capital_letters,
     "greekSmallLetters": greek_small_letters,
