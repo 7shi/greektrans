@@ -118,16 +118,16 @@ greek_consonants = "".join(filter(is_consonant, greek_letters))
 
 # Create romanization table template
 table_name = "romanize"
-if not os.path.exists(f"{table_name}-letter.json"):
-    with open(f"{table_name}-letter.json", "w", encoding="utf-8") as file:
+if not os.path.exists(f"json/{table_name}-letter.json"):
+    with open(f"json/{table_name}-letter.json", "w", encoding="utf-8") as file:
         json.dump({letter: "" for letter in greek_letters}, file, ensure_ascii=False, indent=2)
-    print(f"Please edit `{table_name}-letter.json`.", file=sys.stderr)
+    print(f"Please edit `json/{table_name}-letter.json`.", file=sys.stderr)
     sys.exit(1)
 
-with open(f"{table_name}-letter.json", "r", encoding="utf-8") as file:
+with open(f"json/{table_name}-letter.json", "r", encoding="utf-8") as file:
     romanization_table = json.load(file)
 
-with open(f"{table_name}-extra.json", "r", encoding="utf-8") as file:
+with open(f"json/{table_name}-extra.json", "r", encoding="utf-8") as file:
     romanization_table_ex = json.load(file)
 
 def reverse_table(table):
@@ -139,7 +139,7 @@ def reverse_table(table):
     return rev
 
 # Generate Unicode Data
-with open("unicode-greek.json", "w", encoding="utf-8") as file:
+with open("json/unicode-greek.json", "w", encoding="utf-8") as file:
     json.dump({key: gch.json() for key, gch in greek_letters_info.items()}, file, ensure_ascii=False, indent=2)
 
 # convert to JSON
@@ -157,7 +157,7 @@ table = json.dumps({
 }, ensure_ascii=False, indent=2)
 
 # Save to file
-with open(f"{table_name}.json", "w", encoding="utf-8") as file:
+with open(f"json/{table_name}.json", "w", encoding="utf-8") as file:
     file.write(table)
 
 # Generate JavaScript module
