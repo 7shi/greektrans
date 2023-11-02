@@ -225,18 +225,17 @@ class TestGreekTrans(unittest.TestCase):
         self.assertEqual(prepare_romanize("κἀγώ"), "κἀ'γώ")
         self.assertEqual(romanize("Ἐγὼ δ' εἰς τὴν ἀγρίαν ὁδὸν εἰσῆλθον."),
                          "Egṑ d' eis tḕn agrían hodòn eisêlthon.")
-
-    def tearDown(self):
-        # The Lord's Prayer
-        # https://en.wikipedia.org/wiki/Greek_diacritics#Examples
-
+    
+    # The Lord's Prayer
+    # https://en.wikipedia.org/wiki/Greek_diacritics#Examples
+    def test_lords_prayer(self):
         with open("lords_prayer.txt", "r", encoding="utf-8") as file:
-            sample = file.read()
-
-        # Note: The results do not match because of removing without grammar.
-        print(monotonize(sample))
-
-        print(romanize(sample))
-        # print(romanize(to_monotonic(sample)))
+            src = file.read()
+        with open("lords_prayer-romanized.txt", "r", encoding="utf-8") as file:
+            dst_r = file.read()
+        with open("lords_prayer-monotonized.txt", "r", encoding="utf-8") as file:
+            dst_m = file.read()
+        self.assertEqual(romanize(src), dst_r)
+        self.assertEqual(monotonize(src), dst_m)
 
 unittest.main()
