@@ -213,71 +213,9 @@ with open(f"{table_name}.js", "w", encoding="utf-8") as file:
 with open(f"{table_name}.py", "w", encoding="utf-8") as file:
     file.write(f"table = {table}");
 
-### Additional Impementation
-
-def strip(text):
-    text = unicodedata.normalize("NFD", text)
-    text = "".join(filter(lambda ch: ch not in greek_attrs_char, text))
-    return unicodedata.normalize("NFC", text)
-
-def monotonize(text):
-    return "".join(map(monotonize1, text))
-
-def prepare_romanize(word):
-    ret = ""
-    if len(word) >= 1 and is_vowel(word[0]):
-        if len(word) >= 2 and word[:2] in romanization_table_ex["combination"]:
-            ret = word[:2]
-            word = word[2:]
-        else:
-            ret = word[:1]
-            word = word[1:]
-    # check coronis: ex. κἀγώ = καὶ ἐγώ
-    psili = greek_attrs["PSILI"]
-    for ch in word:
-        ret += ch
-        if ch in psili:
-            ret += "'"
-    return ret
-
-def tokenize(text):
-    text = unicodedata.normalize("NFC", text)
-    token = ""
-    type = 0
-    for ch in text:
-        t = 1 if ch in greek_letters else 2
-        if type != t:
-            if token:
-                yield type, token
-                token = ""
-            type = t
-        token += ch
-    if token:
-        yield type, token
-
-def replaces(table, text):
-    for key, value in table.items():
-        text = text.replace(key, value)
-    return text
-
-def romanize(text, caron=True, dot_macron=True):
-    ret = ""
-    for type, token in tokenize(text):
-        if type == 1:
-            ret += prepare_romanize(token)
-        else:
-            ret += token
-    ret = replaces(romanization_table_ex["combination"], ret)
-    ret = "".join(map(lambda letter: romanization_table.get(letter, letter), ret))
-    if caron:
-        ret = replaces(romanization_table_ex["caron"], ret)
-    if dot_macron:
-        ret = replaces(romanization_table_ex["dotMacron"], ret)
-    return ret
-
 ### unit test
 
-import unittest
+import unittest, greektrans
 
 def load_texts(file_prefix):
     with open(f"{file_prefix}.txt", "r", encoding="utf-8") as file:
@@ -290,26 +228,28 @@ def load_texts(file_prefix):
 
 class TestGreekTrans(unittest.TestCase):
     def test(self):
-        self.assertEqual(strip("ᾅ"), "α")
-        self.assertEqual(strip("ί"), "ι")
-        self.assertEqual(prepare_romanize("κἀγώ"), "κἀ'γώ")
+        self.assertEqual(greektrans.strip("ᾅ"), "α")
+        self.assertEqual(greektrans.strip("ί"), "ι")
+        self.assertEqual(greektrans.prepare_romanize("κἀγώ"), "κἀ'γώ")
 
         src = "Ἐγὼ δ' εἰς τὴν ἀγρίαν ὁδὸν εἰσῆλθον."
-        self.assertEqual(strip(src), "Εγω δ' εις την αγριαν οδον εισηλθον.")
-        self.assertEqual(romanize(src), "Egṑ d' eis tḕn agrían hodòn eisêlthon.")
+        self.assertEqual(greektrans.strip(src),
+                         "Εγω δ' εις την αγριαν οδον εισηλθον.")
+        self.assertEqual(greektrans.romanize(src),
+                         "Egṑ d' eis tḕn agrían hodòn eisêlthon.")
 
     # The Lord's Prayer
     # https://en.wikipedia.org/wiki/Greek_diacritics#Examples
     def test_lords_prayer(self):
         src, dst_r, dst_m = load_texts("samples/lords_prayer")
-        self.assertEqual(romanize(src), dst_r)
-        self.assertEqual(monotonize(src), dst_m)
+        self.assertEqual(greektrans.romanize(src), dst_r)
+        self.assertEqual(greektrans.monotonize(src), dst_m)
 
     # Divine Comedy Inferno Canto 1
     # https://github.com/7shi/dante-la-el
     def test_inferno_1(self):
         src, dst_r, dst_m = load_texts("samples/inferno-1")
-        self.assertEqual(romanize(src), dst_r)
-        self.assertEqual(monotonize(src), dst_m)
+        self.assertEqual(greektrans.romanize(src), dst_r)
+        self.assertEqual(greektrans.monotonize(src), dst_m)
 
 unittest.main()
