@@ -60,6 +60,14 @@ romanize_basic = "a,b,g,d,e,z,ē,th,i,c,l,m,n,x,o,p,r,s,s,t,y,ph,ch,ps,ō".split
 romanize_basic_table = {gch: unicodedata.normalize("NFD", lch)
                         for gch, lch in zip(greek_basic_letters, romanize_basic)}
 
+def add_attr(text, attr):
+    nfc = unicodedata.normalize("NFC", text)
+    if len(nfc) == 1:
+        nfc2 = unicodedata.normalize("NFC", text + attr)
+        if len(nfc2) == 1 or nfc2[-1] == attr:
+            return nfc2
+    return nfc + attr
+
 def romanize1(letter):
     nfd = unicodedata.normalize("NFD", letter.lower())
     if not (ret := romanize_basic_table.get(nfd[0])):
@@ -85,17 +93,9 @@ def romanize1(letter):
             ret += ch
     if circ:
         ret += attr_chars_rev["CIRCUMFLEX_ACCENT"]
-    ret2 = unicodedata.normalize("NFC", ret)
-    if not iota:
-        return ret2
-
-    dot = attr_chars_rev["DOT_BELOW"]
-    if len(ret2) != 1:
-        return ret2 + dot
-    ret3 = unicodedata.normalize("NFC", ret + dot)
-    if len(ret3) == 1 or ret3[-1] == dot:
-        return ret3
-    return ret2 + dot
+    if iota:
+        return add_attr(ret, attr_chars_rev["DOT_BELOW"])
+    return unicodedata.normalize("NFC", ret)
 
 romanization_table = {
     "\u00b7": ";", # MIDDLE DOT
