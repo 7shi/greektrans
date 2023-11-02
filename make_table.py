@@ -6,16 +6,39 @@ class GreekChar:
     def __init__(self, code):
         self.code = code
         self.char = chr(code)
+        self.nfd  = unicodedata.normalize("NFD", self.char)
+
         try:
             self.name = unicodedata.name(self.char)
         except ValueError:
             self.name = ""
-        if m := re.search(r"GREEK (CAPITAL|SMALL) LETTER", self.name):
-            self.greek_letter = True
+
+        if m := re.match(r"GREEK (CAPITAL|SMALL) (LETTER [A-Z]+)", self.name):
             self.capital = m.group(1) == "CAPITAL"
+            self.greek_name = m.group(2)
         else:
-            self.greek_letter = False
             self.capital = False
+            self.greek_name = ""
+
+        self.attrs = set()
+        if m := re.match(r"(.*) WITH (.*)", self.name):
+            self.base_name = m.group(1)
+            for attr in m.group(2).split(" AND "):
+                self.attrs.add(attr)
+        else:
+            self.base_name = self.name
+
+        self.tonos          = "TONOS"          in self.attrs # acute (modern)
+        self.dialytika      = "DIALYTIKA"      in self.attrs # diaeresis (tréma)
+        self.oxia           = "OXIA"           in self.attrs # acute (ancient)
+        self.perispomeni    = "PERISPOMENI"    in self.attrs # circumflex
+        self.varia          = "VARIA"          in self.attrs # grave
+        self.psili          = "PSILI"          in self.attrs # smooth breathing
+        self.dasia          = "DASIA"          in self.attrs # rough breathing (aspirated)
+        self.prosgegrammeni = "PROSGEGRAMMENI" in self.attrs # iota subscript (capital)
+        self.ypogegrammeni  = "YPOGEGRAMMENI"  in self.attrs # iota subscript (small)
+        self.macron         = "MACRON"         in self.attrs # macron
+        self.vrachy         = "VRACHY"         in self.attrs # breve
 
     def __str__(self):
         return f"{self.char}[U+{self.code:04x}]: {self.name}"
@@ -25,82 +48,43 @@ greek_letters_info = {}
 for s, e in [(0x384, 0x3d0), (0x1f00, 0x2000)]:
     for code in range(s, e):
         gch = GreekChar(code)
-        if gch.greek_letter:
+        if gch.greek_name:
             greek_letters_info[gch.char] = gch
 
-class Assoc:
-    @staticmethod
-    def filter(predicate, assoc):
-        return {key: value for key, value in assoc.items() if predicate(key, value)}
-
-# TONOS/OXIA: acute, DIALYTIKA: diaeresis (tréma), PERISPOMENI: circumflex
-# 'Ι': 'GREEK CAPITAL LETTER IOTA'
-# 'ι': 'GREEK SMALL LETTER IOTA'
-# 'ί': 'GREEK SMALL LETTER IOTA WITH TONOS'
-# 'ϊ': 'GREEK SMALL LETTER IOTA WITH DIALYTIKA'
-# 'ΐ': 'GREEK SMALL LETTER IOTA WITH DIALYTIKA AND TONOS'
-# 'ῖ': 'GREEK SMALL LETTER IOTA WITH PERISPOMENI'
-# 'ῗ': 'GREEK SMALL LETTER IOTA WITH DIALYTIKA AND PERISPOMENI'
-
 # extract: GREEK CAPITAL/SMALL LETTER
-greek_capital_letters = "".join(Assoc.filter(lambda _, value: bool(re.search(r'GREEK CAPITAL LETTER', value.name)), greek_letters_info).keys())
-greek_small_letters = "".join(Assoc.filter(lambda _, value: bool(re.search(r'GREEK SMALL LETTER', value.name)), greek_letters_info).keys())
+greek_capital_letters = "".join([gch.char for gch in greek_letters_info.values() if gch.capital])
+greek_small_letters = "".join([gch.char for gch in greek_letters_info.values() if not gch.capital])
 greek_letters = greek_capital_letters + greek_small_letters
 greek_letters_rev = {gch.name: gch.char for gch in greek_letters_info.values()}
 
-# "": ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρςστυφχψω
-# TONOS, DIALYTIKA, OXIA, PERISPOMENI, VARIA: grave,
-# PSILI: smooth breathing, DASIA: rough breathing (aspirated),
-# PROSGEGRAMMENI: capital iota subscript, YPOGEGRAMMENI: small iota subscript,
-# VRACHY: breve, MACRON
-attrs = { "": "" }
+attrs = { "": "" } # ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρςστυφχψω
 for gch in greek_letters_info.values():
-    # WITH以下を取得
-    m = re.search(r" WITH (.*)", gch.name)
-    if m:
-        # ANDで分割
-        for attr in m.group(1).split(" AND "):
+    if len(gch.attrs) == 0:
+        attrs[""] += gch.char
+    else:
+        for attr in gch.attrs:
             if attr not in attrs:
                 attrs[attr] = ""
             attrs[attr] += gch.char
-    else:
-        attrs[""] += gch.char
 
 def strip1(letter):
     gch = greek_letters_info.get(letter)
-    if not gch:
-        return letter
-    name = re.sub(r" WITH .*", "", gch.name)
-    return greek_letters_rev.get(name, letter)
-
-# extract: WITH DIALYTIKA
-dialytika_letters = Assoc.filter(lambda key, _: bool(re.search(r'WITH DIALYTIKA$', key)), greek_letters_rev)
-
-# extract: WITH TONOS
-tonos_letters = Assoc.filter(lambda key, _: bool(re.search(r'WITH TONOS$', key)), greek_letters_rev)
-
-# extract: WITH DIAYTIKA AND TONOS
-dialytika_tonos_letters = Assoc.filter(lambda key, _: bool(re.search(r'WITH DIALYTIKA AND TONOS$', key)), greek_letters_rev)
+    return gch.nfd[0] if gch else letter
 
 def monotonize1(letter):
     gch = greek_letters_info.get(letter)
     if not gch:
         return letter
-    name = re.sub(r" WITH .*", "", gch.name)
-    basic = greek_letters_rev.get(name)
-    if not basic:
-        return letter
-    dialytika = bool(re.search(r"DIALYTIKA", gch.name))
-    tonos = bool(re.search(r"TONOS|PERISPOMENI|OXIA", gch.name))
-    if tonos and dialytika:
-        ret = dialytika_tonos_letters.get(name + " WITH DIALYTIKA AND TONOS")
+    tonos = gch.tonos or gch.perispomeni or gch.oxia
+    if tonos and gch.dialytika:
+        ret = greek_letters_rev.get(gch.base_name + " WITH DIALYTIKA AND TONOS")
         if ret: return ret
-    if dialytika:
-        return dialytika_letters.get(name + " WITH DIALYTIKA")
+    if gch.dialytika:
+        return greek_letters_rev[gch.base_name + " WITH DIALYTIKA"]
     elif tonos:
-        return tonos_letters.get(name + " WITH TONOS")
+        return greek_letters_rev[gch.base_name + " WITH TONOS"]
     else:
-        return basic
+        return gch.nfd[0]
 
 strip_table = {key: key2 for key in greek_letters if key != (key2 := strip1(key))}
 monotonic_table = {key: key2 for key in greek_letters if key != (key2 := monotonize1(key))}
