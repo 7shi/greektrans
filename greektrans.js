@@ -31,14 +31,14 @@ export function isConsonant(letter) {
     return table.greekConsonants.includes(letter);
 }
 
-function stringMap(map, text) {
-    return text.split("").map((letter) => map[letter] || letter).join("");
-}
-
 export function strip(text) {
     text = text.normalize("NFD");
     text = [...text].filter((ch) => !(ch in greekAttrsChar)).join("");
     return text.normalize("NFC");
+}
+
+function stringMap(map, text) {
+    return text.split("").map((letter) => map[letter] || letter).join("");
 }
 
 export function monotonize(text) {
