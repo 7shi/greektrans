@@ -65,7 +65,7 @@ class UnicodeChar:
 
 # Read Unicode names
 letters_info = {}
-for s, e in [(0x20, 0x250), (0x384, 0x3d0), (0x1f00, 0x2000)]:
+for s, e in [(0x20, 0x250), (0x1e00, 0x1f00), (0x384, 0x3d0), (0x1f00, 0x2000)]:
     for code in range(s, e):
         uch = UnicodeChar(code)
         if uch.type:
@@ -87,15 +87,20 @@ greek_small_letters = "".join([uch.char for uch in greek_letters_info.values() i
 greek_letters = greek_capital_letters + greek_small_letters
 greek_letters_rev = {uch.name: uch.char for uch in greek_letters_info.values()}
 
-attrs = { "": "" } # ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρςστυφχψω
-for uch in greek_letters_info.values():
-    if len(uch.attrs) == 0:
-        attrs[""] += uch.char
-    else:
-        for attr in uch.attrs:
-            if attr not in attrs:
-                attrs[attr] = ""
-            attrs[attr] += uch.char
+def collect_attrs(letters):
+    ret = {"": ""}
+    for uch in letters:
+        if len(uch.attrs) == 0:
+            ret[""] += uch.char
+        else:
+            for attr in uch.attrs:
+                if attr not in ret:
+                    ret[attr] = ""
+                ret[attr] += uch.char
+    return ret
+
+latin_attrs = collect_attrs(latin_letters_info.values())
+greek_attrs = collect_attrs(greek_letters_info.values())
 
 def strip1(letter):
     uch = greek_letters_info.get(letter)
@@ -164,7 +169,7 @@ table = json.dumps({
     "greekLetters": greek_letters,
     "greekCapitalLetters": greek_capital_letters,
     "greekSmallLetters": greek_small_letters,
-    "attributes": attrs,
+    "attributes": greek_attrs,
     "greekVowels": greek_vowels,
     "greekConsonants": greek_consonants,
     "stripTableRev": reverse_table(strip_table),
@@ -203,7 +208,7 @@ def prepare_romanize(word):
             ret = word[:1]
             word = word[1:]
     # check coronis: ex. κἀγώ = καὶ ἐγώ
-    psili = attrs["PSILI"]
+    psili = greek_attrs["PSILI"]
     for ch in word:
         ret += ch
         if ch in psili:
