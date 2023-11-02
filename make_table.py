@@ -42,6 +42,13 @@ class GreekChar:
 
     def __str__(self):
         return f"{self.char}[U+{self.code:04x}]: {self.name}"
+    
+    def json(self):
+        return {
+            "code": f"{self.code:04x}",
+            "nfd": " ".join([f"{ord(ch):04x}" for ch in self.nfd]),
+            "name": self.name,
+        }
 
 # Read Unicode names for Greek
 greek_letters_info = {}
@@ -125,6 +132,7 @@ def reverse_table(table):
 
 # convert to JSON
 table = json.dumps({
+    "unicodeData": {key: gch.json() for key, gch in greek_letters_info.items()},
     "greekLetters": greek_letters,
     "greekCapitalLetters": greek_capital_letters,
     "greekSmallLetters": greek_small_letters,
