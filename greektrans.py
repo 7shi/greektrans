@@ -1,5 +1,6 @@
 # Greek character conversion utility
 
+import unicodedata
 from romanize import table
 
 def from_reversed_table(table_rev):
@@ -10,10 +11,10 @@ def from_reversed_table(table_rev):
     return table
 
 greek_letters = table["greekLetters"]
-strip_table = from_reversed_table(table["stripTableRev"])
 monotonic_table = from_reversed_table(table["monotonicTableRev"])
 romanization_table = from_reversed_table(table["romanizationTableRev"])
 romanization_table_ex = table["romanizationTableEx"]
+greek_attrs_char = {chr(int(value, 16)): key for key, value in table["attributeCodes"].items()}
 
 def is_letter(letter):
     return letter in table["greekLetters"]
@@ -24,11 +25,13 @@ def is_vowel(letter):
 def is_consonant(letter):
     return letter in table["greekConsonants"]
 
+def strip(text):
+    text = unicodedata.normalize("NFD", text)
+    text = "".join(filter(lambda ch: ch not in greek_attrs_char, text))
+    return unicodedata.normalize("NFC", text)
+
 def string_map(map, text):
     return "".join([map[letter] if letter in map else letter for letter in text])
-
-def strip(text):
-    return string_map(strip_table, text)
 
 def monotonize(text):
     return string_map(monotonic_table, text)

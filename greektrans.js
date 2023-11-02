@@ -12,9 +12,12 @@ function fromReversedTable(tableRev) {
     return table;
 }
 
-const stripTable = fromReversedTable(table.stripTableRev);
 const monotonicTable = fromReversedTable(table.monotonicTableRev);
 const romanizationTable = fromReversedTable(table.romanizationTableRev);
+const greekAttrsChar = {};
+for (const [key, value] of Object.entries(table["attributeCodes"])) {
+    greekAttrsChar[String.fromCharCode(parseInt(value, 16))] = key;
+}
 
 export function isLetter(letter) {
     return table.greekLetters.includes(letter);
@@ -33,7 +36,9 @@ function stringMap(map, text) {
 }
 
 export function strip(text) {
-    return stringMap(stripTable, text);
+    text = text.normalize("NFD");
+    text = [...text].filter((ch) => !(ch in greekAttrsChar)).join("");
+    return text.normalize("NFC");
 }
 
 export function monotonize(text) {

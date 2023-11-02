@@ -128,10 +128,6 @@ def add_attr(ch, attr):
     ret = search(uch.type, uch.letter_name, uch.capital, *uch.attrs.union({attr}))
     return ret.char if ret else ch + ach
 
-def strip1(letter):
-    uch = greek_letters_info.get(letter)
-    return uch.nfd[0] if uch else letter
-
 def monotonize1(letter):
     if not (uch := greek_letters_info.get(letter)):
         return letter
@@ -144,14 +140,14 @@ def monotonize1(letter):
             ret = ch
     return ret
 
-strip_table = {key: key2 for key in greek_letters if key != (key2 := strip1(key))}
 monotonic_table = {key: key2 for key in greek_letters if key != (key2 := monotonize1(key))}
 
 def is_letter(letter):
     return letter in greek_letters
 
 def is_vowel(letter):
-    return strip1(letter) in "ΑΕΗΙΟΥΩαεηιουω"
+    uch = greek_letters_info.get(letter)
+    return uch.nfd[0] in "ΑΕΗΙΟΥΩαεηιουω" if uch else False
 
 def is_consonant(letter):
     return is_letter(letter) and not is_vowel(letter)
@@ -200,7 +196,6 @@ table = json.dumps({
     "attributeCodes": {attr: f"{ord(attr_chars[attr]):04x}" for attr in greek_attrs.keys() if attr},
     "greekVowels": greek_vowels,
     "greekConsonants": greek_consonants,
-    "stripTableRev": reverse_table(strip_table),
     "monotonicTableRev": reverse_table(monotonic_table),
     "romanizationTableRev": reverse_table(romanization_table),
     "romanizationTableEx": romanization_table_ex,
