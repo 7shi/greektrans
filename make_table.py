@@ -253,22 +253,32 @@ def romanize(text, caron=True, dot_macron=True):
 
 import unittest
 
+def load_texts(file_prefix):
+    with open(f"{file_prefix}.txt", "r", encoding="utf-8") as file:
+        src = file.read()
+    with open(f"{file_prefix}-romanized.txt", "r", encoding="utf-8") as file:
+        dst_r = file.read()
+    with open(f"{file_prefix}-monotonized.txt", "r", encoding="utf-8") as file:
+        dst_m = file.read()
+    return src, dst_r, dst_m
+
 class TestGreekTrans(unittest.TestCase):
     def test(self):
         self.assertEqual(prepare_romanize("κἀγώ"), "κἀ'γώ")
         self.assertEqual(romanize("Ἐγὼ δ' εἰς τὴν ἀγρίαν ὁδὸν εἰσῆλθον."),
                          "Egṑ d' eis tḕn agrían hodòn eisêlthon.")
-    
+
     # The Lord's Prayer
     # https://en.wikipedia.org/wiki/Greek_diacritics#Examples
     def test_lords_prayer(self):
-        file_prefix = "samples/lords_prayer"
-        with open(f"{file_prefix}.txt", "r", encoding="utf-8") as file:
-            src = file.read()
-        with open(f"{file_prefix}-romanized.txt", "r", encoding="utf-8") as file:
-            dst_r = file.read()
-        with open(f"{file_prefix}-monotonized.txt", "r", encoding="utf-8") as file:
-            dst_m = file.read()
+        src, dst_r, dst_m = load_texts("samples/lords_prayer")
+        self.assertEqual(romanize(src), dst_r)
+        self.assertEqual(monotonize(src), dst_m)
+
+    # Divine Comedy Inferno Canto 1
+    # https://github.com/7shi/dante-la-el
+    def test_inferno_1(self):
+        src, dst_r, dst_m = load_texts("samples/inferno-1")
         self.assertEqual(romanize(src), dst_r)
         self.assertEqual(monotonize(src), dst_m)
 
