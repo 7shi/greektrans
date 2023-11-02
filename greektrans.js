@@ -115,7 +115,7 @@ export function romanize(text, caron = true, dotMacron = true) {
         }
     }
     ret = replaces(table.romanizationTableEx.combination, ret);
-    ret = replaces(romanizationTable, ret);
+    ret = [...ret].map(letter => romanizationTable[letter] || letter).join("");
     if (caron) {
         ret = replaces(table.romanizationTableEx.caron, ret);
     }

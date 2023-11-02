@@ -137,11 +137,11 @@ with open(f"json/{table_name}-extra.json", "r", encoding="utf-8") as file:
     romanization_table_ex = json.load(file)
 
 romanization_table_ex["caron"] = {
-    unicodedata.normalize("NFC", key): value #unicodedata.normalize("NFC", value)
+    unicodedata.normalize("NFC", key): unicodedata.normalize("NFC", value)
     for key, value in romanization_table_ex["caron"].items()
 }
 romanization_table_ex["dotMacron"] = {
-    unicodedata.normalize("NFC", key): value #unicodedata.normalize("NFC", value)
+    unicodedata.normalize("NFC", key): unicodedata.normalize("NFC", value)
     for key, value in romanization_table_ex["dotMacron"].items()
 }
 
