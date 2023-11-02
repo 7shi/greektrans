@@ -67,54 +67,54 @@ class UnicodeChar:
 letters_info = {}
 for s, e in [(0x20, 0x250), (0x384, 0x3d0), (0x1f00, 0x2000)]:
     for code in range(s, e):
-        gch = UnicodeChar(code)
-        if gch.type:
-            letters_info[gch.char] = gch
-latin_letters_info = {key: gch for key, gch in letters_info.items() if gch.type == "LATIN"}
-greek_letters_info = {key: gch for key, gch in letters_info.items() if gch.type == "GREEK"}
+        uch = UnicodeChar(code)
+        if uch.type:
+            letters_info[uch.char] = uch
+latin_letters_info = {key: uch for key, uch in letters_info.items() if uch.type == "LATIN"}
+greek_letters_info = {key: uch for key, uch in letters_info.items() if uch.type == "GREEK"}
 
 def search(type, name, capital, *attrs):
     base_name = type + " " + ("CAPITAL" if capital else "SMALL") + " LETTER " + name
     attrs_set = set(attrs)
-    for gch in letters_info.values():
-        if gch.base_name == base_name and gch.attrs == attrs_set:
-            return gch
+    for uch in letters_info.values():
+        if uch.base_name == base_name and uch.attrs == attrs_set:
+            return uch
     return None
 
 # extract: GREEK CAPITAL/SMALL LETTER
-greek_capital_letters = "".join([gch.char for gch in greek_letters_info.values() if gch.capital])
-greek_small_letters = "".join([gch.char for gch in greek_letters_info.values() if not gch.capital])
+greek_capital_letters = "".join([uch.char for uch in greek_letters_info.values() if uch.capital])
+greek_small_letters = "".join([uch.char for uch in greek_letters_info.values() if not uch.capital])
 greek_letters = greek_capital_letters + greek_small_letters
-greek_letters_rev = {gch.name: gch.char for gch in greek_letters_info.values()}
+greek_letters_rev = {uch.name: uch.char for uch in greek_letters_info.values()}
 
 attrs = { "": "" } # ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρςστυφχψω
-for gch in greek_letters_info.values():
-    if len(gch.attrs) == 0:
-        attrs[""] += gch.char
+for uch in greek_letters_info.values():
+    if len(uch.attrs) == 0:
+        attrs[""] += uch.char
     else:
-        for attr in gch.attrs:
+        for attr in uch.attrs:
             if attr not in attrs:
                 attrs[attr] = ""
-            attrs[attr] += gch.char
+            attrs[attr] += uch.char
 
 def strip1(letter):
-    gch = greek_letters_info.get(letter)
-    return gch.nfd[0] if gch else letter
+    uch = greek_letters_info.get(letter)
+    return uch.nfd[0] if uch else letter
 
 def monotonize1(letter):
-    gch = greek_letters_info.get(letter)
-    if not gch:
+    uch = greek_letters_info.get(letter)
+    if not uch:
         return letter
-    tonos = gch.tonos or gch.perispomeni or gch.oxia
-    if tonos and gch.dialytika:
-        ret = greek_letters_rev.get(gch.base_name + " WITH DIALYTIKA AND TONOS")
+    tonos = uch.tonos or uch.perispomeni or uch.oxia
+    if tonos and uch.dialytika:
+        ret = greek_letters_rev.get(uch.base_name + " WITH DIALYTIKA AND TONOS")
         if ret: return ret
-    if gch.dialytika:
-        return greek_letters_rev[gch.base_name + " WITH DIALYTIKA"]
+    if uch.dialytika:
+        return greek_letters_rev[uch.base_name + " WITH DIALYTIKA"]
     elif tonos:
-        return greek_letters_rev[gch.base_name + " WITH TONOS"]
+        return greek_letters_rev[uch.base_name + " WITH TONOS"]
     else:
-        return gch.nfd[0]
+        return uch.nfd[0]
 
 strip_table = {key: key2 for key in greek_letters if key != (key2 := strip1(key))}
 monotonic_table = {key: key2 for key in greek_letters if key != (key2 := monotonize1(key))}
@@ -155,9 +155,9 @@ def reverse_table(table):
 
 # Generate Unicode Data
 with open("json/unicode-latin.json", "w", encoding="utf-8") as file:
-    json.dump({key: gch.json() for key, gch in latin_letters_info.items()}, file, ensure_ascii=False, indent=2)
+    json.dump({key: uch.json() for key, uch in latin_letters_info.items()}, file, ensure_ascii=False, indent=2)
 with open("json/unicode-greek.json", "w", encoding="utf-8") as file:
-    json.dump({key: gch.json() for key, gch in greek_letters_info.items()}, file, ensure_ascii=False, indent=2)
+    json.dump({key: uch.json() for key, uch in greek_letters_info.items()}, file, ensure_ascii=False, indent=2)
 
 # convert to JSON
 table = json.dumps({
