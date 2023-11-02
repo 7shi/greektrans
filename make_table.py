@@ -13,7 +13,7 @@ class UnicodeChar:
         except ValueError:
             self.name = ""
 
-        if m := re.match(r"([A-Z]+) (CAPITAL|SMALL) (LETTER [A-Z]+)", self.name):
+        if m := re.match(r"([A-Z]+) (CAPITAL|SMALL) LETTER ([A-Z]+)", self.name):
             self.type = m.group(1)
             self.capital = m.group(2) == "CAPITAL"
             self.letter_name = m.group(3)
