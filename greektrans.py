@@ -2,7 +2,7 @@
 
 from romanize import table
 
-def from_reverse_table(table_rev):
+def from_reversed_table(table_rev):
     table = {}
     for key, value in table_rev.items():
         for letter in value:
@@ -10,9 +10,9 @@ def from_reverse_table(table_rev):
     return table
 
 greek_letters = table["greekLetters"]
-strip_table = from_reverse_table(table["stripTableRev"])
-monotonic_table = from_reverse_table(table["monotonicTableRev"])
-romanization_table = from_reverse_table(table["romanizationTableRev"])
+strip_table = from_reversed_table(table["stripTableRev"])
+monotonic_table = from_reversed_table(table["monotonicTableRev"])
+romanization_table = from_reversed_table(table["romanizationTableRev"])
 romanization_table_ex = table["romanizationTableEx"]
 
 def is_letter(letter):

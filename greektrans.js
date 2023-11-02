@@ -2,7 +2,7 @@
 
 import { table } from "./romanize.js";
 
-function fromReverseTable(tableRev) {
+function fromReversedTable(tableRev) {
     const table = {};
     for (const [key, value] of Object.entries(tableRev)) {
         for (const letter of value) {
@@ -12,9 +12,9 @@ function fromReverseTable(tableRev) {
     return table;
 }
 
-const stripTable = fromReverseTable(table.stripTableRev);
-const monotonicTable = fromReverseTable(table.monotonicTableRev);
-const romanizationTable = fromReverseTable(table.romanizationTableRev);
+const stripTable = fromReversedTable(table.stripTableRev);
+const monotonicTable = fromReversedTable(table.monotonicTableRev);
+const romanizationTable = fromReversedTable(table.romanizationTableRev);
 
 export function isLetter(letter) {
     return table.greekLetters.includes(letter);
