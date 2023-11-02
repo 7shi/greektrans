@@ -21,22 +21,14 @@ class GreekChar:
         return f"{self.char}[U+{self.code:04x}]: {self.name}"
 
 # Read Unicode names for Greek
-greek_letters_name = {}
+greek_letters_info = {}
 for s, e in [(0x384, 0x3d0), (0x1f00, 0x2000)]:
     for code in range(s, e):
-        char = chr(code)
-        try:
-            gch = GreekChar(code)
-            if gch.greek_letter:
-                greek_letters_name[gch.char] = gch.name
-        except ValueError:
-            pass
+        gch = GreekChar(code)
+        if gch.greek_letter:
+            greek_letters_info[gch.char] = gch
 
 class Assoc:
-    @staticmethod
-    def swap(assoc):
-        return {value: key for key, value in assoc.items()}
-
     @staticmethod
     def filter(predicate, assoc):
         return {key: value for key, value in assoc.items() if predicate(key, value)}
@@ -51,10 +43,10 @@ class Assoc:
 # 'ῗ': 'GREEK SMALL LETTER IOTA WITH DIALYTIKA AND PERISPOMENI'
 
 # extract: GREEK CAPITAL/SMALL LETTER
-greek_capital_letters = "".join(Assoc.filter(lambda _, value: bool(re.search(r'GREEK CAPITAL LETTER', value)), greek_letters_name).keys())
-greek_small_letters = "".join(Assoc.filter(lambda _, value: bool(re.search(r'GREEK SMALL LETTER', value)), greek_letters_name).keys())
+greek_capital_letters = "".join(Assoc.filter(lambda _, value: bool(re.search(r'GREEK CAPITAL LETTER', value.name)), greek_letters_info).keys())
+greek_small_letters = "".join(Assoc.filter(lambda _, value: bool(re.search(r'GREEK SMALL LETTER', value.name)), greek_letters_info).keys())
 greek_letters = greek_capital_letters + greek_small_letters
-greek_letters_rev = Assoc.swap(greek_letters_name)
+greek_letters_rev = {gch.name: gch.char for gch in greek_letters_info.values()}
 
 # "": ΑΒΓΔΕΖΗΘΙΚΛΜΝΞΟΠΡΣΤΥΦΧΨΩαβγδεζηθικλμνξοπρςστυφχψω
 # TONOS, DIALYTIKA, OXIA, PERISPOMENI, VARIA: grave,
@@ -62,44 +54,44 @@ greek_letters_rev = Assoc.swap(greek_letters_name)
 # PROSGEGRAMMENI: capital iota subscript, YPOGEGRAMMENI: small iota subscript,
 # VRACHY: breve, MACRON
 attrs = { "": "" }
-for key, value in greek_letters_name.items():
+for gch in greek_letters_info.values():
     # WITH以下を取得
-    m = re.search(r" WITH (.*)", value)
+    m = re.search(r" WITH (.*)", gch.name)
     if m:
         # ANDで分割
         for attr in m.group(1).split(" AND "):
             if attr not in attrs:
                 attrs[attr] = ""
-            attrs[attr] += key
+            attrs[attr] += gch.char
     else:
-        attrs[""] += key
+        attrs[""] += gch.char
 
 def strip1(letter):
-    sdata = greek_letters_name.get(letter)
-    if not sdata:
+    gch = greek_letters_info.get(letter)
+    if not gch:
         return letter
-    name = re.sub(r" WITH .*", "", sdata)
+    name = re.sub(r" WITH .*", "", gch.name)
     return greek_letters_rev.get(name, letter)
 
 # extract: WITH DIALYTIKA
-dialytika_letters = Assoc.swap(Assoc.filter(lambda _, value: bool(re.search(r'WITH DIALYTIKA$', value)), greek_letters_name))
+dialytika_letters = Assoc.filter(lambda key, _: bool(re.search(r'WITH DIALYTIKA$', key)), greek_letters_rev)
 
 # extract: WITH TONOS
-tonos_letters = Assoc.swap(Assoc.filter(lambda _, value: bool(re.search(r'WITH TONOS$', value)), greek_letters_name))
+tonos_letters = Assoc.filter(lambda key, _: bool(re.search(r'WITH TONOS$', key)), greek_letters_rev)
 
 # extract: WITH DIAYTIKA AND TONOS
-dialytika_tonos_letters = Assoc.swap(Assoc.filter(lambda _, value: bool(re.search(r'WITH DIALYTIKA AND TONOS$', value)), greek_letters_name))
+dialytika_tonos_letters = Assoc.filter(lambda key, _: bool(re.search(r'WITH DIALYTIKA AND TONOS$', key)), greek_letters_rev)
 
 def monotonize1(letter):
-    sdata = greek_letters_name.get(letter)
-    if not sdata:
+    gch = greek_letters_info.get(letter)
+    if not gch:
         return letter
-    name = re.sub(r" WITH .*", "", sdata)
+    name = re.sub(r" WITH .*", "", gch.name)
     basic = greek_letters_rev.get(name)
     if not basic:
         return letter
-    dialytika = bool(re.search(r"DIALYTIKA", sdata))
-    tonos = bool(re.search(r"TONOS|PERISPOMENI|OXIA", sdata))
+    dialytika = bool(re.search(r"DIALYTIKA", gch.name))
+    tonos = bool(re.search(r"TONOS|PERISPOMENI|OXIA", gch.name))
     if tonos and dialytika:
         ret = dialytika_tonos_letters.get(name + " WITH DIALYTIKA AND TONOS")
         if ret: return ret
@@ -122,8 +114,8 @@ def is_vowel(letter):
 def is_consonant(letter):
     return is_letter(letter) and not is_vowel(letter)
 
-greek_vowels = "".join(Assoc.filter(lambda key, _: is_vowel(key), greek_letters_name).keys())
-greek_consonants = "".join(Assoc.filter(lambda key, _: is_consonant(key), greek_letters_name).keys())
+greek_vowels = "".join(filter(is_vowel, greek_letters))
+greek_consonants = "".join(filter(is_consonant, greek_letters))
 
 # Create romanization table template
 table_name = "romanize"
