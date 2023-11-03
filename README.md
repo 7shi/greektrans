@@ -73,8 +73,12 @@ console.log(greektrans.monotonize(text));
 // => "Πάτερ ημών ο εν τοίς ουρανοίς·"
 ```
 
-# Link
+# Links
 
-Description of technology used (in Japanese).
+Description of technology used. (in Japanese)
 
 * https://qiita.com/7shi/items/6000e9ce33145bec49a0
+
+Explanation of motive. (in Japanese)
+
+* https://7shi.hateblo.jp/entry/2023/11/04/005458
