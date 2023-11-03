@@ -62,7 +62,7 @@ deno run --allow-read greektrans.js [-m] file
 Supports the browser and Deno.
 
 ```js
-import * as greektrans from "https://cdn.jsdelivr.net/gh/7shi/greektrans@0.4/greektrans.min.js";
+import * as greektrans from "https://cdn.jsdelivr.net/gh/7shi/greektrans@0.5/greektrans.min.js";
 
 const text = "Πάτερ ἡμῶν ὁ ἐν τοῖς οὐρανοῖς·";
 
