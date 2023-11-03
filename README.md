@@ -16,11 +16,11 @@ The transliteration rule is based on the Classical method. (except "ει" -> "ei
 
 * https://en.wikipedia.org/wiki/Romanization_of_Greek#Ancient_Greek
 
-Diacritical mark conversions are in the original system.
+Diacritical mark conversions are in the original system. Some rules can be disabled by the argument of `romanize`.
 
 * The circumflex accent on the diphthong is split into acute and grave.  
   ex. "πνεῦμα" -> "pnéùma" ("eû" -> "éù")
-* The caron is used for the acute accent on the long vowel.  
+* The caron is used for the acute accent on the long vowel. (`caron` argument)  
   ex. "φωνή" -> "phōně" ("ḗ" -> "èé" -> "ě")
 * The dot below is used for the iota subscript.  
   ex. "λόγῳ" -> "lógọ̄"
@@ -29,7 +29,7 @@ Diacritical mark conversions are in the original system.
 
 The dot below was chosen because the font composition is relatively supported compared to the other diacritical marks.
 
-The vowel with the iota subscript is always long, so the macron is redundant. But it seems better to add this for those who are not familiar with it.
+The vowel with the iota subscript is always long, so the macron is redundant. But it seems better to add this for those who are not familiar with it. (`dotMacron` argument)
 
 ## Monotonize
 
