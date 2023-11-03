@@ -1,5 +1,7 @@
 // Greek character conversion utility
 
+/// initialize table
+
 import { table } from "./romanize.js";
 
 function fromReversedTable(tableRev) {
@@ -12,10 +14,13 @@ function fromReversedTable(tableRev) {
     return table;
 }
 
+function capitalize(text) {
+    return text[0].toUpperCase() + text.slice(1);
+}
+
 const romanizationTable = fromReversedTable(table.romanizationTableRev);
 for (const ch of table.greekCapitalLetters) {
-    const value = romanizationTable[ch.toLowerCase()]
-    romanizationTable[ch] = value[0].toUpperCase() + value.slice(1);
+    romanizationTable[ch] = capitalize(romanizationTable[ch.toLowerCase()]);
 }
 
 const attributeCodes = {};
@@ -33,6 +38,35 @@ for (const [key, value] of Object.entries(attributeCodes)) {
         greekAttrsChar[value] = "";
     }
 }
+
+function isDecomposed(text) {
+    return text == text.normalize("NFD");
+}
+
+function hasAttr(text, attr) {
+    return text.normalize("NFD").includes(attributeCodes[attr]);
+}
+
+const combinationTable = {}
+for (const [key, value] of Object.entries(table.combination)) {
+    combinationTable[key] = value;
+    if (isDecomposed(key)) {
+        combinationTable[key.toUpperCase()] = value.toUpperCase();
+    } else if (value[0] === "h" || hasAttr(key, "COMMA_ABOVE")) {
+        combinationTable[capitalize(key)] = capitalize(value);
+    }
+}
+
+function addUpper(table) {
+    for (const [key, value] of Object.entries(table)) {
+        table[key.toUpperCase()] = value.toUpperCase();
+    }
+}
+
+addUpper(table.caron);
+addUpper(table.dotMacron);
+
+/// utility functions
 
 export function isLetter(letter) {
     return table.greekLetters.includes(letter);
@@ -70,7 +104,7 @@ export function monotonize(text) {
 function prepareRomanize(word) {
     let ret = "";
     if (word.length >= 1 && isVowel(word[0])) {
-        if (word.length >= 2 && table.romanizationTableEx.combination[word.slice(0, 2)]) {
+        if (word.length >= 2 && combinationTable[word.slice(0, 2)]) {
             ret = word.slice(0, 2);
             word = word.slice(2);
         } else {
@@ -114,13 +148,13 @@ export function romanize(text, caron = true, dotMacron = true) {
             ret += token;
         }
     }
-    ret = replaces(table.romanizationTableEx.combination, ret);
+    ret = replaces(combinationTable, ret);
     ret = [...ret].map(letter => romanizationTable[letter] || letter).join("");
     if (caron) {
-        ret = replaces(table.romanizationTableEx.caron, ret);
+        ret = replaces(table.caron, ret);
     }
     if (dotMacron) {
-        ret = replaces(table.romanizationTableEx.dotMacron, ret);
+        ret = replaces(table.dotMacron, ret);
     }
     return ret;
 }

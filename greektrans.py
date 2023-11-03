@@ -1,6 +1,9 @@
 # Greek character conversion utility
 
 import unicodedata
+
+### initialize table
+
 from romanize import table
 
 def from_reversed_table(table_rev):
@@ -14,8 +17,6 @@ romanization_table = from_reversed_table(table["romanizationTableRev"])
 for ch in table["greekCapitalLetters"]:
     romanization_table[ch] = romanization_table[ch.lower()].capitalize()
 
-romanization_table_ex = table["romanizationTableEx"]
-
 attribute_codes = {key: chr(int(value, 16)) for key, value in table["attributeCodes"].items()}
 greek_attrs_char = {}
 for key, value in attribute_codes.items():
@@ -25,6 +26,28 @@ for key, value in attribute_codes.items():
         greek_attrs_char[value] = attribute_codes["DIAERESIS"]
     else:
         greek_attrs_char[value] = ""
+
+def is_decomposed(text):
+    return text == unicodedata.normalize("NFD", text)
+
+def has_attr(text, attr):
+    return attribute_codes[attr] in unicodedata.normalize("NFD", text)
+
+combination_table = {}
+for key, value in table["combination"].items():
+    combination_table[key] = value
+    if is_decomposed(key):
+        combination_table[key.upper()] = value.upper()
+    elif value[0] == "h" or has_attr(key, "COMMA_ABOVE"):
+        combination_table[key.capitalize()] = value.capitalize()
+
+def add_upper(table):
+    table.update({key.upper(): value.upper() for key, value in table.items()})
+
+add_upper(table["caron"])
+add_upper(table["dotMacron"])
+
+### utility functions
 
 def is_letter(letter):
     return letter in table["greekLetters"]
@@ -55,7 +78,7 @@ def monotonize(text):
 def prepare_romanize(word):
     ret = ""
     if len(word) >= 1 and is_vowel(word[0]):
-        if len(word) >= 2 and word[:2] in romanization_table_ex["combination"]:
+        if len(word) >= 2 and word[:2] in combination_table:
             ret = word[:2]
             word = word[2:]
         else:
@@ -91,12 +114,12 @@ def romanize(text, caron=True, dot_macron=True):
             ret += prepare_romanize(token)
         else:
             ret += token
-    ret = replaces(romanization_table_ex["combination"], ret)
+    ret = replaces(combination_table, ret)
     ret = "".join(map(lambda letter: romanization_table.get(letter, letter), ret))
     if caron:
-        ret = replaces(romanization_table_ex["caron"], ret)
+        ret = replaces(table["caron"], ret)
     if dot_macron:
-        ret = replaces(romanization_table_ex["dotMacron"], ret)
+        ret = replaces(table["dotMacron"], ret)
     return ret
 
 if __name__ == "__main__":

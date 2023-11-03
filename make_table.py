@@ -55,18 +55,21 @@ def is_consonant(letter):
 greek_vowels = "".join(filter(is_vowel, greek_letters))
 greek_consonants = "".join(filter(is_consonant, greek_letters))
 
+### Romanize
+
 greek_basic_letters = "αβγδεζηθικλμνξοπρςστυφχψω"
 romanize_basic = "a,b,g,d,e,z,ē,th,i,c,l,m,n,x,o,p,r,s,s,t,y,ph,ch,ps,ō".split(",")
 romanize_basic_table = {gch: unicodedata.normalize("NFD", lch)
                         for gch, lch in zip(greek_basic_letters, romanize_basic)}
 
 def add_attr(text, attr):
+    ch = attr_chars_rev[attr]
     nfc = unicodedata.normalize("NFC", text)
     if len(nfc) == 1:
-        nfc2 = unicodedata.normalize("NFC", text + attr)
-        if len(nfc2) == 1 or nfc2[-1] == attr:
+        nfc2 = unicodedata.normalize("NFC", text + ch)
+        if len(nfc2) == 1 or nfc2[-1] == ch:
             return nfc2
-    return nfc + attr
+    return nfc + ch
 
 def romanize1(letter):
     nfd = unicodedata.normalize("NFD", letter.lower())
@@ -94,7 +97,7 @@ def romanize1(letter):
     if circ:
         ret += attr_chars_rev["CIRCUMFLEX_ACCENT"]
     if iota:
-        return add_attr(ret, attr_chars_rev["DOT_BELOW"])
+        return add_attr(ret, "DOT_BELOW")
     return unicodedata.normalize("NFC", ret)
 
 romanization_table = {
@@ -105,9 +108,71 @@ romanization_table = {
 for ch in greek_small_letters:
     romanization_table[ch] = romanize1(ch)
 
-table_name = "romanize"
-with open(f"json/{table_name}-extra.json", "r", encoding="utf-8") as file:
-    romanization_table_ex = json.load(file)
+# extra tables
+
+def make_letter(base_letter, *attrs):
+    ret = base_letter
+    for attr in attrs:
+        ret += attr_chars_rev[attr]
+    return ret
+
+combination = {}
+for s, d in [("αι", ["a", "e"]), ("ει", ["e", "i"]), ("υι", ["y", "i"]), ("οι", ["o", "e"]),
+             ("αυ", ["a", "u"]), ("ευ", ["e", "u"]), ("ηυ", ["ē", "u"]), ("ου", ["", "ū"])]:
+    for asp in [[], ["COMMA_ABOVE"], ["REVERSED_COMMA_ABOVE"]]:
+        for acc in [[], ["ACUTE_ACCENT"], ["GRAVE_ACCENT"], ["GREEK_PERISPOMENI"]]:
+            s1 = s[0:-1]
+            s2 = unicodedata.normalize("NFC", make_letter(s[-1], *asp, *acc))
+            d0 = "h" if asp == ["REVERSED_COMMA_ABOVE"] else ""
+            circ = acc == ["GREEK_PERISPOMENI"]
+            d1 = add_attr(d[0], "ACUTE_ACCENT") if d[0] and circ else d[0]
+            dacc = ["GRAVE_ACCENT" if d1 else "CIRCUMFLEX_ACCENT"] if circ else acc
+            d2 = d[1][0]
+            if dacc:
+                d2 = unicodedata.normalize("NFD", d2)
+                if circ:
+                    d2 = d2[0]
+                d2 = add_attr(d2, *dacc)
+            d3 = d[1][1:]
+            ss = s1 + s2
+            dd = d0 + d1 + d2 + d3
+            combination[ss] = dd
+for s, d in [("γγ", "ng"), ("γκ", "nc"), ("γξ", "nx"), ("γχ", "nch")]:
+    combination[s] = d
+
+caron = {}
+for ch in "aeo": # ACUTE + DOT -> CARON + DOT
+    ch1 = add_attr(make_letter(ch, "ACUTE_ACCENT"), "DOT_BELOW")
+    ch2 = add_attr(make_letter(ch, "CARON"       ), "DOT_BELOW")
+    caron[ch1] = ch2
+for ch in "eou": # MACRON + ACUTE -> CARON
+    ch1 = add_attr(make_letter(ch, "MACRON"), "ACUTE_ACCENT")
+    ch2 = add_attr(ch, "CARON")
+    caron[ch1] = ch2
+
+dot_macron = {}
+for ch in "aeo":
+    for acc in [[], ["ACUTE_ACCENT"], ["GRAVE_ACCENT"]]:
+        ch1 = add_attr(make_letter(ch,           *acc), "DOT_BELOW")
+        ch2 = add_attr(make_letter(ch, "MACRON", *acc), "DOT_BELOW")
+        dot_macron[ch1] = ch2
+
+def check_assoc(a, b):
+    ok = True
+    for key, value in a.items():
+        if key not in b:
+            print(f"missing: {key}: {value} not in b")
+            ok = False
+        elif value != b[key]:
+            print(f"conflict: {key} {value} != {b[key]}")
+            ok = False
+    for key, value in b.items():
+        if key not in a:
+            print(f"missing: {key}: {value} not in a")
+            ok = False
+    return ok
+
+### Save table
 
 def reverse_table(table):
     rev = {}
@@ -127,12 +192,12 @@ table = json.dumps({
     "greekVowels": greek_vowels,
     "greekConsonants": greek_consonants,
     "romanizationTableRev": reverse_table(romanization_table),
-    "romanizationTableEx": romanization_table_ex,
+    "combination": combination,
+    "caron": caron,
+    "dotMacron": dot_macron,
 }, ensure_ascii=False, indent=2)
 
-# Save to file
-with open(f"json/{table_name}.json", "w", encoding="utf-8") as file:
-    file.write(table)
+table_name = "romanize"
 
 # Generate JavaScript module
 with open(f"{table_name}.js", "w", encoding="utf-8") as file:
