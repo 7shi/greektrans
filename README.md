@@ -72,3 +72,9 @@ console.log(greektrans.romanize(text));
 console.log(greektrans.monotonize(text));
 // => "Πάτερ ημών ο εν τοίς ουρανοίς·"
 ```
+
+# Link
+
+Description of technology used (in Japanese).
+
+* https://qiita.com/7shi/items/6000e9ce33145bec49a0
