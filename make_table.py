@@ -232,15 +232,11 @@ class TestGreekTrans(unittest.TestCase):
         self.assertEqual(greektrans.romanize(src),
                          "Egṑ d' eis tḕn agrían hodòn eisêlthon.")
 
-    # The Lord's Prayer
-    # https://en.wikipedia.org/wiki/Greek_diacritics#Examples
     def test_lords_prayer(self):
         src, dst_r, dst_m = load_texts("samples/lords_prayer")
         self.assertEqual(greektrans.romanize(src), dst_r)
         self.assertEqual(greektrans.monotonize(src), dst_m)
 
-    # Divine Comedy Inferno Canto 1
-    # https://github.com/7shi/dante-la-el
     def test_inferno_1(self):
         src, dst_r, dst_m = load_texts("samples/inferno-1")
         self.assertEqual(greektrans.romanize(src), dst_r)
