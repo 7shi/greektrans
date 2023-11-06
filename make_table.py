@@ -83,7 +83,6 @@ def romanize1(letter):
             body += "h"
         else:
             prefix = "h"
-            body = body
     if letter.isupper():
         body = body.capitalize()
     if (ch := attr_chars_rev["DIAERESIS"]) in nfd:
