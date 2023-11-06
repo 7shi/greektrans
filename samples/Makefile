@@ -1,23 +1,23 @@
 GEN1 = python ../greektrans.py
 GEN2 = deno run --allow-read ../greektrans.js
 
+SAMPLES = lords_prayer inferno-1 inferno-2
+
 all:
 
 regenerate:
-	$(GEN1) lords_prayer.txt > lords_prayer-romanized.txt
-	$(GEN1) -m lords_prayer.txt > lords_prayer-monotonized.txt
-	$(GEN1) inferno-1.txt > inferno-1-romanized.txt
-	$(GEN1) -m inferno-1.txt > inferno-1-monotonized.txt
+	for s in $(SAMPLES); do \
+		$(GEN1)    $$s.txt > $$s-romanized.txt; \
+		$(GEN1) -m $$s.txt > $$s-monotonized.txt; \
+	done
 
 test:
-	$(GEN2) lords_prayer.txt > test-lords_prayer-romanized.txt
-	$(GEN2) -m lords_prayer.txt > test-lords_prayer-monotonized.txt
-	$(GEN2) inferno-1.txt > test-inferno-1-romanized.txt
-	$(GEN2) -m inferno-1.txt > test-inferno-1-monotonized.txt
-	diff -u lords_prayer-romanized.txt test-lords_prayer-romanized.txt
-	diff -u lords_prayer-monotonized.txt test-lords_prayer-monotonized.txt
-	diff -u inferno-1-romanized.txt test-inferno-1-romanized.txt
-	diff -u inferno-1-monotonized.txt test-inferno-1-monotonized.txt
+	for s in $(SAMPLES); do \
+		$(GEN2)    $$s.txt > test-$$s-romanized.txt; \
+		$(GEN2) -m $$s.txt > test-$$s-monotonized.txt; \
+		diff -u $$s-romanized.txt   test-$$s-romanized.txt; \
+		diff -u $$s-monotonized.txt test-$$s-monotonized.txt; \
+	done
 
 clean:
 	rm -f test-*

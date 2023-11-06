@@ -244,4 +244,9 @@ class TestGreekTrans(unittest.TestCase):
         self.assertEqual(greektrans.romanize(src), dst_r)
         self.assertEqual(greektrans.monotonize(src), dst_m)
 
+    def test_inferno_2(self):
+        src, dst_r, dst_m = load_texts("samples/inferno-2")
+        self.assertEqual(greektrans.romanize(src), dst_r)
+        self.assertEqual(greektrans.monotonize(src), dst_m)
+
 unittest.main()
