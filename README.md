@@ -35,7 +35,7 @@ The vowel with the iota subscript is always long, so the macron is redundant. Bu
 
 ## Monotonize
 
-Monotonization integrates the acute and grave and circumflex accent into the acute accent in polysyllabic words. The accents in monosyllabic words and other diacritic marks are omitted.
+Monotonization integrates the acute (´), the grave (`), and the circumflex (ˆ) accent into the acute accent in polysyllabic words. The diaeresis (¨) is preserved. The accent in monosyllabic words and other diacritic marks are omitted.
 
 The Wikipedia's example is reproduced.
 
