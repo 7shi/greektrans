@@ -99,7 +99,7 @@ function replaces(table, text) {
     return text;
 }
 
-function* tokenize(text) {
+export function* tokenize(text) {
     text = text.normalize("NFC");
     let token = "";
     let type = 0;

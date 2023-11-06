@@ -80,7 +80,7 @@ print(greektrans.monotonize(text))
 Supports the browser and Deno.
 
 ```js
-import * as greektrans from "https://cdn.jsdelivr.net/gh/7shi/greektrans@0.6/greektrans.min.js";
+import * as greektrans from "https://cdn.jsdelivr.net/gh/7shi/greektrans@0.7/greektrans.min.js";
 
 const text = "Πάτερ ἡμῶν ὁ ἐν τοῖς οὐρανοῖς·";
 
