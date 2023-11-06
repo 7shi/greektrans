@@ -59,6 +59,22 @@ or
 deno run --allow-read greektrans.js [-m] file
 ```
 
+## Python
+
+Use as library.
+
+```py
+import greektrans
+
+text = "Πάτερ ἡμῶν ὁ ἐν τοῖς οὐρανοῖς·"
+
+print(greektrans.romanize(text))
+# Páter hēmôn ho en tóès ūranóès;
+
+print(greektrans.monotonize(text))
+# Πάτερ ημών ο εν τοις ουρανοίς·
+```
+
 ## JavaScript
 
 Supports the browser and Deno.
@@ -69,15 +85,15 @@ import * as greektrans from "https://cdn.jsdelivr.net/gh/7shi/greektrans@0.6/gre
 const text = "Πάτερ ἡμῶν ὁ ἐν τοῖς οὐρανοῖς·";
 
 console.log(greektrans.romanize(text));
-// => "Páter hēmôn ho en tóès ūranóès;"
+// Páter hēmôn ho en tóès ūranóès;
 
 console.log(greektrans.monotonize(text));
-// => "Πάτερ ημών ο εν τοίς ουρανοίς·"
+// Πάτερ ημών ο εν τοις ουρανοίς·
 ```
 
 # Links
 
-Examples of Use (translation is inaccurate)
+Examples of use. (translation is inaccurate)
 
 * https://github.com/7shi/dante-la-el/blob/main/Inferno/ChatGPT/02-grc-words.md
 
