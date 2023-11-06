@@ -35,13 +35,13 @@ The vowel with the iota subscript is always long, so the macron is redundant. Bu
 
 ## Monotonize
 
-Monotonization integrates the acute and circumflex accent into the acute accent. Other diacritic marks are omitted.
+Monotonization integrates the acute and grave and circumflex accent into the acute accent in polysyllabic words. The accents in monosyllabic words and other diacritic marks are omitted.
 
-It does not take into account Modern Greek grammar and therefore does not conform to its orthography.
-
-The Wikipedia's example is not reproduced.
+The Wikipedia's example is reproduced.
 
 * https://en.wikipedia.org/wiki/Greek_diacritics#Examples
+
+But it does not take into account Modern Greek grammar and therefore does not conform to its orthography. For example, it cannot distinguish between [η](https://en.wiktionary.org/wiki/%CE%B7#Greek) "the" and [ή](https://en.wiktionary.org/wiki/%CE%AE#Greek) "or".
 
 # Usage
 
@@ -64,7 +64,7 @@ deno run --allow-read greektrans.js [-m] file
 Supports the browser and Deno.
 
 ```js
-import * as greektrans from "https://cdn.jsdelivr.net/gh/7shi/greektrans@0.5/greektrans.min.js";
+import * as greektrans from "https://cdn.jsdelivr.net/gh/7shi/greektrans@0.6/greektrans.min.js";
 
 const text = "Πάτερ ἡμῶν ὁ ἐν τοῖς οὐρανοῖς·";
 

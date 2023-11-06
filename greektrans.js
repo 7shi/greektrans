@@ -30,7 +30,7 @@ for (const [key, value] of Object.entries(table["attributeCodes"])) {
 
 const greekAttrsChar = {};
 for (const [key, value] of Object.entries(attributeCodes)) {
-    if (key == "ACUTE_ACCENT" || key == "GREEK_PERISPOMENI") {
+    if (["ACUTE_ACCENT", "GRAVE_ACCENT", "GREEK_PERISPOMENI"].includes(key)) {
         greekAttrsChar[value] = attributeCodes.ACUTE_ACCENT;
     } else if (key == "DIAERESIS") {
         greekAttrsChar[value] = attributeCodes.DIAERESIS;
@@ -48,12 +48,16 @@ function hasAttr(text, attr) {
 }
 
 const combinationTable = {}
+const diphthongs = {}
 for (const [key, value] of Object.entries(table.combination)) {
     combinationTable[key] = value;
     if (isDecomposed(key)) {
         combinationTable[key.toUpperCase()] = value.toUpperCase();
     } else if (value[0] === "h" || hasAttr(key, "COMMA_ABOVE")) {
         combinationTable[capitalize(key)] = capitalize(value);
+    }
+    if (key.normalize("NFD").length == 2 && table.greekVowels.includes(key[0])) {
+        diphthongs[key] = "α"
     }
 }
 
@@ -95,10 +99,44 @@ function replaces(table, text) {
     return text;
 }
 
+function* tokenize(text) {
+    text = text.normalize("NFC");
+    let token = "";
+    let type = 0;
+    for (const ch of text) {
+        const t = isLetter(ch) ? 1 : 2;
+        if (type !== t) {
+            if (token) {
+                yield [type, token];
+                token = "";
+            }
+            type = t;
+        }
+        token += ch;
+    }
+    if (token) yield [type, token];
+}
+
+function prepareMonotonize(word) {
+    const w = strip(word);
+    if (Array.from(replaces(diphthongs, w)).filter(isVowel).length < 2) {
+        return w;
+    }
+    return word;
+}
+
 export function monotonize(text) {
-    text = text.normalize("NFD");
-    text = replaces(greekAttrsChar, text);
-    return text.normalize("NFC");
+    let ret = "";
+    for (const [type, token] of tokenize(text)) {
+        if (type === 1) {
+            ret += prepareMonotonize(token);
+        } else {
+            ret += token;
+        }
+    }
+    ret = ret.normalize("NFD");
+    ret = replaces(greekAttrsChar, ret);
+    return ret.normalize("NFC");
 }
 
 function prepareRomanize(word) {
@@ -119,24 +157,6 @@ function prepareRomanize(word) {
         if (psili.includes(ch)) ret += "'";
     }
     return ret;
-}
-
-function* tokenize(text) {
-    text = text.normalize("NFC");
-    let token = "";
-    let type = 0;
-    for (const ch of text) {
-        const t = isLetter(ch) ? 1 : 2;
-        if (type !== t) {
-            if (token) {
-                yield [type, token];
-                token = "";
-            }
-            type = t;
-        }
-        token += ch;
-    }
-    if (token) yield [type, token];
 }
 
 export function romanize(text, caron = true, dotMacron = true) {

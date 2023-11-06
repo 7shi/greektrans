@@ -20,7 +20,7 @@ for ch in table["greekCapitalLetters"]:
 attribute_codes = {key: chr(int(value, 16)) for key, value in table["attributeCodes"].items()}
 greek_attrs_char = {}
 for key, value in attribute_codes.items():
-    if key in ["ACUTE_ACCENT", "GREEK_PERISPOMENI"]:
+    if key in ["ACUTE_ACCENT", "GRAVE_ACCENT", "GREEK_PERISPOMENI"]:
         greek_attrs_char[value] = attribute_codes["ACUTE_ACCENT"]
     elif key == "DIAERESIS":
         greek_attrs_char[value] = attribute_codes["DIAERESIS"]
@@ -34,12 +34,15 @@ def has_attr(text, attr):
     return attribute_codes[attr] in unicodedata.normalize("NFD", text)
 
 combination_table = {}
+diphthongs = {}
 for key, value in table["combination"].items():
     combination_table[key] = value
     if is_decomposed(key):
         combination_table[key.upper()] = value.upper()
     elif value[0] == "h" or has_attr(key, "COMMA_ABOVE"):
         combination_table[key.capitalize()] = value.capitalize()
+    if len(unicodedata.normalize("NFD", key)) == 2 and key[0] in table["greekVowels"]:
+        diphthongs[key] = "α"
 
 def add_upper(table):
     table.update({key.upper(): value.upper() for key, value in table.items()})
@@ -70,10 +73,37 @@ def replaces(table, text):
             text = text.replace(key, value)
     return text
 
+def tokenize(text):
+    text = unicodedata.normalize("NFC", text)
+    token = ""
+    type = 0
+    for ch in text:
+        t = 1 if is_letter(ch) else 2
+        if type != t:
+            if token:
+                yield type, token
+                token = ""
+            type = t
+        token += ch
+    if token:
+        yield type, token
+
+def prepare_monotonize(word):
+    w = strip(word)
+    if len(list(filter(is_vowel, replaces(diphthongs, w)))) < 2:
+        return w
+    return word
+
 def monotonize(text):
-    text = unicodedata.normalize("NFD", text)
-    text = replaces(greek_attrs_char, text)
-    return unicodedata.normalize("NFC", text)
+    ret = ""
+    for type, token in tokenize(text):
+        if type == 1:
+            ret += prepare_monotonize(token)
+        else:
+            ret += token
+    ret = unicodedata.normalize("NFD", ret)
+    ret = replaces(greek_attrs_char, ret)
+    return unicodedata.normalize("NFC", ret)
 
 def prepare_romanize(word):
     ret = ""
@@ -91,21 +121,6 @@ def prepare_romanize(word):
         if ch in psili:
             ret += "'"
     return ret
-
-def tokenize(text):
-    text = unicodedata.normalize("NFC", text)
-    token = ""
-    type = 0
-    for ch in text:
-        t = 1 if is_letter(ch) else 2
-        if type != t:
-            if token:
-                yield type, token
-                token = ""
-            type = t
-        token += ch
-    if token:
-        yield type, token
 
 def romanize(text, caron=True, dot_macron=True):
     ret = ""
