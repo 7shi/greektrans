@@ -73,32 +73,34 @@ def add_attr(text, attr):
 
 def romanize1(letter):
     nfd = unicodedata.normalize("NFD", letter.lower())
-    if not (ret := romanize_basic_table.get(nfd[0])):
+    prefix = ""
+    if not (body := romanize_basic_table.get(nfd[0])):
         return letter
-    if macron := (ret[-1] == attr_chars_rev["MACRON"]):
-        ret = ret[:-1]
+    if macron := (body[-1] == attr_chars_rev["MACRON"]):
+        body = body[:-1]
     if attr_chars_rev["REVERSED_COMMA_ABOVE"] in nfd:
-        if ret == "r":
-            ret += "h"
+        if body == "r":
+            body += "h"
         else:
-            ret = "h" + ret
+            prefix = "h"
+            body = body
     if letter.isupper():
-        ret = ret.capitalize()
+        body = body.capitalize()
     if (ch := attr_chars_rev["DIAERESIS"]) in nfd:
-        ret += ch
+        body += ch
     circ = attr_chars_rev["GREEK_PERISPOMENI"] in nfd
     iota = attr_chars_rev["GREEK_YPOGEGRAMMENI"] in nfd
     ch = attr_chars_rev["MACRON"]
     if not circ and not iota and (macron or ch in nfd):
-        ret += ch
+        body += ch
     for name in ["BREVE", "ACUTE_ACCENT", "GRAVE_ACCENT"]:
         if (ch := attr_chars_rev[name]) in nfd:
-            ret += ch
+            body += ch
     if circ:
-        ret += attr_chars_rev["CIRCUMFLEX_ACCENT"]
+        body += attr_chars_rev["CIRCUMFLEX_ACCENT"]
     if iota:
-        return add_attr(ret, "DOT_BELOW")
-    return unicodedata.normalize("NFC", ret)
+        return prefix + add_attr(body, "DOT_BELOW")
+    return prefix + unicodedata.normalize("NFC", body)
 
 romanization_table = {
     "\u00b7": ";", # MIDDLE DOT
