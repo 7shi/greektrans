@@ -4,7 +4,9 @@ Ancient Greek Transliteration Tools.
 
 Available in Python and JavaScript, it can be used as a library and a command line tool. It supports romanization and Modern Greek-like (but not fully compliant) accent monotonization.
 
-Online Demo: https://codepen.io/7shi/pen/rNPLdaP
+Online Demo
+
+* https://codepen.io/7shi/pen/rNPLdaP
 
 # Specification
 
@@ -74,6 +76,10 @@ console.log(greektrans.monotonize(text));
 ```
 
 # Links
+
+Examples of Use (translation is inaccurate)
+
+* https://github.com/7shi/dante-la-el/blob/main/Inferno/ChatGPT/02-grc-words.md
 
 Description of technology used. (in Japanese)
 
